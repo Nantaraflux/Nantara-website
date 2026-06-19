@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Preview — Nantara AI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+      font-family: -apple-system, sans-serif;
+    }
+    .phone-frame {
+      width: 390px;
+      height: 844px;
+      border-radius: 48px;
+      border: 6px solid #333;
+      background: #000;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 
+        0 0 0 2px #1a1a1a,
+        0 20px 60px rgba(0,0,0,0.6),
+        inset 0 0 0 1px rgba(255,255,255,0.05);
+    }
+    /* Notch / Dynamic Island */
+    .phone-frame::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 126px;
+      height: 36px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 10;
+    }
+    /* Home indicator */
+    .phone-frame::after {
+      content: '';
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 134px;
+      height: 5px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      z-index: 10;
+    }
+    .phone-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 42px;
+    }
+    .label {
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+      margin-top: 20px;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="phone-frame">
+      <iframe src="Nantara AI Landing Page v5.html"></iframe>
+    </div>
+    <p class="label">iPhone 15 Pro — 390 × 844</p>
+  </div>
+</body>
+</html>

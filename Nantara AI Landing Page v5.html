@@ -1,0 +1,3351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nantara AI — Order Intelligence System for B2B Suppliers</title>
+  <meta name="description" content="Automate your entire B2B order pipeline. WhatsApp → AI → Order Database → CRM. Live in 72 hours. Zero manual entry.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta property="og:title" content="Nantara AI — Order Intelligence System for B2B Suppliers">
+  <meta property="og:description" content="Automate your entire B2B order pipeline. Live in 72 hours. Zero manual entry.">
+  <meta property="og:image" content="logo.png">
+  <meta property="og:type" content="website">
+  <meta name="description" content="Nantara transforms WhatsApp conversations into structured business operations — order capture, customer management, invoicing, fulfillment, and reporting in one system.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Gentium+Plus:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-card: #0c0a1e;
+      --bg-card-hover: #13102a;
+      --blue: #38C8FF;
+      --blue-dark: #0A52E8;
+      --purple: #8B5CF6;
+      --purple-mid: #7C3AED;
+      --violet: #A78BFA;
+      --cyan: #22D3EE;
+      --white: #FFFFFF;
+      --text: #FFFFFF;
+      --text-muted: rgba(226,232,255,0.78);
+      --text-dim: rgba(200,210,255,0.55);
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(255,255,255,0.14);
+      --max-w: 1200px;
+      --px: clamp(24px, 5vw, 64px);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; background-color: #050816; }
+
+    body {
+      font-family: 'Montserrat', -apple-system, sans-serif;
+      font-size: 17px; line-height: 1.65;
+      color: var(--text); background: transparent;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      position: relative;
+    }
+    /* Subtle enterprise ambient — one refined gradient, no sparkle */
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+      background:
+        radial-gradient(ellipse 900px 600px at 50% 0%, rgba(109,40,217,0.14), transparent 70%),
+        radial-gradient(ellipse 600px 400px at 0% 60%, rgba(56,200,255,0.06), transparent 70%),
+        radial-gradient(ellipse 600px 400px at 100% 40%, rgba(109,40,217,0.08), transparent 70%);
+    }
+    @media (prefers-reduced-motion: reduce) { body::before { animation: none; } }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--px); }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 0;
+      background: transparent;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav.scrolled {
+      background: rgba(5,8,22,0.72);
+      backdrop-filter: blur(28px) saturate(1.6);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 12px 0;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Gentium Plus', Georgia, serif; font-weight: 700; letter-spacing: -.02em; font-weight: 700; font-size: 20px;
+      color: var(--white); display: flex; align-items: center; gap: 0;
+      letter-spacing: 0.01em;
+    }
+    .nav-logo img { height: 70px; width: 70px; object-fit: contain; margin-right: -16px; }
+    .nav-logo span { font-size: 22px; letter-spacing: -0.012em; }
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+    }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; color: var(--text-muted);
+      transition: color 0.2s; letter-spacing: 0.01em;
+    }
+    .nav-links a:hover { color: var(--white); }
+    a.nav-cta {
+      font-size: 14px; font-weight: 700; color: #FFFFFF;
+      padding: 9px 22px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--purple) 100%);
+      border: none;
+      transition: all 0.25s;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      letter-spacing: 0.01em;
+    }
+    a.nav-cta:hover {
+      filter: brightness(1.2);
+      box-shadow: 0 0 24px rgba(26,107,255,0.4);
+      transform: translateY(-1px);
+    }
+    .nav-toggle {
+      display: none; background: none; border: none; cursor: pointer;
+      width: 36px; height: 36px; align-items: center; justify-content: center;
+    }
+    .nav-toggle svg { width: 20px; height: 20px; stroke: var(--white); }
+
+    /* ===== HERO (Editorial + Dashboard) ===== */
+    .hero {
+      min-height: auto; display: flex; flex-direction: column;
+      align-items: center; position: relative; overflow: visible;
+      background: transparent;
+      text-align: center; padding: 0 20px clamp(20px, 4vh, 60px);
+    }
+    .hero-stage {
+      width: 100%; min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 84px 0 clamp(28px, 6vh, 64px);
+    }
+    /* Decorative arc lines */
+    .hero-arcs {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .hero-arc {
+      position: absolute; border: 1px solid rgba(56,182,255,0.06);
+      border-radius: 50%;
+    }
+    .hero-arc:nth-child(1) { width: 1200px; height: 1200px; top: -600px; left: 50%; margin-left: -600px; }
+    .hero-arc:nth-child(2) { width: 900px; height: 900px; top: -400px; left: 50%; margin-left: -450px; border-color: rgba(124,58,237,0.05); }
+    .hero-arc:nth-child(3) { width: 600px; height: 600px; top: -200px; left: 50%; margin-left: -300px; border-color: rgba(56,182,255,0.04); }
+
+    .hero-glow {
+      will-change: transform;
+      position: absolute; z-index: 0;
+      width: 1000px; height: 640px; top: 4%; left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(ellipse,
+        rgba(56,200,255,0.22) 0%, rgba(109,40,217,0.12) 45%, transparent 72%);
+      filter: blur(60px); pointer-events: none;
+    }
+
+    /* Central light ray (Nantara blue→purple) */
+    .hero-beam {
+      will-change: transform;
+      position: absolute; z-index: 0; pointer-events: none;
+      left: 50%; top: 1%; transform: translateX(-50%);
+      width: 340px; height: clamp(440px, 62vh, 700px);
+      background: linear-gradient(to top,
+        rgba(0,229,255,0) 0%,
+        rgba(56,200,255,0.22) 18%,
+        rgba(109,40,217,0.12) 48%,
+        rgba(80,20,150,0.05) 70%,
+        transparent 92%);
+      filter: blur(44px); mix-blend-mode: screen;
+      animation: heroBeam 5.5s ease-in-out infinite;
+    }
+    .hero-beam::before {
+      content: ''; position: absolute; left: 50%; bottom: 6%; transform: translateX(-50%);
+      width: 3px; height: 72%; border-radius: 3px;
+      background: linear-gradient(to top, rgba(200,230,255,0.85), rgba(124,58,237,0.32) 55%, transparent 90%);
+      filter: blur(2.5px);
+    }
+    .hero-beam::after {
+      content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+      width: 440px; height: 140px; border-radius: 50%;
+      background: radial-gradient(50% 50% at 50% 50%, rgba(56,182,255,0.38), rgba(124,58,237,0.15) 55%, transparent 72%);
+      filter: blur(38px);
+    }
+    @keyframes heroBeam { 0%,100%{opacity:.82} 50%{opacity:1} }
+
+    /* Glowing horizontal seam between hero and dashboard */
+    .hero-divider {
+      position: relative; z-index: 1; pointer-events: none;
+      width: min(1060px, 92%); height: 2px;
+      margin: 0 auto clamp(80px, 12vw, 150px);
+      background: linear-gradient(90deg, transparent 0%, rgba(56,182,255,0.10) 10%, rgba(56,182,255,0.85) 50%, rgba(56,182,255,0.10) 90%, transparent 100%);
+    }
+    .hero-divider::before {
+      content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+      width: 72%; height: 24px;
+      background: radial-gradient(50% 50% at 50% 50%, rgba(56,182,255,0.62), rgba(124,58,237,0.22) 56%, transparent 78%);
+      filter: blur(13px); animation: dividerGlow 5s ease-in-out infinite;
+    }
+    .hero-divider::after {
+      content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+      width: 250px; height: 3px; border-radius: 3px;
+      background: linear-gradient(90deg, transparent, rgba(224,240,255,1) 44%, rgba(214,234,255,1) 56%, transparent);
+    }
+    @keyframes dividerGlow { 0%,100%{opacity:.72} 50%{opacity:1} }
+
+    /* ===== HERO CHAT HIGHLIGHT (phone center, text on sides) ===== */
+    .hero-chat { position: relative; z-index: 2; width: 100%; max-width: 1160px; margin: 0 auto clamp(40px, 8vw, 96px); }
+    .hc-2col { display: grid; grid-template-columns: 1fr minmax(330px, 366px); gap: clamp(30px, 4.5vw, 72px); align-items: center; }
+    .hc-side { display: flex; flex-direction: column; }
+    .hc-left { align-items: flex-start; text-align: left; }
+    .hc-right { align-items: flex-end; }
+    .hero-chat .hc-title, .hero-chat .hc-sub, .hero-chat .hc-asks-row, .hero-chat .hc-hint, .hero-chat .hc-cz { animation: hcRise .8s cubic-bezier(.16,1,.3,1) both; animation-delay: var(--hd, 0s); }
+    .hero-chat .wa-phone { animation: dashFloat 8s ease-in-out infinite, hcFadeOnly .9s ease both; animation-delay: 0s, var(--hd, .9s); }
+    @keyframes hcRise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+    @keyframes hcFadeOnly { from { opacity: 0; } to { opacity: 1; } }
+    .hc-badge { display: inline-flex; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); border: 1px solid rgba(56,182,255,.22); background: rgba(56,182,255,.06); padding: 7px 14px; border-radius: 999px; }
+    .hc-badge i { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e; animation: ltPulse 1.4s infinite; }
+    .hc-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: clamp(22px, 2.5vw, 31px); letter-spacing: -.02em; line-height: 1.14; color: var(--white); margin: 16px 0 0; }
+    .hc-title .g { background: linear-gradient(120deg, var(--blue), var(--violet)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .hc-sub { color: var(--text-muted); font-size: clamp(13.5px, 1.4vw, 15.5px); line-height: 1.6; margin: 14px 0 0; }
+    .hc-asks-row { display: flex; flex-wrap: wrap; gap: 9px; width: 100%; margin-top: 24px; }
+    .hc-asks-row .wa-ask { width: auto; }
+    .hero-chat .wa-ask { display: flex; align-items: center; gap: 11px; width: 100%; text-align: left; font-size: 14px; color: var(--text-muted); background: rgba(255,255,255,.025); border: 1px solid var(--border); border-radius: 12px; padding: 11px 14px; cursor: pointer; font-family: inherit; transition: border-color .2s, background .2s, color .2s, transform .2s; }
+    .hero-chat .wa-ask:hover { border-color: rgba(56,182,255,.4); background: rgba(56,182,255,.07); color: #fff; transform: translateX(3px); }
+    .hero-chat .wa-ask-ico { width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0; }
+    .hero-chat .wa-ask-ico svg { width: 15px; height: 15px; }
+    .hc-hint { margin-top: 14px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: .03em; }
+    .hc-feats { display: flex; align-items: flex-start; gap: clamp(14px, 2vw, 26px); margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border); width: 100%; }
+    .hc-feat { display: flex; flex-direction: column; gap: 3px; }
+    .hc-feat b { font-family: 'DM Mono', monospace; font-size: clamp(17px, 2vw, 22px); font-weight: 500; color: var(--white); line-height: 1; }
+    .hc-feat span { font-size: 11.5px; color: var(--text-dim); letter-spacing: .01em; }
+    .hero-chat .wa-header { gap: 10px; padding: 11px 15px; align-items: center; }
+    .hero-chat .wa-avatar { width: 50px; height: 50px; color: #fff; font-weight: 700; font-size: 19px; }
+    .hero-chat .wa-avatar img { width: 46px; height: 46px; }
+    .hero-chat .wa-hd-text { display: flex; flex-direction: column; justify-content: center; gap: 2px; }
+    .hero-chat .wa-hd-name { font-size: 16px; font-weight: 700; line-height: 1.1; letter-spacing: -0.01em; }
+    .hero-chat .wa-hd-status { font-size: 12px; line-height: 1.1; }
+    @media (max-width: 1024px) {
+      .hc-2col { grid-template-columns: 1fr; justify-items: center; gap: 30px; }
+      .hc-left, .hc-right { align-items: center; text-align: center; max-width: 480px; width: 100%; }
+      .hc-left .hc-asks-row { justify-content: center; }
+      .hc-cz { margin-left: auto; margin-right: auto; }
+    }
+
+    .hero-headline {
+      position: relative; z-index: 2;
+      font-family: 'Gentium Plus', Georgia, serif;
+      font-size: clamp(48px, 7.5vw, 96px);
+      font-weight: 400; line-height: 1.02;
+      color: var(--white); letter-spacing: -0.03em;
+      max-width: 960px; margin-bottom: 24px;
+    }
+    .hero-headline .accel {
+      background: linear-gradient(100deg, var(--purple) 0%, var(--violet) 45%, var(--blue) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-subline {
+      position: relative; z-index: 2;
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(17px, 2.2vw, 22px);
+      color: var(--text-muted); line-height: 1.6; margin-bottom: 40px;
+    }
+    .hero-subline em { font-style: italic; }
+    .hero-subline .growth {
+      color: var(--blue); font-style: italic;
+    }
+    .hero-headline em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--violet) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-headline strong {
+      font-weight: 400;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .hero-actions {
+      position: relative; z-index: 3;
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; flex-wrap: wrap; margin-bottom: 22px;
+    }
+
+    /* Hero eyebrow pill */
+    .hero-eyebrow {
+      position: relative; z-index: 3;
+      display: inline-flex; align-items: center; gap: 9px;
+      font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .04em;
+      color: var(--text-muted); background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); border-radius: 999px;
+      padding: 7px 15px 7px 11px; margin-bottom: 26px;
+    }
+    .hero-eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: #34D399; box-shadow: 0 0 9px #34D399; animation: ltPulse 1.5s infinite; }
+    .hero-eyebrow b { color: var(--white); font-weight: 500; }
+
+    /* Hero secondary "watch demo" CTA */
+    .cta-watch {
+      position: relative; z-index: 3; display: inline-flex; align-items: center; gap: 10px;
+      font-size: 15px; font-weight: 600; color: var(--white); cursor: pointer;
+      padding: 13px 22px 13px 14px; border-radius: 12px; font-family: inherit;
+      border: 1px solid var(--border-hover); background: rgba(255,255,255,0.03);
+      transition: border-color .25s, background .25s, transform .2s;
+    }
+    .cta-watch:hover { border-color: rgba(56,182,255,.45); background: rgba(56,182,255,.06); transform: translateY(-1px); }
+    .cta-watch .play {
+      width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--blue-dark), var(--purple));
+    }
+    .cta-watch .play svg { width: 12px; height: 12px; fill: #fff; }
+    .cta-watch small { display: block; font-size: 11px; font-weight: 400; color: var(--text-dim); margin-top: 1px; }
+    .cta-watch .ctw-txt { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.1; }
+
+    /* Hero trust micro-row */
+    .hero-trust {
+      position: relative; z-index: 3;
+      display: flex; align-items: center; justify-content: center; gap: 22px; flex-wrap: wrap;
+      margin-bottom: clamp(46px, 7vw, 78px);
+    }
+    .hero-trust .ht {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 12.5px; color: var(--text-dim);
+    }
+    .hero-trust .ht svg { width: 15px; height: 15px; stroke: #34D399; fill: none; stroke-width: 2.2; flex-shrink: 0; }
+    .hero-trust .ht b { color: var(--text); font-weight: 600; }
+
+    /* ===== STICKY BOOK-DEMO BAR ===== */
+    .demo-bar {
+      position: fixed; bottom: 24px; right: 20px; transform: translateX(140%);
+      z-index: 120; width: 280px;
+      display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+      background: linear-gradient(135deg, rgba(79,190,255,.12) 0%, rgba(124,58,237,.12) 100%);
+      border: 1px solid rgba(124,58,237,.3);
+      border-radius: 10px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(79,190,255,.15);
+      opacity: 0; transition: transform .55s cubic-bezier(.16,1,.3,1), opacity .45s ease;
+    }
+    .demo-bar.show { transform: translateX(0); opacity: 1; }
+    .demo-bar-txt { flex: 1; min-width: 0; }
+    .demo-bar-txt strong { display: block; font-size: 13px; font-weight: 600; color: #fff; letter-spacing: -.01em; line-height: 1.2; }
+    .demo-bar-txt span { display: block; font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .demo-bar .cta-magnetic { padding: 8px 16px; font-size: 12px; white-space: nowrap; flex-shrink: 0; }
+    .demo-bar-x {
+      flex-shrink: 0; width: 26px; height: 26px; border-radius: 6px; cursor: pointer;
+      background: transparent; border: none; color: var(--text-dim); font-size: 18px; line-height: 1;
+      display: flex; align-items: center; justify-content: center; transition: all .2s;
+    }
+    .demo-bar-x:hover { color: #fff; background: rgba(255,255,255,0.08); }
+    @media (max-width: 768px) {
+      .demo-bar { bottom: 16px; right: 12px; width: 260px; }
+      .demo-bar-txt span { display: none; }
+      .demo-bar-txt strong { font-size: 12px; }
+    }
+    @media (max-width: 560px) {
+      .demo-bar { width: 240px; padding: 10px 12px; }
+      .demo-bar .cta-magnetic { padding: 8px 14px; font-size: 11px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .demo-bar { transition: opacity .3s ease; }
+    }
+
+
+    /* ===== COUNT-UP METRICS ===== */
+    .metric-value { font-variant-numeric: tabular-nums; }
+
+    /* ===== 3D TILT CARDS ===== */
+    .bento-card {
+      perspective: 1200px;
+      transform-style: preserve-3d;
+      transition: transform .3s cubic-bezier(.23,1,.320,1), box-shadow .3s ease;
+    }
+    .bento-card:hover { transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateZ(10px); box-shadow: 0 24px 48px rgba(79,190,255,.25); }
+
+    /* ===== INTEGRATIONS ORBIT ===== */
+    .integ-orbit { position: relative; width: 240px; height: 240px; margin: 0 auto; }
+    .integ-core {
+      position: absolute; inset: 50%; width: 60px; height: 60px;
+      transform: translate(-50%, -50%); border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue-dark), var(--purple));
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10; box-shadow: 0 0 30px rgba(79,190,255,.4);
+    }
+    .integ-logo {
+      position: absolute; inset: 50%; width: 44px; height: 44px;
+      transform: translate(-50%, -50%);
+      border-radius: 10px; background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 700; color: #fff;
+      animation: orbitSpin 16s linear infinite;
+      animation-delay: var(--delay, 0s);
+      box-shadow: 0 0 20px rgba(124,58,237,.2);
+    }
+    @keyframes orbitSpin {
+      from { transform: translate(-50%, -50%) rotate(0deg) translateY(-90px) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg) translateY(-90px) rotate(-360deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .integ-logo { animation: none; }
+      body::before { opacity: 0 !important; }
+      .bento-card:hover { transform: none; }
+    }
+
+    /* ===== SCROLL PROGRESS BAR ===== */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 2.5px; width: 0%;
+      z-index: 200; pointer-events: none; border-radius: 0 3px 3px 0;
+      background: linear-gradient(90deg, var(--blue-dark), var(--blue) 45%, var(--purple));
+      box-shadow: 0 0 12px rgba(56,182,255,.7), 0 0 4px rgba(124,58,237,.6);
+      transition: width .12s linear;
+    }
+
+    /* ===== HERO HEADLINE WORD REVEAL + SWEEP ===== */
+    .hero-headline .hw { display: inline-block; overflow: hidden; vertical-align: top; line-height: 1.05; }
+    .hero-headline .hw-i { display: inline-block; will-change: transform, opacity; }
+    .hero-headline .hw-grad {
+      background: linear-gradient(100deg, var(--purple) 0%, var(--violet) 45%, var(--blue) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-headline.swept { position: relative; }
+    .hero-headline.swept::after {
+      content: ''; position: absolute; inset: -6% -4%; pointer-events: none;
+      background: linear-gradient(105deg, transparent 38%, rgba(255,255,255,.55) 50%, transparent 62%);
+      transform: translateX(-120%) skewX(-12deg); mix-blend-mode: screen;
+      animation: headlineSweep 1.1s cubic-bezier(.4,0,.2,1) forwards;
+    }
+    @keyframes headlineSweep { to { transform: translateX(120%) skewX(-12deg); } }
+
+    /* ===== CONFETTI (success burst) ===== */
+    .confetti-layer { position: absolute; inset: 0; overflow: visible; pointer-events: none; z-index: 9; }
+    .confetti-bit {
+      position: absolute; width: 8px; height: 8px; border-radius: 1.5px;
+      will-change: transform, opacity; opacity: 0;
+      animation: confettiFly var(--cdur, 1100ms) cubic-bezier(.18,.7,.4,1) forwards;
+    }
+    @keyframes confettiFly {
+      0% { opacity: 1; transform: translate(0,0) rotate(0deg) scale(1); }
+      100% { opacity: 0; transform: translate(var(--cx), var(--cy)) rotate(var(--cr)) scale(.7); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-headline.swept::after { animation: none; display: none; }
+      .confetti-bit { animation: none; display: none; }
+      .scroll-progress { transition: none; }
+    }
+
+    /* ===== DASHBOARD MOCKUP ===== */
+    .hero-dashboard {
+      position: relative; z-index: 2;
+      width: 100%; max-width: 1060px;
+      margin: 0 auto clamp(56px, 10vw, 120px);
+      border: 1px solid rgba(56,182,255,0.16);
+      border-radius: 18px; overflow: hidden;
+      background: rgba(28,32,52,0.55);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 44px 100px -28px rgba(6,10,40,0.9), 0 0 80px -30px rgba(56,182,255,0.3);
+      animation: dashFloat 7s ease-in-out infinite;
+    }
+    @keyframes dashFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    /* Dashboard nav bar */
+    .dash-topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 18px; border-bottom: 1px solid rgba(255,255,255,0.06);
+      flex-wrap: wrap; gap: 8px; font-size: 12px; color: var(--text-muted);
+    }
+    .dash-topbar-left { display:flex; align-items:center; gap:2px; font-weight:600; color:var(--white); font-size:13px; }
+    .dash-topbar-left img { height: 56px; width: 56px; object-fit: contain; margin-right: -6px; }
+    .dash-topbar-left span { font-size: 17px; }
+    .dash-tabs { display: flex; gap: 4px; }
+    .dash-tab {
+      font-size: 12px; color: var(--text-muted); padding: 6px 14px;
+      border-radius: 8px; cursor: pointer; transition: all .2s;
+      border: 1px solid transparent; background: none; font-family: inherit; letter-spacing: 0.01em;
+    }
+    .dash-tab:hover { color: var(--white); background: rgba(255,255,255,0.04); }
+    .dash-tab.active { color: var(--blue); background: rgba(56,182,255,0.08); border-color: rgba(56,182,255,0.16); }
+
+    /* Sidebar */
+    .dash-sidebar {
+      padding: 4px 18px 4px 0; border-right: 1px solid rgba(255,255,255,0.06);
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .dash-sidebar-title {
+      font-size: 18px; font-weight: 700; color: var(--white);
+      line-height: 1.2; margin-bottom: 2px;
+    }
+    .dash-sidebar-sub {
+      font-size: 11px; color: var(--text-dim); margin-bottom: 12px;
+    }
+    .dash-sidebar-label {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--blue); margin: 8px 0 4px;
+    }
+    .dash-month {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 12px; border-radius: 8px; font-size: 13px;
+      color: var(--text-muted); cursor: default; transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+    .dash-month:hover { background: rgba(255,255,255,0.03); }
+    .dash-month.active {
+      background: rgba(56,182,255,0.06); border-color: rgba(56,182,255,0.12);
+      color: var(--white);
+    }
+    .dash-month-plus { font-size: 16px; color: var(--text-dim); }
+    .dash-month-stats {
+      margin-top: 4px; font-size: 11px; color: var(--text-dim);
+      display: none; line-height: 1.6;
+    }
+    .dash-month.active .dash-month-stats { display: block; }
+    .dash-month.active .dash-month-plus { display: none; }
+
+    /* Main content */
+    .dash-main { padding: 0; display: flex; flex-direction: column; gap: 16px; }
+
+    /* Metric cards row */
+    .dash-metrics {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    }
+    .dash-metric {
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px; padding: 16px;
+    }
+    .dash-metric-label { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+    .dash-metric-value {
+      font-family: 'DM Mono', monospace; font-size: clamp(22px, 2.5vw, 32px);
+      font-weight: 500; color: var(--white); line-height: 1;
+    }
+    .dash-metric-value.blue { color: var(--blue); }
+    .dash-metric-value.purple { color: var(--violet); }
+    .dash-metric-sub { font-size: 11px; color: var(--text-dim); margin-top: 6px; }
+
+    /* Chart area */
+    .dash-chart {
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px; padding: 20px; flex: 1;
+    }
+    .dash-chart-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .dash-chart-title { font-size: 13px; font-weight: 600; color: var(--white); }
+    .dash-chart-badge {
+      font-family: 'DM Mono', monospace; font-size: 18px; font-weight: 600;
+      color: #22c55e;
+    }
+    .dash-chart-note { font-size: 11px; color: var(--text-dim); text-align: right; }
+
+    /* SVG chart */
+    .chart-svg { width: 100%; height: 120px; }
+    .chart-bar { fill: rgba(56,182,255,0.2); rx: 3; }
+    .chart-bar:hover { fill: rgba(56,182,255,0.4); }
+    .chart-line { fill: none; stroke: var(--violet); stroke-width: 2; }
+    .chart-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-dim); margin-top: 6px; }
+
+    /* Interactive panels */
+    .dash-body { position: relative; padding: 20px; min-height: 300px; }
+    .dash-panel { display: none; }
+    .dash-panel.active { display: block; animation: panelSlide .45s cubic-bezier(.16,1,.3,1); }
+    @keyframes panelSlide { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+    .dash-overview { display: grid; grid-template-columns: 220px 1fr; gap: 16px; }
+
+    /* Orders table */
+    .ord-table { width: 100%; border-collapse: collapse; }
+    .ord-table th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); padding: 8px 12px; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .ord-table td { font-size: 13px; color: var(--text-muted); padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .ord-table tr:last-child td { border-bottom: none; }
+    .ord-table tbody tr { transition: background .15s; }
+    .ord-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+    .ord-id { font-family: 'DM Mono', monospace; color: var(--blue); font-size: 12px; }
+    .ord-val { font-family: 'DM Mono', monospace; color: var(--white); }
+    .chan { display: inline-flex; align-items: center; gap: 7px; }
+    .chan-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .ord-status { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; padding: 4px 10px; border-radius: 6px; white-space: nowrap; }
+    .ord-status.done { background: rgba(34,197,94,0.1); color: #22c55e; }
+    .ord-status.routing { background: rgba(56,182,255,0.1); color: var(--blue); }
+    .ord-status.pending { background: rgba(234,179,8,0.1); color: #eab308; }
+
+    /* Buyers */
+    .buyer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .buyer-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 16px; display: flex; align-items: center; gap: 14px; transition: border-color .2s; }
+    .buyer-card:hover { border-color: rgba(56,182,255,0.18); }
+    .buyer-ava { width: 42px; height: 42px; border-radius: 11px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; color: #fff; }
+    .buyer-info { flex: 1; min-width: 0; }
+    .buyer-name { font-size: 14px; font-weight: 600; color: var(--white); display: flex; align-items: center; gap: 8px; }
+    .buyer-meta { font-size: 11px; color: var(--text-dim); margin-top: 3px; }
+    .tier { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 5px; }
+    .tier.plat { background: rgba(167,139,250,0.14); color: var(--violet); }
+    .tier.gold { background: rgba(234,179,8,0.14); color: #eab308; }
+    .tier.silver { background: rgba(148,163,184,0.16); color: #cbd5e1; }
+    .buyer-ltv { text-align: right; }
+    .buyer-ltv-val { font-family: 'DM Mono', monospace; font-size: 16px; color: var(--white); }
+    .buyer-ltv-lbl { font-size: 10px; color: var(--text-dim); }
+
+    /* Analytics */
+    .an-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .an-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 18px; }
+    .an-title { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; }
+    .an-big { font-family: 'DM Mono', monospace; font-size: 34px; color: var(--blue); line-height: 1; }
+    .an-big-sub { font-size: 11px; color: var(--text-dim); margin-top: 6px; }
+    .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 11px; }
+    .bar-row:last-child { margin-bottom: 0; }
+    .bar-label { font-size: 11px; color: var(--text-muted); width: 72px; flex-shrink: 0; }
+    .bar-track { flex: 1; height: 7px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 4px; }
+    .bar-val { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-muted); width: 34px; text-align: right; }
+    .peak-bars { display: flex; align-items: flex-end; gap: 5px; height: 64px; }
+    .peak-bars span { flex: 1; background: linear-gradient(180deg, var(--blue), rgba(56,182,255,0.18)); border-radius: 3px 3px 0 0; }
+
+    @media (max-width: 900px) {
+      .hero-dashboard { max-width: 520px; }
+      .dash-overview { grid-template-columns: 1fr; }
+      .dash-sidebar { display: none; }
+      .dash-metrics { grid-template-columns: 1fr; }
+      .buyer-grid, .an-grid { grid-template-columns: 1fr; }
+      .dash-tabs { width: 100%; justify-content: space-between; }
+      .dash-tab { padding: 6px 8px; flex: 1; text-align: center; }
+      .ord-table th:nth-child(3), .ord-table td:nth-child(3) { display: none; }
+    }
+
+    /* Magnetic CTA */
+    .cta-magnetic {
+      position: relative; display: inline-flex; align-items: center; gap: 10px;
+      font-size: 15px; font-weight: 600; color: var(--white);
+      padding: 14px 28px; border-radius: 12px; border: none; cursor: pointer;
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--purple) 100%);
+      overflow: hidden; transition: transform 0.2s, box-shadow 0.3s;
+      font-family: inherit;
+    }
+    .cta-magnetic::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .cta-magnetic:hover::before { opacity: 1; }
+    .cta-magnetic:hover {
+      box-shadow: 0 0 32px rgba(26,107,255,0.35), 0 8px 24px rgba(0,0,0,0.4);
+    }
+    .cta-magnetic svg { width: 16px; height: 16px; transition: transform 0.2s; }
+    .cta-magnetic:hover svg { transform: translateX(3px); }
+
+    .cta-ghost {
+      font-size: 15px; font-weight: 500; color: var(--text-muted);
+      padding: 13px 22px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04);
+      cursor: pointer; transition: all 0.25s; font-family: inherit;
+    }
+    .cta-ghost:hover {
+      color: var(--white); border-color: rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ===== ASK NANTARA (WhatsApp) ===== */
+    .wa-section { padding: clamp(80px, 10vw, 140px) 0; position: relative; border-top: 1px solid var(--border); }
+    .wa-wrap {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(32px, 5vw, 72px); align-items: center;
+    }
+    .wa-copy .section-eyebrow { margin-bottom: 14px; }
+    .wa-copy h2 { margin-bottom: 18px; }
+    .wa-copy .section-desc { margin-bottom: 28px; max-width: 440px; }
+    .wa-asks { display: flex; flex-direction: column; gap: 12px; }
+    .wa-ask {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 15px; color: var(--text-muted);
+    }
+    .wa-ask-ico {
+      width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(56,182,255,0.08); border: 1px solid rgba(56,182,255,0.14);
+    }
+    .wa-ask-ico svg { width: 16px; height: 16px; stroke: var(--blue); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Phone */
+    .wa-phone {
+      max-width: 348px; width: 100%; margin: 0 auto;
+      position: relative;
+      border-radius: 28px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: #0B141A;
+      box-shadow: 0 50px 110px -34px rgba(0,0,0,0.85), 0 0 80px -40px rgba(56,182,255,0.25);
+      animation: dashFloat 8s ease-in-out infinite;
+    }
+    .wa-header {
+      background: #202C33; display: flex; align-items: center; gap: 11px;
+      padding: 13px 15px;
+    }
+    .wa-back { color: #8696A0; font-size: 20px; line-height: 1; }
+    .wa-avatar {
+      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #1A6BFF, #8B3DFF);
+    }
+    .wa-avatar img { width: 30px; height: 30px; object-fit: contain; }
+    .wa-hd-name { font-size: 15px; font-weight: 600; color: #E9EDF0; line-height: 1.2; }
+    .wa-hd-status { font-size: 12px; color: #8696A0; }
+    .wa-hd-icons { margin-left: auto; display: flex; gap: 18px; color: #8696A0; }
+    .wa-hd-icons svg { width: 18px; height: 18px; fill: currentColor; }
+    .wa-body {
+      background: #0B141A; padding: 16px 12px;
+      display: flex; flex-direction: column; gap: 7px;
+      height: clamp(380px, 52vh, 460px); overflow-y: auto; scroll-behavior: smooth;
+    }
+    .wa-body::-webkit-scrollbar { width: 5px; }
+    .wa-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.14); border-radius: 3px; }
+    .wa-msg.live { opacity: 1 !important; transform: none !important; animation: none !important; }
+    .wa-typing { display: flex; gap: 4px; align-items: center; padding: 11px 13px !important; }
+    .wa-typing span { width: 7px; height: 7px; border-radius: 50%; background: #8696A0; animation: waTyp 1s infinite; }
+    .wa-typing span:nth-child(2) { animation-delay: .15s; }
+    .wa-typing span:nth-child(3) { animation-delay: .3s; }
+    @keyframes waTyp { 0%,60%,100% { opacity: .3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+    .wa-day {
+      align-self: center; background: #1D282F; color: #8696A0;
+      font-size: 11px; padding: 4px 12px; border-radius: 7px; margin: 4px 0 8px;
+    }
+    .wa-msg {
+      max-width: 84%; padding: 8px 11px 7px; border-radius: 9px;
+      font-size: 13.5px; line-height: 1.5; position: relative;
+      opacity: 0; transform: translateY(8px);
+    }
+    .wa-go .wa-msg { animation: waPop .5s cubic-bezier(.16,1,.3,1) forwards; animation-delay: var(--d, 0s); }
+    @keyframes waPop { to { opacity: 1; transform: none; } }
+    .wa-in { align-self: flex-start; background: #202C33; color: #E9EDF0; border-top-left-radius: 2px; }
+    .wa-out { align-self: flex-end; background: #005C4B; color: #E9EDF0; border-top-right-radius: 2px; }
+    .wa-time { font-size: 10px; color: rgba(233,237,240,0.45); display: inline-block; margin-left: 10px; vertical-align: bottom; float: right; margin-top: 5px; }
+    .wa-out .wa-time::after { content: ' ✓✓'; color: #53BDEB; }
+    .wa-recap-title {
+      font-size: 12px; font-weight: 700; color: #53BDEB;
+      letter-spacing: 0.02em; margin-bottom: 9px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .wa-recap-row {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12.5px; padding: 4px 0; border-top: 1px solid rgba(255,255,255,0.06);
+      color: #AEBAC1;
+    }
+    .wa-recap-row:first-of-type { border-top: none; }
+    .wa-recap-row b { color: #E9EDF0; font-weight: 600; }
+    .wa-recap-row .up { color: #22c55e; }
+    .wa-rank { display: flex; align-items: center; gap: 8px; font-size: 12.5px; padding: 5px 0; color: #AEBAC1; border-top: 1px solid rgba(255,255,255,0.06); }
+    .wa-rank:first-of-type { border-top: none; }
+    .wa-rank-num { width: 18px; height: 18px; border-radius: 5px; background: rgba(83,189,235,0.15); color: #53BDEB; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .wa-rank b { color: #E9EDF0; font-weight: 600; }
+    .wa-rank span { margin-left: auto; font-family: 'DM Mono', monospace; color: #8696A0; font-size: 11px; }
+    .wa-input {
+      background: #0B141A; padding: 11px 12px; display: flex; align-items: center; gap: 9px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .wa-input-box {
+      flex: 1; min-width: 0; height: 42px; box-sizing: border-box;
+      background: rgba(255,255,255,0.045); border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 21px; padding: 0 16px;
+      font-size: 13px; color: #E9EDF0; outline: none; font-family: inherit;
+      transition: border-color .18s ease, background .18s ease, box-shadow .18s ease;
+    }
+    .wa-input-box:focus {
+      border-color: rgba(56,182,255,0.55); background: rgba(56,182,255,0.06);
+      box-shadow: 0 0 0 3px rgba(56,182,255,0.12);
+    }
+    .wa-input-box::placeholder { color: #8696A0; }
+    .wa-send {
+      width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; cursor: pointer;
+      border: 1px solid rgba(0,168,132,0.35);
+      background: #00A884; display: flex; align-items: center; justify-content: center;
+      transition: filter .18s ease, transform .18s ease;
+    }
+    .wa-send:hover { filter: brightness(1.08); transform: scale(1.04); }
+    .wa-send svg { width: 18px; height: 18px; fill: #0B141A; }
+
+    @media (max-width: 860px) {
+      .wa-wrap { grid-template-columns: 1fr; }
+      .wa-copy { text-align: center; }
+      .wa-copy .section-desc { margin-left: auto; margin-right: auto; }
+      .wa-asks { max-width: 380px; margin: 0 auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .wa-msg { opacity: 1; transform: none; }
+      .wa-phone { animation: none; }
+    }
+
+    /* ===== ASK NANTARA persona picker ===== */
+    .wa-persona { margin-top: 28px; }
+    .wa-persona-label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px; }
+    .wa-persona-list { display: flex; gap: 10px; flex-wrap: wrap; }
+    .wa-char { display: flex; align-items: center; gap: 9px; padding: 8px 16px 8px 8px; border-radius: 30px; border: 1px solid var(--border); background: rgba(255,255,255,0.02); cursor: pointer; transition: all .2s; font-family: inherit; }
+    .wa-char:hover { border-color: rgba(255,255,255,0.2); }
+    .wa-char.active { border-color: var(--blue); background: rgba(56,182,255,0.08); }
+    .wa-char-ava { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .wa-char-name { font-size: 13px; font-weight: 600; color: var(--white); display: block; }
+    .wa-char-role { font-size: 10px; color: var(--text-dim); display: block; }
+    @media (max-width: 860px) { .wa-persona-list { justify-content: center; } }
+
+    /* persona custom builder */
+    .wa-custom { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .wa-custom input { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: 13px; color: var(--white); font-family: inherit; outline: none; width: 160px; }
+    .wa-custom input:focus { border-color: var(--blue); }
+    .wa-custom-colors { display: flex; gap: 6px; }
+    .wa-swatch { width: 22px; height: 22px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; padding: 0; }
+    .wa-swatch.active { border-color: var(--white); }
+    .wa-custom-add { font-family: inherit; font-size: 12px; font-weight: 600; color: #fff; background: linear-gradient(135deg, var(--blue-dark), var(--purple)); border: none; border-radius: 8px; padding: 9px 14px; cursor: pointer; transition: filter .15s; }
+    .wa-custom-add:hover { filter: brightness(1.12); }
+    .wa-custom-hint { font-size: 11px; color: var(--text-dim); margin-top: 9px; }
+
+    /* ===== VISIBLE CUSTOMIZE CARD (left column) ===== */
+    .hc-cz { width: 100%; max-width: 340px; margin-top: 22px; text-align: left; background: linear-gradient(168deg, rgba(20,26,42,.72), rgba(10,12,22,.6)); border: 1px solid var(--border); border-radius: 16px; padding: 17px 17px 18px; backdrop-filter: blur(8px); }
+    .hc-cz-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
+    .hc-cz-title { font-size: 13px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
+    .hc-cz-title svg { width: 15px; height: 15px; fill: none; stroke: var(--blue); stroke-width: 2; }
+    .hc-cz-live { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .06em; color: var(--blue); display: inline-flex; align-items: center; gap: 6px; }
+    .hc-cz-live i { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e; animation: ltPulse 1.4s infinite; }
+    .hc-cz-label { display: block; font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); margin: 0 0 7px; }
+    .hc-cz-input { width: 100%; background: rgba(0,0,0,.28); border: 1px solid rgba(255,255,255,.1); border-radius: 9px; padding: 9px 12px; font-size: 13px; color: #fff; font-family: inherit; outline: none; margin-bottom: 14px; }
+    .hc-cz-input:focus { border-color: var(--blue); }
+    .hc-cz-seg { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 15px; }
+    .hc-cz-seg button { font-family: inherit; font-size: 11.5px; font-weight: 600; color: var(--text-muted); background: rgba(0,0,0,.28); border: 1px solid rgba(255,255,255,.1); border-radius: 8px; padding: 8px 4px; cursor: pointer; transition: all .15s; }
+    .hc-cz-seg button:hover { border-color: rgba(255,255,255,.25); color: #fff; }
+    .hc-cz-seg button.active { color: #fff; border-color: transparent; background: linear-gradient(135deg, var(--blue-dark), var(--purple)); }
+    .hc-cz-avatars { display: flex; gap: 10px; }
+    .hc-cz-ava { width: 38px; height: 38px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #0B141A; transition: border-color .15s, transform .15s; }
+    .hc-cz-ava img { width: 33px; height: 33px; object-fit: contain; }
+    .hc-cz-ava:hover { border-color: rgba(255,255,255,.4); transform: translateY(-2px); }
+    .hc-cz-ava.active { border-color: #fff; }
+    @media (max-width: 1024px) { .hc-cz { margin-left: auto; margin-right: auto; } }
+
+    /* ===== HOW IT WORKS (3 steps) ===== */
+    .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 54px; }
+    .how-step { position: relative; border: 1px solid var(--border); border-radius: 18px; padding: 30px 26px 28px; background: var(--bg-card); transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .35s, box-shadow .35s; overflow: hidden; }
+    .how-step::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 2px; background: linear-gradient(90deg, transparent, var(--blue), transparent); opacity: 0; transition: opacity .35s; }
+    .how-step:hover { transform: translateY(-5px); border-color: rgba(56,182,255,.28); box-shadow: 0 26px 64px -30px rgba(26,107,255,.55); }
+    .how-step:hover::before { opacity: 1; }
+    .how-n { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--blue); letter-spacing: .14em; }
+    .how-ico { width: 48px; height: 48px; border-radius: 13px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(26,107,255,.16), rgba(124,58,237,.16)); border: 1px solid rgba(56,182,255,.22); margin: 15px 0 18px; }
+    .how-ico svg { width: 23px; height: 23px; fill: none; stroke: var(--blue); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .how-step h3 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px; letter-spacing: -.01em; }
+    .how-step p { font-size: 14.5px; color: var(--text-muted); line-height: 1.62; }
+    @media (max-width: 860px) { .how-grid { grid-template-columns: 1fr; } }
+
+    /* ===== COMPARISON: Chatbot Biasa vs Agen Nantara ===== */
+    .cmp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 54px; }
+    .cmp-card { border: 1px solid var(--border); border-radius: 22px; padding: 26px 22px 24px; background: var(--bg-card); display: flex; flex-direction: column; position: relative; overflow: hidden; }
+    .cmp-smart { border-color: rgba(56,182,255,.26); background: linear-gradient(168deg, rgba(15,22,40,.85), rgba(10,12,22,.7)); box-shadow: 0 30px 80px -40px rgba(26,107,255,.5); }
+    .cmp-smart::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 2px; background: linear-gradient(90deg, transparent, var(--blue), transparent); opacity: .8; }
+    .cmp-head { text-align: center; margin-bottom: 20px; }
+    .cmp-head h3 { font-size: 21px; font-weight: 700; color: #fff; letter-spacing: -.01em; display: inline-flex; align-items: center; gap: 9px; }
+    .cmp-tag { font-family: 'DM Mono', monospace; font-size: 9.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; }
+    .cmp-dumb .cmp-tag { color: #94a0a8; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); }
+    .cmp-smart .cmp-tag { color: var(--blue); background: rgba(56,182,255,.1); border: 1px solid rgba(56,182,255,.3); }
+    .cmp-head p { font-size: 13.5px; color: var(--text-muted); line-height: 1.55; margin-top: 10px; max-width: 34ch; margin-left: auto; margin-right: auto; }
+
+    /* chat window (WhatsApp dark) */
+    .cmp-chat { position: relative; flex: 1 1 auto; min-height: 500px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,.06); background-color: #0B141A; background-image: linear-gradient(rgba(11,20,26,.94), rgba(11,20,26,.94)), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M0 0h40v40H0z' fill='none'/%3E%3Cpath d='M20 8l2 4-2 4-2-4z' fill='%23ffffff' fill-opacity='0.015'/%3E%3C/svg%3E"); }
+    .cmp-scroll { position: absolute; inset: 0; padding: 16px 14px; display: flex; flex-direction: column; gap: 9px; overflow: hidden; }
+    /* left (static) card grows to fit its full conversation — never clipped */
+    .cmp-dumb .cmp-chat { overflow: visible; }
+    .cmp-dumb .cmp-scroll { position: relative; inset: auto; overflow: visible; height: auto; }
+    .cmp-smart .cmp-scroll { overflow-y: auto; scroll-behavior: smooth; }
+    .cmp-scroll::-webkit-scrollbar { width: 5px; } .cmp-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 3px; }
+
+    .cmp-row { display: flex; gap: 8px; max-width: 86%; }
+    .cmp-row.out { align-self: flex-end; flex-direction: column; align-items: flex-end; }
+    .cmp-ava { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; align-self: flex-end; overflow: hidden; background: #2A3942; display: flex; align-items: center; justify-content: center; }
+    .cmp-ava img { width: 26px; height: 26px; object-fit: contain; }
+    .cmp-ava.bot { background: #3a4750; }
+    .cmp-bub { font-size: 13px; line-height: 1.5; padding: 8px 11px; border-radius: 9px; color: #E9EDF0; position: relative; word-wrap: break-word; }
+    .cmp-row.in .cmp-bub { background: #202C33; border-top-left-radius: 3px; }
+    .cmp-row.out .cmp-bub { background: #005C4B; border-top-right-radius: 3px; }
+    .cmp-bub ol { margin: 5px 0 0; padding-left: 20px; } .cmp-bub li { margin: 1px 0; }
+    .cmp-who { font-size: 10px; color: #8696A0; margin-top: 3px; }
+    .cmp-row.in .cmp-time, .cmp-row.out .cmp-time { display: block; text-align: right; font-size: 9.5px; color: rgba(233,237,240,.45); margin-top: 3px; }
+
+    /* typing indicator */
+    .cmp-typing { display: inline-flex; gap: 4px; padding: 11px 13px; }
+    .cmp-typing span { width: 7px; height: 7px; border-radius: 50%; background: #8696A0; animation: cmpType 1.2s infinite ease-in-out; }
+    .cmp-typing span:nth-child(2){ animation-delay: .2s; } .cmp-typing span:nth-child(3){ animation-delay: .4s; }
+    @keyframes cmpType { 0%,60%,100%{ transform: translateY(0); opacity: .4; } 30%{ transform: translateY(-4px); opacity: 1; } }
+    .cmp-appear { animation: cmpAppear .5s cubic-bezier(.22,1,.36,1); }
+    @keyframes cmpAppear { from { opacity: 0; transform: translateY(11px) scale(.985); filter: blur(3px); } to { opacity: 1; transform: none; filter: blur(0); } }
+
+    /* fail bar (dumb bot) */
+    .cmp-fail { margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12.5px; font-weight: 600; color: #F87171; background: rgba(248,113,113,.08); border: 1px solid rgba(248,113,113,.22); border-radius: 9px; padding: 10px; }
+    .cmp-fail svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .cmp-win { margin-top: 13px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12.5px; font-weight: 600; color: #34D399; }
+    .cmp-win svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+    /* invoice chip inside chat */
+    .cmp-inv { width: 168px; background: #F3EFE6; border-radius: 7px; padding: 9px; color: #1a1a1a; }
+    .cmp-inv-top { display: flex; align-items: center; gap: 7px; }
+    .cmp-inv-ic { width: 26px; height: 30px; background: #fff; border: 1px solid #d8d2c4; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: #E2574C; flex-shrink: 0; }
+    .cmp-inv-nm { font-size: 10.5px; font-weight: 600; line-height: 1.2; } .cmp-inv-nm small { display: block; font-weight: 400; color: #6b6b6b; font-size: 9px; }
+    .cmp-inv-body { margin-top: 8px; background: #fff; border-radius: 4px; padding: 8px; }
+    .cmp-inv-h { font-size: 14px; font-weight: 800; letter-spacing: -.02em; } 
+    .cmp-inv-line { height: 4px; border-radius: 2px; background: #e8e4d8; margin-top: 5px; } .cmp-inv-line.s { width: 60%; } .cmp-inv-line.t { width: 80%; }
+    .cmp-inv-total { display: flex; justify-content: space-between; font-size: 9px; font-weight: 700; margin-top: 7px; border-top: 1px solid #e8e4d8; padding-top: 5px; }
+
+    /* product showcase card inside chat */
+    .cmp-prod { width: 216px; display: flex; flex-direction: column; gap: 7px; }
+    .cmp-prod-item { display: flex; gap: 9px; align-items: center; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); border-radius: 9px; padding: 7px 8px; }
+    .cmp-prod-thumb { width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0; position: relative; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
+    .cmp-prod-thumb::after { content: ''; position: absolute; left: 50%; top: 54%; transform: translate(-50%,-50%); width: 60%; height: 34%; border-radius: 40% 40% 50% 50%; background: rgba(255,255,255,.32); }
+    .cmp-prod-info { flex: 1; min-width: 0; }
+    .cmp-prod-nm { font-size: 12px; font-weight: 600; color: #E9EDF0; line-height: 1.2; }
+    .cmp-prod-meta { font-size: 10px; color: #8696A0; margin-top: 2px; }
+    .cmp-prod-price { font-size: 11.5px; font-weight: 700; color: #fff; white-space: nowrap; }
+
+    /* shipping label (resi) card inside chat */
+    .cmp-resi { width: 210px; background: #F3EFE6; border-radius: 7px; padding: 9px; color: #1a1a1a; }
+    .cmp-resi-top { display: flex; align-items: center; justify-content: space-between; }
+    .cmp-resi-cour { font-size: 11px; font-weight: 800; letter-spacing: -.01em; }
+    .cmp-resi-badge { font-size: 8px; font-weight: 700; color: #fff; background: #16a34a; border-radius: 4px; padding: 2px 6px; letter-spacing: .04em; }
+    .cmp-resi-body { margin-top: 8px; background: #fff; border-radius: 4px; padding: 8px; }
+    .cmp-resi-track { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: .04em; }
+    .cmp-resi-bars { display: flex; gap: 1.5px; margin-top: 6px; height: 24px; align-items: stretch; }
+    .cmp-resi-bars i { flex: 1; background: #1a1a1a; border-radius: .5px; }
+    .cmp-resi-bars i:nth-child(3n){ flex: .5; } .cmp-resi-bars i:nth-child(4n){ flex: 1.6; background: #fff; } .cmp-resi-bars i:nth-child(7n){ flex: .4; }
+    .cmp-resi-route { display: flex; justify-content: space-between; font-size: 8.5px; color: #6b6b6b; margin-top: 7px; }
+    .cmp-resi-route b { color: #1a1a1a; font-weight: 700; }
+
+    @media (max-width: 820px) { .cmp-grid { grid-template-columns: 1fr; } }
+
+    /* ===== METRICS STRIP ===== */
+    .metrics-strip {
+      padding: 72px 0;
+      position: relative; overflow: hidden;
+    }
+    .metrics-strip::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(26,107,255,0.04) 0%, rgba(139,61,255,0.03) 100%);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .metrics-row {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+      position: relative;
+    }
+    .metric-item {
+      text-align: center; padding: 32px 20px;
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+      border-radius: 14px; position: relative;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .metric-item:hover {
+      border-color: rgba(56,182,255,0.15); transform: translateY(-2px);
+    }
+    .metric-value {
+      font-size: clamp(32px, 4vw, 48px); font-weight: 800;
+      letter-spacing: -0.03em; line-height: 1;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 8px;
+    }
+    .metric-label {
+      font-size: 13px; color: var(--text-muted); line-height: 1.4;
+    }
+
+    /* ===== SECTION SHARED ===== */
+    .section { padding: clamp(100px, 12vw, 160px) 0; }
+    .section-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 16px; display: block;
+    }
+    .section-title { font-family: 'Montserrat', sans-serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 700; line-height: 1.06;
+      letter-spacing: -0.03em; color: var(--white);
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: 18px; color: var(--text-muted); line-height: 1.75;
+      max-width: 520px;
+    }
+    .section-header {
+      margin-bottom: clamp(56px, 7vw, 88px);
+    }
+
+    /* ===== BENTO GRID ===== */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 12px;
+    }
+    .bento-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: clamp(28px,3vw,40px);
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: border-color 0.35s, background 0.35s, transform 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
+    .bento-card::before {
+      content: ''; position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(56,182,255,0.06), transparent 60%);
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .bento-card:hover::before { opacity: 1; }
+    .bento-card:hover {
+      border-color: rgba(56,182,255,0.15);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+    .bento-card > * { position: relative; z-index: 1; }
+
+    .bento-card.span-2 { grid-column: span 2; }
+    .bento-card.tall { grid-row: span 2; }
+
+    .bento-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(56,182,255,0.08); border: 1px solid rgba(56,182,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    }
+    .bento-card:hover .bento-icon {
+      background: rgba(56,182,255,0.14); border-color: rgba(56,182,255,0.25);
+      transform: scale(1.08);
+    }
+    .bento-icon svg {
+      width: 18px; height: 18px; stroke: var(--blue); fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .bento-title {
+      font-size: 20px; font-weight: 700; color: var(--white);
+      margin-bottom: 10px; letter-spacing: -0.02em;
+    }
+    .bento-desc {
+      font-size: 15px; color: var(--text-muted); line-height: 1.7;
+    }
+    .bento-detail {
+      margin-top: 16px; padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 13px; color: var(--text-dim); line-height: 1.6;
+      max-height: 0; overflow: hidden; opacity: 0;
+      transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s, margin-top 0.3s, padding-top 0.3s;
+      margin-top: 0; padding-top: 0;
+    }
+    .bento-card:hover .bento-detail {
+      max-height: 120px; opacity: 1;
+      margin-top: 16px; padding-top: 16px;
+    }
+
+    /* ===== WORKFLOW PREVIEW ===== */
+    .workflow-section {
+      padding: clamp(100px, 12vw, 160px) 0;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ===== LOOKER STUDIO DASHBOARD ===== */
+    .looker { background: #0A0C14; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; box-shadow: 0 44px 100px -36px rgba(0,0,0,0.75); }
+    .lk-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 22px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.015); flex-wrap: wrap; }
+    .lk-title { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; color: var(--white); }
+    .lk-title .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px rgba(34,197,94,0.6); animation: pulse 2s ease-in-out infinite; }
+    .lk-title .lk-live { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: #22c55e; background: rgba(34,197,94,0.1); padding: 3px 8px; border-radius: 5px; }
+    .lk-range { display: flex; gap: 4px; background: rgba(255,255,255,0.03); padding: 4px; border-radius: 10px; border: 1px solid var(--border); }
+    .lk-pill { font-size: 12px; color: var(--text-muted); padding: 7px 16px; border-radius: 7px; cursor: pointer; border: none; background: none; font-family: inherit; transition: all .2s; }
+    .lk-pill:hover { color: var(--white); }
+    .lk-pill.active { background: var(--blue); color: #fff; box-shadow: 0 2px 14px rgba(56,182,255,0.3); }
+    .lk-body { padding: 22px; display: flex; flex-direction: column; gap: 16px; }
+    .lk-scorecards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .lk-score { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+    .lk-score-label { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
+    .lk-score-val { font-family: 'DM Mono', monospace; font-size: clamp(22px, 2.6vw, 30px); font-weight: 500; color: var(--white); line-height: 1; }
+    .lk-score-delta { font-size: 11px; margin-top: 8px; font-family: 'DM Mono', monospace; color: #22c55e; }
+    .lk-score:nth-child(1) .lk-score-val { color: var(--blue); }
+    .lk-score:nth-child(2) .lk-score-val { color: var(--violet); }
+    .lk-grid { display: grid; grid-template-columns: 1.8fr 1fr; gap: 14px; }
+    .lk-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .lk-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+    .lk-card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .lk-card-head > span:first-child { font-size: 13px; font-weight: 600; color: var(--white); }
+    .lk-card-sub { font-size: 11px; color: var(--text-dim); }
+    .lk-chart { width: 100%; height: 180px; display: block; }
+    .lk-bar-rect { fill: url(#lkGrad); transition: height .55s cubic-bezier(.16,1,.3,1), y .55s cubic-bezier(.16,1,.3,1); cursor: pointer; }
+    .lk-bar-rect:hover { fill: var(--blue); }
+    .lk-chart-x { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-dim); margin-top: 8px; }
+    .lk-donut { position: relative; width: 140px; height: 140px; margin: 0 auto 16px; }
+    .lk-donut svg { transform: rotate(-90deg); }
+    .lk-donut circle { fill: none; stroke-width: 14; transition: stroke-dasharray .65s cubic-bezier(.16,1,.3,1), stroke-dashoffset .65s cubic-bezier(.16,1,.3,1); }
+    .lk-donut-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .lk-donut-center b { font-family: 'DM Mono', monospace; font-size: 22px; color: var(--white); }
+    .lk-donut-center span { font-size: 10px; color: var(--text-dim); }
+    .lk-legend { display: flex; flex-direction: column; gap: 9px; }
+    .lk-legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
+    .lk-legend-dot { width: 9px; height: 9px; border-radius: 3px; flex-shrink: 0; }
+    .lk-legend-val { margin-left: auto; font-family: 'DM Mono', monospace; color: var(--white); font-size: 12px; }
+    .lk-row { display: flex; align-items: center; gap: 12px; margin-bottom: 13px; }
+    .lk-row:last-child { margin-bottom: 0; }
+    .lk-row-name { font-size: 12.5px; color: var(--text-muted); width: 130px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .lk-row-track { flex: 1; height: 8px; background: rgba(255,255,255,0.05); border-radius: 5px; overflow: hidden; }
+    .lk-row-fill { height: 100%; border-radius: 5px; width: 0; transition: width .65s cubic-bezier(.16,1,.3,1); }
+    .lk-row-val { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-muted); width: 46px; text-align: right; flex-shrink: 0; }
+    @media (max-width: 860px) {
+      .lk-scorecards { grid-template-columns: 1fr 1fr; }
+      .lk-grid, .lk-grid2 { grid-template-columns: 1fr; }
+      .lk-row-name { width: 96px; }
+    }
+
+    /* Mock App Window */
+    .wf-window {
+      background: #08080d; border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      position: relative;
+    }
+    .wf-titlebar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px; border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.015);
+    }
+    .wf-dots { display: flex; gap: 7px; }
+    .wf-dots span {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+    .wf-dots span:first-child { background: #ef4444; }
+    .wf-dots span:nth-child(2) { background: #eab308; }
+    .wf-dots span:nth-child(3) { background: #22c55e; }
+    .wf-titlebar-center {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: var(--text-dim);
+    }
+    .wf-titlebar-center .live-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #22c55e; box-shadow: 0 0 6px rgba(34,197,94,0.5);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .wf-titlebar-right { font-size: 11px; color: var(--text-dim); font-family: 'DM Mono', monospace; }
+
+    /* Window Layout */
+    .wf-layout {
+      display: grid; grid-template-columns: 200px 1fr;
+      min-height: 420px;
+    }
+
+    /* Sidebar */
+    .wf-sidebar {
+      border-right: 1px solid var(--border);
+      padding: 16px 0;
+      background: rgba(255,255,255,0.01);
+    }
+    .wf-sidebar-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-dim);
+      padding: 8px 20px; margin-bottom: 4px;
+    }
+    .wf-sidebar-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 20px; font-size: 13px; color: var(--text-dim);
+      transition: all 0.3s; cursor: default;
+      border-left: 2px solid transparent;
+    }
+    .wf-sidebar-item.active {
+      color: var(--blue); background: rgba(56,182,255,0.04);
+      border-left-color: var(--blue);
+    }
+    .wf-sidebar-item.completed {
+      color: #22c55e;
+      border-left-color: #22c55e;
+    }
+    .wf-sidebar-item .sb-icon {
+      width: 24px; height: 24px; border-radius: 6px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s; flex-shrink: 0;
+    }
+    .wf-sidebar-item.active .sb-icon {
+      background: rgba(56,182,255,0.1); border-color: rgba(56,182,255,0.25);
+    }
+    .wf-sidebar-item.completed .sb-icon {
+      background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.2);
+    }
+    .wf-sidebar-item .sb-icon svg {
+      width: 12px; height: 12px; stroke: currentColor; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .wf-sidebar-item .sb-status {
+      margin-left: auto; font-size: 10px; font-family: 'DM Mono', monospace;
+      opacity: 0.6;
+    }
+
+    /* Main panel */
+    .wf-main {
+      display: flex; flex-direction: column;
+    }
+
+    /* Data preview area */
+    .wf-preview {
+      flex: 1; padding: 24px 28px;
+      display: flex; flex-direction: column; gap: 16px;
+      position: relative; overflow: hidden;
+    }
+    .wf-preview-header {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .wf-preview-title {
+      font-size: 14px; font-weight: 700; color: var(--white);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .wf-preview-title .stage-badge {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 4px;
+      background: rgba(56,182,255,0.1); color: var(--blue);
+      border: 1px solid rgba(56,182,255,0.15);
+      transition: all 0.3s;
+    }
+    .wf-preview-title .stage-badge.done {
+      background: rgba(34,197,94,0.08); color: #22c55e;
+      border-color: rgba(34,197,94,0.15);
+    }
+    .wf-preview-time {
+      font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-dim);
+    }
+
+    /* Data cards inside preview */
+    .wf-data-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .wf-data-card {
+      padding: 14px 16px; border-radius: 8px;
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+      opacity: 0; transform: translateY(8px) scale(0.98);
+      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .wf-data-card.show {
+      opacity: 1; transform: translateY(0) scale(1);
+    }
+    .wf-data-card .dc-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px;
+    }
+    .wf-data-card .dc-value {
+      font-family: 'DM Mono', monospace; font-size: 13px;
+      color: var(--white); line-height: 1.4;
+    }
+    .wf-data-card .dc-value.highlight { color: var(--blue); }
+    .wf-data-card .dc-value.success { color: #22c55e; }
+    .wf-data-card.span-2 { grid-column: span 2; }
+
+    /* Progress bar */
+    .wf-progress {
+      height: 3px; background: rgba(255,255,255,0.04);
+      border-radius: 2px; overflow: hidden;
+      margin-top: auto;
+    }
+    .wf-progress-fill {
+      height: 100%; width: 0;
+      background: linear-gradient(90deg, var(--blue), var(--purple));
+      border-radius: 2px;
+      transition: width 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    /* Terminal log */
+    .wf-terminal {
+      border-top: 1px solid var(--border);
+      padding: 14px 20px;
+      background: rgba(0,0,0,0.3);
+      max-height: 140px; overflow-y: auto;
+    }
+    .wf-terminal-header {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-dim);
+      margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+    }
+    .wf-terminal-header::before {
+      content: '>_'; font-family: 'DM Mono', monospace; color: var(--blue); font-size: 11px;
+    }
+    .wf-log-entry {
+      font-family: 'DM Mono', monospace; font-size: 11px;
+      line-height: 1.7; color: var(--text-dim);
+      opacity: 0; transform: translateX(-6px);
+      transition: all 0.25s;
+    }
+    .wf-log-entry.show { opacity: 1; transform: translateX(0); }
+    .wf-log-time { color: var(--text-dim); opacity: 0.5; }
+    .wf-log-action { color: var(--blue); }
+    .wf-log-success { color: #22c55e; }
+    .wf-log-warn { color: #eab308; }
+
+    @media (max-width: 900px) {
+      .wf-layout { grid-template-columns: 1fr; }
+      .wf-sidebar { display: none; }
+      .wf-data-grid { grid-template-columns: 1fr; }
+      .wf-data-card.span-2 { grid-column: span 1; }
+    }
+
+    /* ===== BEFORE/AFTER ===== */
+    .shift-grid {
+      display: grid; grid-template-columns: 1fr 48px 1fr;
+      gap: 0; align-items: start;
+    }
+    .shift-col-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; margin-bottom: 24px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .shift-col-label.before { color: #ef4444; }
+    .shift-col-label.after { color: var(--blue); }
+    .shift-rows { display: flex; flex-direction: column; }
+    .shift-row {
+      padding: 20px 0; border-bottom: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .shift-row:last-child { border-bottom: none; }
+    .shift-metric {
+      font-size: clamp(22px, 2.5vw, 32px); font-weight: 800;
+      letter-spacing: -0.03em; line-height: 1;
+    }
+    .shift-metric.before { color: rgba(239,68,68,0.6); }
+    .shift-metric.after {
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .shift-label { font-size: 14px; color: var(--text-muted); }
+    .shift-divider {
+      display: flex; align-items: center; justify-content: center;
+      padding-top: 60px;
+    }
+    .shift-arrow {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--bg-card); border: 1px solid rgba(56,182,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .shift-arrow svg { width: 14px; height: 14px; stroke: var(--blue); fill: none; stroke-width: 2; }
+    .shift-before { padding-right: 32px; }
+    .shift-after { padding-left: 32px; }
+
+    /* ===== FAQ ===== */
+    .faq-list { max-width: 680px; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 0; font-family: inherit;
+      font-size: 15px; font-weight: 600; color: var(--white);
+      text-align: left; gap: 16px; transition: color 0.2s;
+    }
+    .faq-q:hover { color: var(--blue); }
+    .faq-plus {
+      width: 20px; height: 20px; flex-shrink: 0; position: relative;
+      transition: transform 0.3s;
+    }
+    .faq-plus::before, .faq-plus::after {
+      content: ''; position: absolute;
+      background: var(--text-dim); border-radius: 1px;
+      transition: transform 0.3s, background 0.2s;
+    }
+    .faq-plus::before { width: 12px; height: 1.5px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .faq-plus::after { width: 1.5px; height: 12px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .faq-item.open .faq-plus::after { transform: translate(-50%,-50%) rotate(90deg); }
+    .faq-item.open .faq-q { color: var(--blue); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1); }
+    .faq-item.open .faq-a { max-height: 260px; }
+    .faq-a-inner { padding-bottom: 22px; font-size: 14px; color: var(--text-muted); line-height: 1.8; }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials {
+      padding: clamp(100px, 12vw, 160px) 0 clamp(48px, 6vw, 72px);
+      overflow: hidden;
+    }
+    .testi-track-wrap {
+      position: relative;
+      margin: 0 calc(var(--px) * -1);
+      padding: 0 var(--px);
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
+    }
+    .testi-track {
+      display: flex; gap: 16px;
+      cursor: grab; user-select: none;
+      transition: transform 0.05s linear;
+    }
+    .testi-track:active { cursor: grabbing; }
+    .testi-track.snapping { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+
+    .testi-card {
+      flex: 0 0 380px; min-width: 320px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px;
+      display: flex; flex-direction: column;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .testi-card:hover {
+      border-color: rgba(56,182,255,0.15);
+      transform: translateY(-2px);
+    }
+
+    .testi-stars {
+      display: flex; gap: 2px; margin-bottom: 16px;
+    }
+    .testi-stars svg {
+      width: 14px; height: 14px; fill: #eab308; stroke: none;
+    }
+
+    .testi-quote {
+      font-size: 15px; color: var(--text); line-height: 1.7;
+      flex: 1; margin-bottom: 20px;
+    }
+    .testi-quote em {
+      color: var(--blue); font-style: normal; font-weight: 600;
+    }
+
+    .testi-author {
+      display: flex; align-items: center; gap: 12px;
+      padding-top: 16px; border-top: 1px solid var(--border);
+    }
+    .testi-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 15px; color: var(--white);
+      flex-shrink: 0; letter-spacing: -0.02em;
+    }
+    .testi-avatar.av-1 { background: linear-gradient(135deg, #1A6BFF, #38B6FF); }
+    .testi-avatar.av-2 { background: linear-gradient(135deg, #7C3AED, #A78BFA); }
+    .testi-avatar.av-3 { background: linear-gradient(135deg, #0891B2, #22D3EE); }
+    .testi-avatar.av-4 { background: linear-gradient(135deg, #4F46E5, #818CF8); }
+    .testi-avatar.av-5 { background: linear-gradient(135deg, #8B3DFF, #38B6FF); }
+    .testi-avatar.av-6 { background: linear-gradient(135deg, #059669, #34D399); }
+    .testi-avatar.av-7 { background: linear-gradient(135deg, #D946EF, #A78BFA); }
+
+    .testi-name {
+      font-size: 14px; font-weight: 700; color: var(--white);
+      line-height: 1.3;
+    }
+    .testi-role {
+      font-size: 12px; color: var(--text-dim); line-height: 1.3;
+      margin-top: 1px;
+    }
+    .testi-badge {
+      margin-left: auto;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 6px;
+      background: rgba(34,197,94,0.08); color: #22c55e;
+      border: 1px solid rgba(34,197,94,0.12);
+      white-space: nowrap;
+    }
+
+    .testi-nav {
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px; margin-top: 32px;
+    }
+    .testi-nav-btn {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .testi-nav-btn:hover {
+      background: rgba(255,255,255,0.06); border-color: var(--border-hover);
+    }
+    .testi-nav-btn svg {
+      width: 16px; height: 16px; stroke: var(--text-muted); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .testi-dots {
+      display: flex; gap: 6px;
+    }
+    .testi-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      transition: all 0.3s;
+    }
+    .testi-dot.active {
+      background: var(--blue); width: 20px; border-radius: 3px;
+    }
+
+    @media (max-width: 900px) {
+      .testi-card { flex: 0 0 300px; min-width: 280px; }
+    }
+    /* ===== INTEGRATIONS HUB ===== */
+    .hub-stage {
+      position: relative; width: 100%; max-width: 700px;
+      height: 500px; margin: 20px auto 0;
+    }
+    .hub-canvas {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      z-index: 1; pointer-events: none;
+    }
+    /* Center logo */
+    .hub-center {
+      position: absolute; z-index: 10;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 88px; height: 88px; border-radius: 50%;
+      background: rgba(6,6,14,0.95);
+      border: 2px solid rgba(56,182,255,0.3);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow:
+        0 0 40px rgba(56,182,255,0.2),
+        0 0 80px rgba(124,58,237,0.1),
+        inset 0 0 20px rgba(56,182,255,0.05);
+    }
+    .hub-center img {
+      width: 56px; height: 56px; object-fit: contain;
+      filter: drop-shadow(0 0 12px rgba(56,182,255,0.4));
+    }
+    .hub-center-ring {
+      position: absolute; top: 50%; left: 50%;
+      width: 110px; height: 110px; border-radius: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(56,182,255,0.12);
+      z-index: 9; pointer-events: none;
+      animation: hubRingPulse 3s ease-in-out infinite;
+    }
+    .hub-center-ring.r2 {
+      width: 136px; height: 136px;
+      border-color: rgba(124,58,237,0.08);
+      animation-delay: 0.5s;
+    }
+    @keyframes hubRingPulse {
+      0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+      50% { transform: translate(-50%,-50%) scale(1.08); opacity: 0.4; }
+    }
+    /* App nodes */
+    .hub-node {
+      position: absolute; z-index: 12;
+      width: 54px; height: 54px; border-radius: 50%;
+      background: rgba(10,10,20,0.92);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+    .hub-node:hover {
+      border-color: rgba(56,182,255,0.5);
+      box-shadow: 0 0 28px rgba(56,182,255,0.25);
+      transform: translate(-50%, -50%) scale(1.12);
+    }
+    .hub-node svg { width: 24px; height: 24px; }
+    .hub-node-label {
+      position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; font-weight: 600; color: var(--text-dim);
+      white-space: nowrap; letter-spacing: 0.04em;
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .hub-node:hover .hub-node-label { opacity: 1; }
+    @media (max-width: 600px) {
+      .hub-stage { height: 380px; max-width: 360px; }
+      .hub-center { width: 68px; height: 68px; }
+      .hub-center img { width: 42px; height: 42px; }
+      .hub-node { width: 42px; height: 42px; }
+      .hub-node svg { width: 18px; height: 18px; }
+    }
+
+    .final-cta {
+      padding: clamp(120px, 14vw, 180px) 0;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .final-cta-glow {
+      position: absolute; top: -40%; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 600px; border-radius: 50%; pointer-events: none;
+      background: radial-gradient(ellipse, rgba(26,107,255,0.12) 0%, rgba(139,61,255,0.06) 40%, transparent 70%);
+      filter: blur(60px);
+    }
+    .final-cta .section-title, .final-cta .section-desc,
+    .final-cta .hero-actions, .final-cta .trust-row { position: relative; }
+    .final-cta .section-desc { max-width: 440px; margin: 0 auto 36px; }
+
+    .trust-row { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-top: 36px; }
+    .trust-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--text-dim);
+    }
+    .trust-item svg { width: 14px; height: 14px; stroke: var(--blue); fill: none; stroke-width: 2; flex-shrink: 0; }
+
+    /* ===== FOOTER ===== */
+    .footer { padding: 56px 0 32px; border-top: 1px solid var(--border); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-logo {
+      font-family: 'Gentium Plus', serif; font-weight: 700; font-size: 18px;
+      color: var(--white); display: flex; align-items: center; gap: 0; margin-bottom: 10px;
+    }
+    .footer-logo img { height: 36px; width: 36px; object-fit: contain; margin-right: -8px; }
+    .footer-brand p { font-size: 13px; color: var(--text-dim); line-height: 1.6; max-width: 220px; }
+    .footer-col h4 {
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;
+    }
+    .footer-col a { display: block; font-size: 13px; color: var(--text-dim); padding: 3px 0; transition: color 0.15s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom {
+      padding-top: 20px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12px; color: var(--text-dim);
+    }
+    .footer-socials { display: flex; gap: 8px; }
+    .footer-socials a {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .footer-socials a:hover { border-color: var(--border-hover); background: rgba(255,255,255,0.06); }
+    .footer-socials svg { width: 14px; height: 14px; fill: var(--text-dim); }
+
+    /* ===== SCROLL REVEALS ===== */
+    .sr { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .sr.visible { opacity: 1; transform: translateY(0); }
+    .sr-delay-1 { transition-delay: 0.08s; }
+    .sr-delay-2 { transition-delay: 0.16s; }
+    .sr-delay-3 { transition-delay: 0.24s; }
+    .sr-delay-4 { transition-delay: 0.32s; }
+    .sr-delay-5 { transition-delay: 0.40s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 64px; left: 0; right: 0;
+        background: rgba(1,2,8,0.97); backdrop-filter: blur(24px);
+        border-bottom: 1px solid var(--border);
+        padding: 20px var(--px) 24px; gap: 16px;
+      }
+      .bento-grid { grid-template-columns: 1fr; }
+      .bento-card.span-2 { grid-column: span 1; }
+      .metrics-row { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .metric-item:not(:last-child)::after { display: none; }
+      .wf-pipeline { flex-direction: column; }
+      .wf-connector { width: auto; height: 24px; }
+      .wf-connector-line { width: 2px; height: 100%; }
+      .shift-grid { grid-template-columns: 1fr; gap: 24px; }
+      .shift-divider { padding-top: 0; transform: rotate(90deg); width: 36px; margin: 0 auto; }
+      .shift-before, .shift-after { padding: 0; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+    @media (max-width: 500px) {
+      .metrics-row { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-chat, .hero-chat *, .wa-phone { transform: none !important; animation: none !important; opacity: 1 !important; }
+      .sr { opacity: 1; transform: none; transition: none; }
+      .hero-headline, .hero-subline, .hero-actions, .hero-chat { opacity: 1; transform: none; }
+      .hero-eyebrow, .hero-trust { opacity: 1 !important; transform: none !important; }
+      .testi-track { transition: none; }
+      .hub-pulse-ring, .hub-center-glow, .hub-dot-particle { animation: none !important; }
+      .hub-line-pulse { animation: none !important; }
+      @keyframes float1, @keyframes float2, @keyframes float3,
+      @keyframes orbitPulse, @keyframes iFloat1, @keyframes iFloat2, @keyframes iFloat3,
+      @keyframes pulse { animation: none !important; }
+      *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+    }
+
+    /* ===== FOCUS VISIBLE ===== */
+    :focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 3px;
+    }
+    .nav-cta:focus-visible {
+      outline-offset: 4px;
+    }
+    .faq-q:focus-visible {
+      outline-offset: -2px;
+      border-radius: 8px;
+    }
+
+    /* ===== CURSOR POINTER (all interactive) ===== */
+    a, button, .nav-links a, .footer-col a, .testi-nav-btn, .faq-q, .nav-cta {
+      cursor: pointer;
+    }
+
+    /* ===== 1440px+ CONTAINER ===== */
+    @media (min-width: 1440px) {
+      .container { max-width: 1280px; }
+    }
+    /* ===== AGENT LOOP TRACE — interactive hero (crafted) ===== */
+    .dash-body.agentic { padding: 0; min-height: 0; }
+    .lt { display: grid; grid-template-columns: 288px 1fr; min-height: 410px; }
+
+    .lt-status { display: flex; align-items: center; gap: 13px; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-muted); letter-spacing: .02em; }
+    .lt-task { color: var(--text-dim); }
+    .lt-run { display: inline-flex; align-items: center; gap: 7px; padding: 4px 11px; border: 1px solid rgba(56,182,255,.22); border-radius: 999px; color: var(--blue); background: rgba(56,182,255,.06); font-size: 11px; }
+    .lt-run i { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 8px var(--blue); animation: ltPulse 1.4s infinite; }
+    .lt-elapsed { color: var(--text-dim); min-width: 38px; }
+    @keyframes ltPulse { 0%,100%{opacity:.35} 50%{opacity:1} }
+
+    .lt-loop { padding: clamp(22px,2.4vw,30px); border-right: 1px solid rgba(255,255,255,0.07); display: flex; flex-direction: column; }
+    .lt-kicker { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--text-dim); }
+    .lt-loop h4 { font-size: 19px; font-weight: 700; color: var(--white); letter-spacing: -.015em; margin: 11px 0 24px; line-height: 1.18; }
+    .lt-steps { position: relative; display: flex; flex-direction: column; gap: 1px; flex: 1; }
+    .lt-rail { position: absolute; left: 13.5px; top: 16px; bottom: 18px; width: 2px; background: rgba(255,255,255,.08); border-radius: 2px; }
+    .lt-rail-fill { position: absolute; left: 13.5px; top: 16px; width: 2px; height: 0; background: var(--blue); border-radius: 2px; box-shadow: 0 0 10px rgba(56,182,255,.5); transition: height .55s cubic-bezier(.16,1,.3,1); }
+    .lt-step { position: relative; display: grid; grid-template-columns: 28px 1fr; gap: 13px; align-items: start; padding: 9px 8px 9px 0; cursor: pointer; border-radius: 9px; transition: background .2s; }
+    .lt-step:hover { background: rgba(255,255,255,.025); }
+    .lt-num { position: relative; z-index: 1; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-dim); background: var(--bg-card); border: 1.5px solid rgba(255,255,255,.13); transition: all .3s; }
+    .lt-step.done .lt-num { color: var(--blue); border-color: rgba(56,182,255,.45); }
+    .lt-step.on .lt-num { color: #fff; border-color: transparent; background: var(--blue); box-shadow: 0 0 0 4px rgba(56,182,255,.14); }
+    .lt-name { font-size: 14px; font-weight: 600; color: var(--text-muted); transition: color .3s; line-height: 1.55; }
+    .lt-step.on .lt-name { color: #fff; }
+    .lt-desc { font-size: 11.5px; color: var(--text-dim); line-height: 1.45; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .35s ease, opacity .35s ease, margin .35s ease; }
+    .lt-step.on .lt-desc { max-height: 44px; opacity: 1; margin-top: 4px; }
+    .lt-foot { margin-top: 16px; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); letter-spacing: .05em; display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
+    .lt-foot .pp { display: inline-flex; gap: 3px; align-items: flex-end; height: 10px; }
+    .lt-foot .pp i { width: 3px; height: 10px; background: var(--blue); border-radius: 1px; transform-origin: bottom; animation: ltBars 1s ease-in-out infinite; }
+    .lt-foot .pp i:nth-child(2){ animation-delay:.15s } .lt-foot .pp i:nth-child(3){ animation-delay:.3s }
+    @keyframes ltBars { 0%,100%{transform:scaleY(.45);opacity:.4} 50%{transform:scaleY(1);opacity:1} }
+
+    .lt-view { position: relative; padding: clamp(22px,2.4vw,32px); display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+    .lt-view-cap { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); margin-bottom: 18px; display: flex; align-items: center; gap: 9px; }
+    .lt-view-cap::before { content: ''; width: 16px; height: 1.5px; background: var(--blue); }
+    .lt-scene { display: none; }
+    .lt-scene.on { display: block; }
+    .lt-scene.on .lt-msg, .lt-scene.on .lt-chip, .lt-scene.on .lt-rline, .lt-scene.on .lt-pitem, .lt-scene.on .lt-tool, .lt-scene.on .lt-result, .lt-scene.on .lt-loopback { opacity: 0; animation: ltIn .5s cubic-bezier(.16,1,.3,1) forwards; animation-delay: var(--d, 0s); }
+    @keyframes ltIn { from{opacity:0;transform:translateY(9px)} to{opacity:1;transform:none} }
+
+    .lt-msg { background: #202C33; color: #E9EDF0; border-radius: 11px; border-top-left-radius: 3px; padding: 11px 14px; font-size: 13.5px; line-height: 1.5; max-width: 94%; }
+    .lt-msg .who { display: block; font-family: 'DM Mono', monospace; font-size: 10px; color: #8696A0; margin-bottom: 5px; letter-spacing: .02em; }
+    .lt-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+    .lt-chip { font-size: 12px; padding: 6px 11px; border-radius: 8px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.09); color: var(--text-muted); }
+    .lt-chip b { color: var(--blue); font-family: 'DM Mono', monospace; font-weight: 500; }
+    .lt-reason { display: flex; flex-direction: column; gap: 13px; }
+    .lt-rline { display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: baseline; font-size: 13.5px; color: var(--text-muted); }
+    .lt-rline .k { font-family: 'DM Mono', monospace; font-size: 10.5px; color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; }
+    .lt-rline .v { color: #fff; font-weight: 600; }
+    .lt-plan { display: flex; flex-direction: column; gap: 12px; }
+    .lt-pitem { display: flex; gap: 11px; align-items: center; font-size: 13.5px; color: var(--text-muted); }
+    .lt-pbox { width: 17px; height: 17px; border-radius: 5px; border: 1.5px solid rgba(255,255,255,.2); flex: none; }
+    .lt-tools { display: flex; flex-direction: column; gap: 10px; }
+    .lt-tool { display: flex; align-items: center; gap: 10px; font-family: 'DM Mono', monospace; font-size: 12.5px; background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.07); border-radius: 9px; padding: 11px 14px; }
+    .lt-tool .fn { color: var(--blue); }
+    .lt-tool .res { margin-left: auto; font-size: 11px; color: var(--text-dim); white-space: nowrap; }
+    .lt-tool .res.ok { color: #34d399; }
+    .lt-result { border: 1px solid rgba(52,211,153,.28); background: rgba(52,211,153,.06); border-radius: 13px; padding: 16px 18px; }
+    .lt-result .rt { font-size: 15px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px; }
+    .lt-result .tick { width: 20px; height: 20px; border-radius: 50%; background: #34d399; color: #04210f; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex: none; }
+    .lt-result .rs { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-muted); margin-top: 9px; line-height: 1.5; }
+    .lt-loopback { margin-top: 15px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-dim); }
+
+    @media (max-width: 820px) {
+      .lt { grid-template-columns: 1fr; }
+      .lt-loop { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+      .lt-rail, .lt-rail-fill { display: none; }
+      .lt-status .lt-task { display: none; }
+    }
+
+    /* ===== GLOBAL MOTION POLISH (startup / saas / tech) ===== */
+    .sr { transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1), filter .8s ease; filter: blur(5px); }
+    .sr.visible { filter: blur(0); }
+    .nav-cta, .cta-magnetic { position: relative; overflow: hidden; }
+    .nav-cta::after, .cta-magnetic::after {
+      content: ''; position: absolute; top: 0; left: -130%; width: 55%; height: 100%;
+      background: linear-gradient(105deg, transparent, rgba(255,255,255,.30), transparent);
+      transform: skewX(-18deg); pointer-events: none;
+    }
+    .nav-cta:hover::after, .cta-magnetic:hover::after { animation: btnSheen .9s ease; }
+    @keyframes btnSheen { from{left:-130%} to{left:160%} }
+    .bento-card, .dash-metric, .an-card, .buyer-card, .testi-card {
+      transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .35s, box-shadow .35s, background .35s;
+    }
+    .buyer-card:hover, .an-card:hover { transform: translateY(-3px); border-color: rgba(56,182,255,.22); box-shadow: 0 18px 40px -22px rgba(26,107,255,.45); }
+    @media (prefers-reduced-motion: reduce) {
+      .sr { filter: none !important; }
+      .lt-run i, .lt-foot .pp i, .lt-rail-fill { animation: none; transition: none; }
+      .hero-beam { animation: none; }
+      .hero-divider::before { animation: none; }
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="logo.png" alt="Nantara AI">
+      <span>Nantara</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#how">How it works</a>
+      <a href="#services">Services</a>
+      <a href="#workflow">Operations</a>
+      <a href="#chat">Ask Nantara</a>
+      <a href="#faq">FAQ</a>
+      <a href="About.html">About</a>
+      <a href="https://calendly.com/nantara" class="nav-cta">Book Demo</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="7" x2="21" y2="7"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="17" x2="21" y2="17"></line>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== STICKY BOOK-DEMO BAR ===== -->
+<div class="demo-bar" id="demoBar">
+  <div class="demo-bar-txt">
+    <strong>See Nantara run your operations live</strong>
+    <span>Free 15-min demo &middot; live in 72 hours &middot; no commitment</span>
+  </div>
+  <a href="https://calendly.com/nantara" class="cta-magnetic">Book a Demo
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+  </a>
+  <button class="demo-bar-x" id="demoBarX" type="button" aria-label="Dismiss">&times;</button>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-arcs"><div class="hero-arc"></div><div class="hero-arc"></div><div class="hero-arc"></div></div>
+  <div class="hero-glow"></div>
+  <div class="hero-beam"></div>
+
+  <div class="hero-stage">
+  <h1 class="hero-headline">
+    <span class="accel">Accelerate. Automate.</span><br>
+    AI-Powered Scalability.
+  </h1>
+  <p class="hero-subline">Nantara transforms WhatsApp conversations into structured business operations&mdash;from order capture and customer management to invoicing, fulfillment, and reporting.</p>
+
+  <div class="hero-actions">
+    <a href="https://calendly.com/nantara" class="cta-magnetic" id="heroCta">
+      Book a Demo
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+    </a>
+    <a href="#compare" class="cta-ghost">See Nantara in Action</a>
+  </div>
+
+  <div class="hero-trust">
+    <span class="ht"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"></path></svg><b>72-hour</b>&nbsp;setup</span>
+    <span class="ht"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"></path></svg>No rip-and-replace</span>
+    <span class="ht"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"></path></svg><b>24/7</b>&nbsp;on your channels</span>
+  </div>
+  </div>
+
+  <div class="hero-divider"></div>
+
+  <!-- HIGHLIGHT: live chat with Nantara -->
+  <div class="hero-chat" id="chat">
+    <div class="hc-2col">
+      <div class="hc-side hc-left">
+        <h2 class="hc-title" style="--hd:.85s">Talk to Nantara &mdash; the AI that <span class="g">runs your operations.</span></h2>
+        <p class="hc-sub" style="--hd:.95s">Not a sales bot &mdash; a business consultant. Describe how your operation runs and Nantara AI diagnoses where you're losing time, then shows exactly what to automate.</p>
+        <div class="wa-asks hc-asks-row" id="hcAsks" style="--hd:1.05s">
+          <button class="wa-ask" type="button" data-q="Where is my business most likely losing time and money right now?">
+            <span class="wa-ask-ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+            Find my bottlenecks
+          </button>
+          <button class="wa-ask" type="button" data-q="Our WhatsApp orders are chaotic and handled manually. How would you fix it?">
+            <span class="wa-ask-ico"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></span>
+            Fix WhatsApp chaos
+          </button>
+          <button class="wa-ask" type="button" data-q="How should I automate my finance, invoicing and payment workflows?">
+            <span class="wa-ask-ico"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></span>
+            Automate finance
+          </button>
+          <button class="wa-ask" type="button" data-q="Is my business ready to automate its operations? How do I know?">
+            <span class="wa-ask-ico"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></span>
+            Am I ready?
+          </button>
+        </div>
+        <div class="hc-hint" style="--hd:1.12s">Tap a prompt, or type your own &rarr;</div>
+        <div class="hc-cz" style="--hd:1.2s">
+          <div class="hc-cz-top">
+            <span class="hc-cz-title"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>Customize your assistant</span>
+            <span class="hc-cz-live"><i></i>live</span>
+          </div>
+          <label class="hc-cz-label">Name</label>
+          <input class="hc-cz-input" id="waCzName" maxlength="18" placeholder="Nantara" autocomplete="off">
+          <label class="hc-cz-label">Personality</label>
+          <div class="hc-cz-seg" id="waCzTone">
+            <button type="button" data-tone="AI assistant" class="active">Default</button>
+            <button type="button" data-tone="Friendly">Friendly</button>
+            <button type="button" data-tone="Efficient">Efficient</button>
+            <button type="button" data-tone="Analyst">Analyst</button>
+          </div>
+          <label class="hc-cz-label">Avatar</label>
+          <div class="hc-cz-avatars" id="waCzAvatars">
+            <button type="button" class="hc-cz-ava active" data-type="logo" title="Nantara logo"><img src="logo.png" alt=""></button>
+            <button type="button" class="hc-cz-ava" data-type="grad" data-g="linear-gradient(135deg,#1A6BFF,#38B6FF)" style="background:linear-gradient(135deg,#1A6BFF,#38B6FF)"></button>
+            <button type="button" class="hc-cz-ava" data-type="grad" data-g="linear-gradient(135deg,#059669,#34D399)" style="background:linear-gradient(135deg,#059669,#34D399)"></button>
+            <button type="button" class="hc-cz-ava" data-type="grad" data-g="linear-gradient(135deg,#7C3AED,#C084FC)" style="background:linear-gradient(135deg,#7C3AED,#C084FC)"></button>
+            <button type="button" class="hc-cz-ava" data-type="grad" data-g="linear-gradient(135deg,#F59E0B,#FB7185)" style="background:linear-gradient(135deg,#F59E0B,#FB7185)"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-side hc-right">
+<div class="wa-phone" id="waChat" style="--hd:1.0s">
+      <div class="wa-header">
+        <div class="wa-avatar" id="waAvatar" style="background:#0B141A"><img src="logo.png" alt="Nantara"></div>
+        <div class="wa-hd-text">
+          <div class="wa-hd-name" id="waName">Nantara</div>
+          <div class="wa-hd-status" id="waStatus">online &middot; AI assistant</div>
+        </div>
+        <div class="wa-hd-icons">
+          <svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        </div>
+      </div>
+
+      <div class="wa-body">
+        <div class="wa-day">TODAY</div>
+        <div class="wa-msg wa-in" id="waGreet" style="--d:.05s">Hi — I'm Nantara AI, a business consultant, not a sales bot. 👋 Tell me how your operations run today and I'll pinpoint where you're losing time and money.<span class="wa-time">09:24</span></div>
+        <div class="wa-msg wa-out" style="--d:.4s">We get 100+ WhatsApp orders a day — my team logs them by hand.<span class="wa-time">09:24</span></div>
+        <div class="wa-msg wa-in" style="--d:.8s">
+          <div class="wa-recap-title">🔍 Quick diagnosis</div>
+          <div style="font-size:12.5px;color:#AEBAC1;line-height:1.5;margin-bottom:9px;">At that volume, manual entry typically burns 30&ndash;40 staff hours a week and quietly leaks 1&ndash;2 orders a day.</div>
+          <div class="wa-recap-row"><span>Bottleneck</span> <b>manual order entry</b></div>
+          <div class="wa-recap-row"><span>Real cost</span> <b>~40 hrs/week + errors</b></div>
+          <div class="wa-recap-row"><span>The fix</span> <b class="up">auto-capture &rarr; structured orders</b></div>
+          <span class="wa-time">09:24</span>
+        </div>
+        <div class="wa-msg wa-in" style="--d:1.1s">Before I suggest anything — what's your average reply time right now? ⏱️<span class="wa-time">09:24</span></div>
+      </div>
+      <form class="wa-input" id="waForm">
+        <input class="wa-input-box" id="waInput" placeholder="Message Nantara…" autocomplete="off">
+        <button class="wa-send" id="waSendBtn" type="submit"><svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"></path></svg></button>
+      </form>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OPERATIONS DASHBOARD (Looker style) ===== -->
+<section class="workflow-section" id="workflow">
+  <div class="container">
+    <div class="section-header sr">
+      <span class="section-eyebrow">Operations Dashboard</span>
+      <h2 class="section-title">See your whole business<br>at a glance.</h2>
+      <p class="section-desc">A live operational view of orders, revenue, channels, and buyer activity. Switch the date range &mdash; every metric updates instantly.</p>
+    </div>
+
+    <div class="looker sr">
+      <div class="lk-bar">
+        <div class="lk-title"><span class="live-dot"></span> Operations Report <span class="lk-live">LIVE</span></div>
+        <div class="lk-range" id="lkRange">
+          <button class="lk-pill active" data-range="7">7 days</button>
+          <button class="lk-pill" data-range="30">30 days</button>
+          <button class="lk-pill" data-range="90">90 days</button>
+        </div>
+      </div>
+
+      <div class="lk-body">
+        <div class="lk-scorecards">
+          <div class="lk-score"><div class="lk-score-label">Total Orders</div><div class="lk-score-val" id="scOrders">847</div><div class="lk-score-delta" id="scOrdersD">&#9650; 23% vs prev</div></div>
+          <div class="lk-score"><div class="lk-score-label">Revenue</div><div class="lk-score-val" id="scRev">$42.3K</div><div class="lk-score-delta" id="scRevD">&#9650; 18% vs prev</div></div>
+          <div class="lk-score"><div class="lk-score-label">Auto-Resolved</div><div class="lk-score-val" id="scAuto">72%</div><div class="lk-score-delta" id="scAutoD">&#9650; 5% vs prev</div></div>
+          <div class="lk-score"><div class="lk-score-label">Avg Response</div><div class="lk-score-val" id="scResp">4.2m</div><div class="lk-score-delta" id="scRespD">&#9660; 12% faster</div></div>
+        </div>
+
+        <div class="lk-grid">
+          <div class="lk-card">
+            <div class="lk-card-head"><span>Orders over time</span><span class="lk-card-sub" id="tsSub">Last 7 days</span></div>
+            <svg class="lk-chart" id="lkChart" viewBox="0 0 600 180" preserveAspectRatio="none">
+              <defs><linearGradient id="lkGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#38B6FF"/><stop offset="100%" stop-color="rgba(124,58,237,0.35)"/>
+              </linearGradient></defs>
+              <g id="lkBars"></g>
+              <polyline id="lkLine" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linejoin="round" points=""></polyline>
+            </svg>
+            <div class="lk-chart-x" id="lkChartX"></div>
+          </div>
+          <div class="lk-card">
+            <div class="lk-card-head"><span>By channel</span></div>
+            <div class="lk-donut">
+              <svg viewBox="0 0 120 120" width="140" height="140">
+                <circle cx="60" cy="60" r="46" stroke="rgba(255,255,255,0.05)" stroke-width="14"></circle>
+                <circle id="dnWA" cx="60" cy="60" r="46" stroke="#25D366"></circle>
+                <circle id="dnIG" cx="60" cy="60" r="46" stroke="#E1306C"></circle>
+                <circle id="dnEM" cx="60" cy="60" r="46" stroke="#38B6FF"></circle>
+              </svg>
+              <div class="lk-donut-center"><b id="dnTotal">847</b><span>orders</span></div>
+            </div>
+            <div class="lk-legend">
+              <div class="lk-legend-item"><span class="lk-legend-dot" style="background:#25D366"></span>WhatsApp<span class="lk-legend-val" id="lgWA">78%</span></div>
+              <div class="lk-legend-item"><span class="lk-legend-dot" style="background:#E1306C"></span>Instagram<span class="lk-legend-val" id="lgIG">14%</span></div>
+              <div class="lk-legend-item"><span class="lk-legend-dot" style="background:#38B6FF"></span>Email<span class="lk-legend-val" id="lgEM">8%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lk-grid2">
+          <div class="lk-card">
+            <div class="lk-card-head"><span>Top products</span></div>
+            <div id="lkProducts"></div>
+          </div>
+          <div class="lk-card">
+            <div class="lk-card-head"><span>Order status</span></div>
+            <div id="lkStatus"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="section" id="how" style="border-top: 1px solid var(--border);">
+  <div class="container">
+    <div class="section-header sr">
+      <span class="section-eyebrow">How It Works</span>
+      <h2 class="section-title">Live in 72 hours.<br>Hands-off after that.</h2>
+      <p class="section-desc">Three steps from your first message to a fully automated order desk &mdash; no rip-and-replace, no new tools for your team to learn.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-step sr">
+        <div class="how-n">STEP 01</div>
+        <div class="how-ico"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></div>
+        <h3>Connect your channels</h3>
+        <p>Plug Nantara into WhatsApp, Instagram and email. We build, host and wire up the whole stack for you &mdash; nothing for your team to install.</p>
+      </div>
+      <div class="how-step sr sr-delay-1">
+        <div class="how-n">STEP 02</div>
+        <div class="how-ico"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg></div>
+        <h3>Nantara runs operations</h3>
+        <p>It reads every message, enriches it with buyer history and pricing, logs the order and replies &mdash; autonomously, 24/7, in any language.</p>
+      </div>
+      <div class="how-step sr sr-delay-2">
+        <div class="how-n">STEP 03</div>
+        <div class="how-ico"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"></path><path d="M7 14l4-4 3 3 5-6"></path></svg></div>
+        <h3>You watch it grow</h3>
+        <p>Orders captured with zero manual entry, replies in minutes not hours, and roughly 70% of routine work handled without lifting a finger.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPARISON: Chatbot Biasa vs Agen Nantara ===== -->
+<section class="section" id="compare" style="border-top: 1px solid var(--border);">
+  <div class="container">
+    <div class="section-header sr">
+      <span class="section-eyebrow">See The Difference</span>
+      <h2 class="section-title">Built to deliver real results.</h2>
+      <p class="section-desc">Same customer query. Two outcomes — a rigid chatbot that loses the sale, versus a Nantara agent that handles the full order like a trained human admin.</p>
+    </div>
+    <div class="cmp-grid">
+
+      <!-- LEFT: generic chatbot (static) -->
+      <div class="cmp-card cmp-dumb sr">
+        <div class="cmp-head">
+          <h3>Generic Chatbot <span class="cmp-tag">rule-based</span></h3>
+          <p>Can't follow the conversation or handle anything outside its script.</p>
+        </div>
+        <div class="cmp-chat">
+          <div class="cmp-scroll">
+            <div class="cmp-row out"><div class="cmp-bub">Hi, I'd like to order some sandals<span class="cmp-time">09:01</span></div><div class="cmp-who">Customer</div></div>
+            <div class="cmp-row in"><div class="cmp-ava bot"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="2"></rect><path d="M12 8V4M9 14h.01M15 14h.01"></path></svg></div><div class="cmp-bub">Hi! Thanks for contacting <b>a customer</b> 😊 Please choose: <b>1.</b> Catalog &nbsp;<b>2.</b> Promo<span class="cmp-time">09:01</span></div></div>
+            <div class="cmp-row out"><div class="cmp-bub">Any sandals that'd make a good birthday gift?<span class="cmp-time">09:02</span></div><div class="cmp-who">Customer</div></div>
+            <div class="cmp-row in"><div class="cmp-ava bot"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="2"></rect><path d="M12 8V4M9 14h.01M15 14h.01"></path></svg></div><div class="cmp-bub">Sorry, I didn't understand that. Please choose: <b>1.</b> Catalog &nbsp;<b>2.</b> Promo<span class="cmp-time">09:02</span></div></div>
+            <div class="cmp-row out"><div class="cmp-bub">Ugh, never mind then 😕<span class="cmp-time">09:03</span></div><div class="cmp-who">Customer</div></div>
+            <div class="cmp-fail"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M15 9l-6 6M9 9l6 6"></path></svg> Customer left without buying</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Nantara Agent (animated real-time) -->
+      <div class="cmp-card cmp-smart sr">
+        <div class="cmp-head">
+          <h3>Nantara Agent <span class="cmp-tag">agentic ai</span></h3>
+          <p>Adapts to complex, dynamic conversations &mdash; all the way to a completed order.</p>
+        </div>
+        <div class="cmp-chat">
+          <div class="cmp-scroll" id="cmpLive"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== METRICS STRIP ===== -->
+<div class="metrics-strip">
+  <div class="container">
+    <div class="metrics-row">
+      <div class="metric-item sr"><div class="metric-value" data-count="70" data-suffix="%+">0%+</div><div class="metric-label">Faster order fulfillment</div></div>
+      <div class="metric-item sr sr-delay-1"><div class="metric-value" data-count="72" data-suffix="h">0h</div><div class="metric-label">Hours to live deployment</div></div>
+      <div class="metric-item sr sr-delay-2"><div class="metric-value" data-count="5" data-suffix="min">0min</div><div class="metric-label">Average order response time</div></div>
+      <div class="metric-item sr sr-delay-3"><div class="metric-value" data-count="100" data-suffix="%">0%</div><div class="metric-label">Order accuracy rate</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BENTO SERVICES ===== -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-header sr">
+      <span class="section-eyebrow">What You Get</span>
+      <h2 class="section-title">One System For Every Order.</h2>
+      <p class="section-desc">Nantara connects customer communication, operations, finance, and fulfillment into a single operational workflow.</p>
+    </div>
+
+    <div class="bento-grid">
+      <div class="bento-card span-2 sr">
+        <div class="bento-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
+        <div class="bento-title">Order Intelligence</div>
+        <div class="bento-desc">Capture customer orders from WhatsApp and convert them into structured records — automatically, with full context.</div>
+        <div class="bento-detail">Every message becomes a tracked, verified order record. No manual entry. No data lost between channels.</div>
+      </div>
+      <div class="bento-card sr sr-delay-1">
+        <div class="bento-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg></div>
+        <div class="bento-title">Customer Timeline</div>
+        <div class="bento-desc">View conversations, orders, invoices, and customer activity in one place — across every interaction.</div>
+        <div class="bento-detail">Full buyer history at a glance. Your team always has the context they need, with zero digging.</div>
+      </div>
+      <div class="bento-card sr sr-delay-2">
+        <div class="bento-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg></div>
+        <div class="bento-title">Fulfillment Tracking</div>
+        <div class="bento-desc">Track every order from confirmation to delivery — with real-time status updates across your operation.</div>
+        <div class="bento-detail">Warehouse, finance, and customer service always share the same operational picture. No lag, no confusion.</div>
+      </div>
+      <div class="bento-card span-2 sr sr-delay-3">
+        <div class="bento-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
+        <div class="bento-title">Executive Dashboard</div>
+        <div class="bento-desc">Monitor business performance in real time — orders, revenue, fulfillment status, and operational health in one view.</div>
+        <div class="bento-detail">Designed for decision-makers. Spot bottlenecks early. Measure what matters. Act with confidence.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE SHIFT ===== -->
+<section class="section" id="shift">
+  <div class="container">
+    <div class="section-header sr">
+      <span class="section-eyebrow">The Shift</span>
+      <h2 class="section-title">What Happens After Nantara?</h2>
+      <p class="section-desc">One operational system replaces the fragmented workflows that slow your team down every day.</p>
+    </div>
+    <div class="shift-grid sr">
+      <div class="shift-before">
+        <div class="shift-col-label before">Before</div>
+        <div class="shift-rows">
+          <div class="shift-row"><div class="shift-metric before">Orders</div><div class="shift-label">Buried in WhatsApp threads</div></div>
+          <div class="shift-row"><div class="shift-metric before">Multiple</div><div class="shift-label">Disconnected spreadsheets</div></div>
+          <div class="shift-row"><div class="shift-metric before">Manual</div><div class="shift-label">Updates across every team</div></div>
+          <div class="shift-row"><div class="shift-metric before">Delayed</div><div class="shift-label">Reporting and decision-making</div></div>
+          <div class="shift-row"><div class="shift-metric before">Errors</div><div class="shift-label">From preventable human mistakes</div></div>
+        </div>
+      </div>
+      <div class="shift-divider">
+        <div class="shift-arrow"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></div>
+      </div>
+      <div class="shift-after">
+        <div class="shift-col-label after">After Nantara</div>
+        <div class="shift-rows">
+          <div class="shift-row"><div class="shift-metric after">Central</div><div class="shift-label">Operations in one system</div></div>
+          <div class="shift-row"><div class="shift-metric after">Real-time</div><div class="shift-label">Visibility across all functions</div></div>
+          <div class="shift-row"><div class="shift-metric after">Faster</div><div class="shift-label">Fulfillment with fewer steps</div></div>
+          <div class="shift-row"><div class="shift-metric after">Accurate</div><div class="shift-label">Records and financial data</div></div>
+          <div class="shift-row"><div class="shift-metric after">Scalable</div><div class="shift-label">Processes built to grow with you</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-header sr">
+      <span class="section-eyebrow">Trusted By Suppliers</span>
+      <h2 class="section-title">What our clients say.</h2>
+    </div>
+  </div>
+  <div class="container">
+    <div class="testi-track-wrap">
+      <div class="testi-track" id="testiTrack">
+
+<div class="testi-card">
+          <div class="testi-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg></div>
+          <p class="testi-quote">We have 600+ SKUs with different prices per customer tier. Before this, my admin had to check every single one manually. Now a buyer messages on WhatsApp and instantly gets the right price. The biggest difference is repeat buyers — they don't have to ask again, the system already remembers.</p>
+          <div class="testi-author">
+            <div class="testi-avatar av-2">SR</div>
+            <div><div class="testi-name">Saddam Rikho</div><div class="testi-role">Manager, Unique Billiard Supply</div></div>
+          </div>
+        </div>
+
+<div class="testi-card">
+          <div class="testi-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg></div>
+          <p class="testi-quote">I know nothing about technology. Seriously. But Nantara handled the entire setup. What I noticed is my guys at the shop don't have to copy-paste from WhatsApp to Excel anymore. That alone is worth it for me. Their time now goes to actually talking to customers.</p>
+          <div class="testi-author">
+            <div class="testi-avatar av-3">B</div>
+            <div><div class="testi-name">Burhan</div><div class="testi-role">Owner, Burhan Garage</div></div>
+          </div>
+        </div>
+
+<div class="testi-card">
+          <div class="testi-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg></div>
+          <p class="testi-quote">One thing I only realized after using Nantara: we had a bunch of returning customers who should've been upsold but we never offered them anything. The system now suggests it automatically. Second month our revenue went up a decent amount — nothing crazy, but consistent.</p>
+          <div class="testi-author">
+            <div class="testi-avatar av-4">M</div>
+            <div><div class="testi-name">Mario</div><div class="testi-role">Owner, Mario Household Retail</div></div>
+          </div>
+        </div>
+
+<div class="testi-card">
+          <div class="testi-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20" style="opacity:0.2"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg></div>
+          <p class="testi-quote">My expectations were low because I'd already tried other chatbots and they were useless. Nantara is different. It's not a chatbot — it's more like a system that actually understands our order flow. Resellers message us, they get a real answer. Not a template, but something that actually matches their order context.</p>
+          <div class="testi-author">
+            <div class="testi-avatar av-5">DP</div>
+            <div><div class="testi-name">Diana Putri</div><div class="testi-role">Operations, Sumber Jaya Tekstil</div></div>
+          </div>
+        </div>
+
+<div class="testi-card">
+          <div class="testi-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20" style="opacity:0.2"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg></div>
+          <p class="testi-quote">Honestly I was skeptical at first. Billiard supply is super niche, I didn't think AI would get it. But after a month, orders that used to get lost in WhatsApp are all logged now. There's a minor hiccup here and there, but overall way more organized than before.</p>
+          <div class="testi-author">
+            <div class="testi-avatar av-1">KS</div>
+            <div><div class="testi-name">Kevin Santoso</div><div class="testi-role">Owner, Mayestix Pool &amp; Billiard</div></div>
+          </div>
+        </div>
+
+<div class="testi-card">
+          <div class="testi-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg></div>
+          <p class="testi-quote">The setup was fast, that's what surprised me. I thought it would take weeks. Turns out 3 days and it was running. Now even if an order comes in at 2 AM it still gets processed. My team shows up in the morning, opens the dashboard, everything's already there.</p>
+          <div class="testi-author">
+            <div class="testi-avatar av-6">RW</div>
+            <div><div class="testi-name">Rizky Wibowo</div><div class="testi-role">Founder, Kencana Auto Parts</div></div>
+          </div>
+        </div>
+
+<div class="testi-card">
+          <div class="testi-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z"/></svg></div>
+          <p class="testi-quote">I'm not the type to get excited about new tools. But this genuinely cut my admin team's workload in half. We used to need 2 people full-time just managing orders, now 1 part-timer handles it. The rest I reallocated to sales.</p>
+          <div class="testi-author">
+            <div class="testi-avatar av-7">LH</div>
+            <div><div class="testi-name">Lina Hartono</div><div class="testi-role">CEO, Bintang Packaging</div></div>
+          </div>
+        </div>
+
+</div>
+    </div>
+    <div class="testi-nav">
+      <button class="testi-nav-btn" id="testiPrev"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg></button>
+      <div class="testi-dots" id="testiDots"></div>
+      <button class="testi-nav-btn" id="testiNext"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INTEGRATIONS ===== -->
+<section class="section" id="integrations" style="border-top: 1px solid var(--border); overflow: hidden;">
+  <div class="container">
+    <div class="section-header sr" style="text-align:center; max-width:600px; margin-left:auto; margin-right:auto;">
+      <span class="section-eyebrow">Integrations</span>
+      <h2 class="section-title">Plugs into your stack.<br>Breaks nothing.</h2>
+      <p class="section-desc" style="margin:0 auto">Works with WhatsApp, Google Sheets, Gmail, n8n, Notion, Airtable, and any tool your business already runs on.</p>
+    </div>
+
+    <div class="hub-stage sr" id="hubStage">
+      <canvas class="hub-canvas" id="hubCanvas"></canvas>
+
+      <!-- Pulse rings -->
+      <div class="hub-center-ring"></div>
+      <div class="hub-center-ring r2"></div>
+
+      <!-- Center: Nantara logo -->
+      <div class="hub-center">
+        <img src="logo.png" alt="Nantara AI">
+      </div>
+
+      <!-- 7 app nodes — positioned by JS in a circle -->
+      <div class="hub-node" data-idx="0" style="transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="hub-node-label">WhatsApp</span>
+      </div>
+      <div class="hub-node" data-idx="1" style="transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 24 24" fill="#0F9D58"><path d="M19.385 2H4.615A2.615 2.615 0 002 4.615v14.77A2.615 2.615 0 004.615 22h14.77A2.615 2.615 0 0022 19.385V4.615A2.615 2.615 0 0019.385 2zM9 17H6v-2h3v2zm0-4H6v-2h3v2zm0-4H6V7h3v2zm9 8h-7v-2h7v2zm0-4h-7v-2h7v2zm0-4h-7V7h7v2z"/></svg>
+        <span class="hub-node-label">Google Sheets</span>
+      </div>
+      <div class="hub-node" data-idx="2" style="transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 24 24" fill="#EA4335"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+        <span class="hub-node-label">Gmail</span>
+      </div>
+      <div class="hub-node" data-idx="3" style="transform:translate(-50%,-50%)">
+        <div style="font-weight:800;font-size:14px;color:#FF6D5A;letter-spacing:-0.02em">n8n</div>
+        <span class="hub-node-label">n8n</span>
+      </div>
+      <div class="hub-node" data-idx="4" style="transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L18.56 2.57c-.42-.326-.98-.7-2.054-.607L3.84 3.098c-.466.046-.56.28-.374.466l.993 1.644zM5.252 7.56v14.04c0 .793.42 1.073 1.353 1.026l14.54-.84c.932-.046 1.073-.606 1.073-1.26V6.674c0-.653-.233-.98-.746-.933l-15.2.886c-.56.046-.793.28-.793.933zM19 8.065c.14.606 0 1.213-.607 1.26l-.7.14V19.39c-.607.326-1.166.513-1.632.513-.747 0-.933-.233-1.493-.932l-4.574-7.186v6.953l1.446.327s0 1.213-1.68 1.213l-4.623.28c-.14-.28 0-.98.467-1.12l1.212-.326v-9.174l-1.68-.14c-.14-.606.187-1.493.933-1.54l4.993-.326L15.354 14V7.66l-1.213-.14c-.14-.746.42-1.26 1.073-1.306l4.786-.327z"/></svg>
+        <span class="hub-node-label">Notion</span>
+      </div>
+      <div class="hub-node" data-idx="5" style="transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 24 24"><path d="M11.553 1.106L1.846 5.25a.504.504 0 000 .917l9.707 4.2a1.512 1.512 0 001.194 0l9.707-4.2a.504.504 0 000-.917l-9.707-4.144a1.512 1.512 0 00-1.194 0z" fill="#FCB400"/><path d="M12.553 12.553v9.223a.503.503 0 00.713.458l9.458-4.586a.503.503 0 00.276-.45V8.223a.504.504 0 00-.714-.458l-9.458 4.458a.504.504 0 00-.275.33z" fill="#18BFFF"/><path d="M10.447 12.553v9.223a.504.504 0 01-.714.458L.275 17.648A.504.504 0 010 17.198V8.223a.504.504 0 01.714-.458l9.458 4.458a.504.504 0 01.275.33z" fill="#F82B60"/></svg>
+        <span class="hub-node-label">Airtable</span>
+      </div>
+      <div class="hub-node" data-idx="6" style="transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 24 24" fill="#EE4D2D"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm.6 4.2c2.04 0 3.6 1.8 3.6 3.6h-1.2c0-1.32-1.08-2.4-2.4-2.4s-2.4 1.08-2.4 2.4H9c0-1.8 1.56-3.6 3.6-3.6zm4.8 5.4v8.4c0 .66-.54 1.2-1.2 1.2H7.8c-.66 0-1.2-.54-1.2-1.2V9.6h11.4z"/></svg>
+        <span class="hub-node-label">Shopee</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section" id="faq" style="border-top: 1px solid var(--border);">
+  <div class="container">
+    <div class="section-header sr">
+      <span class="section-eyebrow">FAQ</span>
+      <h2 class="section-title">Common questions.</h2>
+    </div>
+    <div class="faq-list sr">
+      <div class="faq-item"><button class="faq-q">How is this different from a chatbot?<span class="faq-plus"></span></button><div class="faq-a"><div class="faq-a-inner">Chatbots answer questions. Nantara automates your entire order pipeline — capture, enrich, route, track, and predict. We turn scattered WhatsApp messages into tracked, error-free orders.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Do I need technical skills?<span class="faq-plus"></span></button><div class="faq-a"><div class="faq-a-inner">No. We handle the entire 72-hour setup. You share access to your WhatsApp and existing tools. We do the rest.</div></div></div>
+      <div class="faq-item"><button class="faq-q">What if I'm not happy in 30 days?<span class="faq-plus"></span></button><div class="faq-a"><div class="faq-a-inner">30-day results guarantee. If you don't see measurable improvement, we refund your setup fee — no questions asked.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Do you store my data?<span class="faq-plus"></span></button><div class="faq-a"><div class="faq-a-inner">No. Your data lives entirely in your account. We build and maintain the workflow — nothing stored on our servers.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Can I switch plans or cancel?<span class="faq-plus"></span></button><div class="faq-a"><div class="faq-a-inner">Yes. Upgrade or downgrade anytime. If you cancel, you keep the workflow — we just stop maintaining and optimizing it.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Which channels and tools does Nantara connect to?<span class="faq-plus"></span></button><div class="faq-a"><div class="faq-a-inner">WhatsApp, Instagram, and email, plus the systems you already run — CRMs, ERPs, payment gateways like Xendit, and spreadsheets. If your team uses it, we integrate with it. No rip-and-replace.</div></div></div>
+      <div class="faq-item"><button class="faq-q">How fast can we go live?<span class="faq-plus"></span></button><div class="faq-a"><div class="faq-a-inner">Most businesses are fully live in about 72 hours. We build, host, and configure everything end-to-end — you just review and approve the flow before it goes live.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Can Nantara handle multiple languages?<span class="faq-plus"></span></button><div class="faq-a"><div class="faq-a-inner">Yes. It detects and replies in your customer's language automatically — Indonesian, English, and more — matching their tone, so every conversation feels natural.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Will it replace my team?<span class="faq-plus"></span></button><div class="faq-a"><div class="faq-a-inner">No — it removes the repetitive work. Data entry, follow-ups, and routing run on autopilot, so your team spends its time on customers and growth instead of admin.</div></div></div>
+      <div class="faq-item"><button class="faq-q">How does pricing work?<span class="faq-plus"></span></button><div class="faq-a"><div class="faq-a-inner">A flat monthly retainer. We build, host, and maintain the whole system for you, with no per-seat fees. Book a demo and we'll scope a quote tailored to your operation.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta">
+  <div class="final-cta-glow"></div>
+  <div class="container">
+    <h2 class="section-title sr">Every Order Matters.<br>Every Minute Counts.</h2>
+    <p class="section-desc sr sr-delay-1">See how Nantara helps businesses operate with clarity, speed, and control. 72-hour deployment. No commitment.</p>
+    <div class="hero-actions sr sr-delay-2" style="justify-content:center">
+      <a href="https://calendly.com/nantara" class="cta-magnetic">
+        Schedule 15-Min Demo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </a>
+    </div>
+    <div class="trust-row sr sr-delay-3">
+      <div class="trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linejoin="round"></path></svg> 30-day money-back guarantee</div>
+      <div class="trust-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 72-hour deployment</div>
+      <div class="trust-item"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Zero data on our servers</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo"><img src="logo.png" alt="Nantara"><span>Nantara</span></a>
+        <p>The operational layer for modern businesses — connecting customer communication, orders, finance, and fulfillment in one system.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#services">Services</a><a href="#workflow">Dashboard</a><a href="#shift">The Shift</a><a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="About.html">About</a><a href="Privacy Policy.html">Privacy Policy</a><a href="Terms of Service.html">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Nantara AI. All rights reserved.</span>
+      <div class="footer-socials">
+        <a href="https://instagram.com/nantaraai" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://tiktok.com/@nantaraai" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 5.82A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const noMotion = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  // ===== STARFIELD BACKGROUND =====
+  if (!noMotion) {
+    const starCanvas = document.createElement('canvas');
+    starCanvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0';
+    document.body.prepend(starCanvas);
+    const sctx = starCanvas.getContext('2d');
+    let SW, SH;
+    const starResize = () => { SW = starCanvas.width = window.innerWidth; SH = starCanvas.height = window.innerHeight; };
+    starResize(); window.addEventListener('resize', starResize);
+    const stars = Array.from({length: 350}, () => ({
+      x: Math.random(), y: Math.random(),
+      r: Math.random() * 1.8 + 0.4,
+      a: Math.random() * 0.7 + 0.3,
+      speed: Math.random() * 0.00007 + 0.00002,
+      twinkle: Math.random() * 0.004 + 0.001,
+      offset: Math.random() * Math.PI * 2,
+      color: Math.random() > 0.6 ? '120,160,255' : Math.random() > 0.4 ? '170,140,255' : '255,255,255'
+    }));
+    let st = 0;
+    (function drawStars() {
+      sctx.clearRect(0, 0, SW, SH);
+      st++;
+      stars.forEach(s => {
+        s.y -= s.speed;
+        if (s.y < -0.02) { s.y = 1.02; s.x = Math.random(); }
+        const tw = Math.sin(st * s.twinkle + s.offset) * 0.3 + 0.7;
+        sctx.beginPath();
+        sctx.arc(s.x * SW, s.y * SH, s.r, 0, Math.PI * 2);
+        sctx.fillStyle = `rgba(${s.color},${s.a * tw})`;
+        sctx.fill();
+      });
+      requestAnimationFrame(drawStars);
+    })();
+  }
+
+  // ===== NAV SCROLL =====
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 32), {passive:true});
+  document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
+
+  // ===== STICKY BOOK-DEMO BAR =====
+  (function(){
+    const bar = document.getElementById('demoBar');
+    if (!bar) return;
+    let dismissed = false;
+    document.getElementById('demoBarX').addEventListener('click', () => { dismissed = true; bar.classList.remove('show'); });
+    const finalCta = document.querySelector('.final-cta');
+    const footer = document.querySelector('.footer');
+    let ctaVisible = false;
+    if (finalCta){
+      new IntersectionObserver(es => es.forEach(e => { ctaVisible = e.isIntersecting; update(); }), {threshold:.15}).observe(finalCta);
+    }
+    if (footer){
+      new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ ctaVisible = true; update(); } }), {threshold:.05}).observe(footer);
+    }
+    function update(){
+      if (dismissed){ bar.classList.remove('show'); return; }
+      const past = window.scrollY > window.innerHeight * 0.85;
+      bar.classList.toggle('show', past && !ctaVisible);
+    }
+    window.addEventListener('scroll', update, {passive:true});
+    update();
+  })();
+
+  // ===== HERO "WATCH DEMO" -> live comparison =====
+  (function(){
+    const w = document.getElementById('heroWatch');
+    const target = document.getElementById('compare');
+    if (w && target) w.addEventListener('click', () => target.scrollIntoView({behavior:'smooth', block:'start'}));
+  })();
+
+  // ===== ASK NANTARA CHAT REVEAL =====
+  (function(){
+    const chat = document.getElementById('waChat');
+    if (!chat) return;
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { chat.classList.add('wa-go'); obs.unobserve(chat); }
+      });
+    }, { threshold: 0.3 });
+    obs.observe(chat);
+  })();
+
+  // ===== AGENT LOOP TRACE — interactive hero =====
+  (function(){
+    const steps = [...document.querySelectorAll('.lt-step')];
+    const scenes = [...document.querySelectorAll('.lt-scene')];
+    const railFill = document.getElementById('ltRailFill');
+    const stepsWrap = document.getElementById('ltSteps');
+    const cap = document.getElementById('ltCap');
+    const elapsedEl = document.getElementById('ltElapsed');
+    if (!steps.length || !scenes.length) return;
+    const CAPS = ['Perceive · reading the message','Reason · resolving intent','Plan · sequencing the work','Act · calling real tools','Observe · checking the result'];
+    let idx = -1, timer = null, paused = false, runT0 = performance.now();
+    function railTo(i){
+      const num = steps[i].querySelector('.lt-num');
+      const wr = stepsWrap.getBoundingClientRect();
+      const nr = num.getBoundingClientRect();
+      railFill.style.height = Math.max(0,(nr.top - wr.top) + nr.height/2 - 16) + 'px';
+    }
+    function show(i){
+      idx = i;
+      steps.forEach((s,j) => { s.classList.toggle('on', j===i); s.classList.toggle('done', j<i); });
+      scenes.forEach((s,j) => { if (j===i){ s.classList.remove('on'); void s.offsetWidth; s.classList.add('on'); } else s.classList.remove('on'); });
+      cap.textContent = CAPS[i];
+      railTo(i);
+      requestAnimationFrame(() => railTo(i));
+      setTimeout(() => railTo(i), 380);
+    }
+    function next(){ if (paused) return; const n = (idx+1) % steps.length; if (n===0) runT0 = performance.now(); show(n); }
+    function start(){ stop(); if (noMotion) return; timer = setInterval(next, 2600); }
+    function stop(){ if (timer) clearInterval(timer); timer = null; }
+    steps.forEach((s,i) => {
+      s.addEventListener('click', () => { show(i); start(); });
+    });
+    const wrap = document.querySelector('.lt');
+    if (wrap){ wrap.addEventListener('mouseenter', () => paused = true); wrap.addEventListener('mouseleave', () => paused = false); }
+    if (elapsedEl && !noMotion){ setInterval(() => { elapsedEl.textContent = ((performance.now()-runT0)/1000).toFixed(1) + 's'; }, 100); }
+    let started = false;
+    const io = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting && !started){ started = true; show(0); runT0 = performance.now(); start(); } }); }, { threshold: .2 });
+    io.observe(document.querySelector('.hero-dashboard') || document.body);
+    show(0);
+  })();
+
+  // ===== MAGNETIC NAV CTA (subtle tech pull) =====
+  if (!noMotion) {
+    document.querySelectorAll('.nav-cta').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        btn.style.transform = 'translate('+((e.clientX-r.left-r.width/2)*0.18)+'px,'+((e.clientY-r.top-r.height/2)*0.3)+'px)';
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform=''; });
+    });
+  }
+
+  // ===== HERO ENTRANCE =====
+  if (!noMotion) {
+    const ease = 'cubic-bezier(0.16,1,0.3,1)';
+    const heroEls = [
+      {sel:'.hero-eyebrow', kf:[{opacity:0,transform:'translateY(20px)'},{opacity:1,transform:'translateY(0)'}], delay:200, dur:800},
+      {sel:'.hero-subline', kf:[{opacity:0,transform:'translateY(20px)'},{opacity:1,transform:'translateY(0)'}], delay:760, dur:800},
+      {sel:'.hero-actions', kf:[{opacity:0,transform:'translateY(20px)'},{opacity:1,transform:'translateY(0)'}], delay:880, dur:800},
+      {sel:'.hero-trust', kf:[{opacity:0,transform:'translateY(20px)'},{opacity:1,transform:'translateY(0)'}], delay:1000, dur:800},
+    ];
+    heroEls.forEach(({sel, kf, delay, dur}) => {
+      document.querySelectorAll(sel).forEach(el =>
+        el.animate(kf, {duration:dur, delay, fill:'none', easing:ease})
+      );
+    });
+  }
+
+  // ===== HERO HEADLINE — word-by-word reveal + gradient sweep =====
+  (function(){
+    const h = document.querySelector('.hero-headline');
+    if (!h) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const wrap = (str, grad) => str.trim().split(/\s+/).map(w =>
+      '<span class="hw"><span class="hw-i'+(grad?' hw-grad':'')+'">'+w+'</span></span>').join(' ');
+    h.innerHTML = wrap('Accelerate. Automate.', true) + '<br>' + wrap('AI-Powered Scalability.', false);
+    if (reduce) return;
+    const items = h.querySelectorAll('.hw-i');
+    items.forEach((el, i) => {
+      el.animate(
+        [{opacity:0, transform:'translateY(115%) rotate(4deg)'},{opacity:1, transform:'translateY(0) rotate(0)'}],
+        {duration:780, delay: 280 + i*90, fill:'backwards', easing:'cubic-bezier(.2,1,.3,1)'}
+      );
+    });
+    setTimeout(() => h.classList.add('swept'), 280 + items.length*90 + 180);
+  })();
+
+  // ===== SCROLL PROGRESS BAR =====
+  (function(){
+    const bar = document.getElementById('scrollProgress');
+    if (!bar) return;
+    const upd = () => {
+      const d = document.documentElement;
+      const max = d.scrollHeight - d.clientHeight;
+      bar.style.width = (max > 0 ? (d.scrollTop / max) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', upd, {passive:true});
+    window.addEventListener('resize', upd);
+    upd();
+  })();
+
+  // ===== MAGNETIC CTA =====
+  if (!noMotion) {
+    const cta = document.getElementById('heroCta');
+    if (cta) {
+      cta.addEventListener('mousemove', e => {
+        const r = cta.getBoundingClientRect();
+        const dx = (e.clientX - r.left - r.width/2) * 0.15;
+        const dy = (e.clientY - r.top - r.height/2) * 0.15;
+        cta.style.transform = `translate(${dx}px, ${dy}px)`;
+      });
+      cta.addEventListener('mouseleave', () => { cta.style.transform = ''; });
+    }
+  }
+
+  // ===== BENTO CARD MOUSE GLOW =====
+  document.querySelectorAll('.bento-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  // ===== SCROLL REVEALS =====
+  if (!noMotion) {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, {threshold: 0.08, rootMargin: '0px 0px -30px 0px'});
+    document.querySelectorAll('.sr').forEach(el => obs.observe(el));
+  }
+
+
+  // ===== 💧 CLICK RIPPLE (all buttons + CTAs) =====
+  (function(){
+    if (noMotion) return;
+    function addRipple(e){
+      const el = e.currentTarget;
+      const r = el.getBoundingClientRect();
+      const size = Math.max(r.width, r.height) * 2.2;
+      const x = e.clientX - r.left - size/2;
+      const y = e.clientY - r.top - size/2;
+      const rpl = document.createElement('span');
+      rpl.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:${size}px;height:${size}px;border-radius:50%;background:rgba(255,255,255,.18);transform:scale(0);pointer-events:none;animation:rippleOut .6s cubic-bezier(.4,0,.2,1) forwards;`;
+      el.appendChild(rpl); setTimeout(()=>rpl.remove(), 650);
+    }
+    const rippleCSS = document.createElement('style');
+    rippleCSS.textContent = '@keyframes rippleOut{to{transform:scale(1);opacity:0;}}';
+    document.head.appendChild(rippleCSS);
+    document.querySelectorAll('.cta-magnetic, .nav-cta, .faq-q, .wa-ask, button').forEach(btn => {
+      const pos = getComputedStyle(btn).position;
+      if (pos === 'static') btn.style.position = 'relative';
+      btn.style.overflow = 'hidden';
+      btn.addEventListener('click', addRipple);
+    });
+  })();
+
+  // ===== 🧲 MAGNETIC ALL CTAs (not just hero) =====
+  (function(){
+    if (noMotion) return;
+    document.querySelectorAll('.cta-magnetic').forEach(btn => {
+      if (btn.id === 'heroCta') return; // already wired
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        const dx = (e.clientX - r.left - r.width/2) * .18;
+        const dy = (e.clientY - r.top - r.height/2) * .18;
+        btn.style.transform = `translate(${dx}px,${dy}px)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    });
+  })();
+
+  // ===== 🌀 HERO PARALLAX (beam + glow only — lightweight) =====
+  (function(){
+    if (noMotion) return;
+    const beam = document.querySelector('.hero-beam');
+    const glow = document.querySelector('.hero-glow');
+    if (!beam && !glow) return;
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const sy = window.scrollY;
+        if (beam) beam.style.transform = `translateX(-50%) translateY(${sy * .18}px)`;
+        if (glow) glow.style.transform = `translateX(-50%) translateY(${sy * .10}px)`;
+        ticking = false;
+      });
+    }, {passive:true});
+  })();
+
+  // ===== TESTIMONIAL SLIDER =====
+  (function(){
+    const track = document.getElementById('testiTrack');
+    if (!track) return;
+    const cards = track.children;
+    const cardCount = cards.length;
+    const dotsWrap = document.getElementById('testiDots');
+    let currentIdx = 0;
+    let isDragging = false, startX = 0, scrollStart = 0;
+
+    // Create dots
+    for (let i = 0; i < Math.min(cardCount, 7); i++) {
+      const dot = document.createElement('div');
+      dot.className = 'testi-dot' + (i === 0 ? ' active' : '');
+      dotsWrap.appendChild(dot);
+    }
+    const dots = dotsWrap.children;
+
+    function getCardWidth() {
+      return cards[0].offsetWidth + 16; // card + gap
+    }
+
+    function goTo(idx) {
+      idx = Math.max(0, Math.min(idx, cardCount - 1));
+      const maxScroll = track.scrollWidth - track.parentElement.offsetWidth;
+      let offset = idx * getCardWidth();
+      if (offset > maxScroll) offset = maxScroll;
+      currentIdx = idx;
+      track.classList.add('snapping');
+      track.style.transform = `translateX(${-offset}px)`;
+      setTimeout(() => track.classList.remove('snapping'), 450);
+      // Update dots
+      [...dots].forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+
+    document.getElementById('testiPrev').addEventListener('click', () => goTo(currentIdx - 1));
+    document.getElementById('testiNext').addEventListener('click', () => goTo(currentIdx + 1));
+
+    // Drag to scroll
+    track.addEventListener('mousedown', e => {
+      isDragging = true; startX = e.clientX;
+      const transform = getComputedStyle(track).transform;
+      const matrix = new DOMMatrix(transform);
+      scrollStart = matrix.m41;
+      track.classList.remove('snapping');
+    });
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      const dx = e.clientX - startX;
+      track.style.transform = `translateX(${scrollStart + dx}px)`;
+    });
+    window.addEventListener('mouseup', e => {
+      if (!isDragging) return;
+      isDragging = false;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 60) {
+        goTo(currentIdx + (dx < 0 ? 1 : -1));
+      } else {
+        goTo(currentIdx);
+      }
+    });
+
+    // Touch support
+    track.addEventListener('touchstart', e => {
+      isDragging = true; startX = e.touches[0].clientX;
+      const transform = getComputedStyle(track).transform;
+      const matrix = new DOMMatrix(transform);
+      scrollStart = matrix.m41;
+      track.classList.remove('snapping');
+    }, {passive: true});
+    track.addEventListener('touchmove', e => {
+      if (!isDragging) return;
+      const dx = e.touches[0].clientX - startX;
+      track.style.transform = `translateX(${scrollStart + dx}px)`;
+    }, {passive: true});
+    track.addEventListener('touchend', e => {
+      if (!isDragging) return;
+      isDragging = false;
+      const dx = (e.changedTouches[0]?.clientX || startX) - startX;
+      if (Math.abs(dx) > 40) {
+        goTo(currentIdx + (dx < 0 ? 1 : -1));
+      } else {
+        goTo(currentIdx);
+      }
+    });
+  })();
+
+  // ===== HUB & SPOKE INTEGRATIONS =====
+  (function(){
+    const stage = document.getElementById('hubStage');
+    const canvas = document.getElementById('hubCanvas');
+    if (!stage || !canvas) return;
+    const ctx = canvas.getContext('2d');
+    const nodes = stage.querySelectorAll('.hub-node');
+    const nodeCount = nodes.length;
+    const radius = 0.38;
+    let w, h, cx, cy, nodePositions = [];
+    let pulsePhase = 0;
+
+    function layout() {
+      const rect = stage.getBoundingClientRect();
+      w = rect.width; h = rect.height;
+      canvas.width = w; canvas.height = h;
+      cx = w / 2; cy = h / 2;
+      const r = Math.min(w, h) * radius;
+      nodePositions = [];
+      nodes.forEach((node, i) => {
+        const angle = -Math.PI / 2 + (i / nodeCount) * Math.PI * 2;
+        const nx = cx + Math.cos(angle) * r;
+        const ny = cy + Math.sin(angle) * r;
+        nodePositions.push({ x: nx, y: ny });
+        node.style.left = nx + 'px';
+        node.style.top = ny + 'px';
+      });
+      // Draw static lines for reduced-motion
+      if (noMotion) drawStatic();
+    }
+
+    function drawStatic() {
+      ctx.clearRect(0, 0, w, h);
+      nodePositions.forEach(pos => {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.strokeStyle = 'rgba(56,182,255,0.15)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      pulsePhase += 0.008;
+
+      nodePositions.forEach((pos, i) => {
+        const dx = pos.x - cx, dy = pos.y - cy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        // Connection line gradient
+        const grad = ctx.createLinearGradient(cx, cy, pos.x, pos.y);
+        grad.addColorStop(0, 'rgba(56,182,255,0.25)');
+        grad.addColorStop(0.5, 'rgba(124,58,237,0.15)');
+        grad.addColorStop(1, 'rgba(56,182,255,0.05)');
+
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Animated pulse dot traveling along the line
+        const t = (Math.sin(pulsePhase * 3 + i * 1.2) + 1) / 2;
+        const px = cx + dx * t;
+        const py = cy + dy * t;
+        const dotGrad = ctx.createRadialGradient(px, py, 0, px, py, 6);
+        dotGrad.addColorStop(0, 'rgba(56,182,255,0.7)');
+        dotGrad.addColorStop(1, 'transparent');
+        ctx.beginPath();
+        ctx.arc(px, py, 6, 0, Math.PI * 2);
+        ctx.fillStyle = dotGrad;
+        ctx.fill();
+
+        // Small bright core dot
+        ctx.beginPath();
+        ctx.arc(px, py, 2, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(56,182,255,0.9)';
+        ctx.fill();
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    layout();
+    if (!noMotion) draw();
+    window.addEventListener('resize', layout);
+  })();
+
+  // ===== COUNTER ANIMATIONS =====
+  document.querySelectorAll('.metric-value[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const cobs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        cobs.unobserve(e.target);
+        if (noMotion || target === 0) { el.textContent = prefix + target + suffix; return; }
+        let t0 = null; const dur = 1800;
+        (function step(ts) {
+          if (!t0) t0 = ts;
+          const p = Math.min((ts - t0) / dur, 1);
+          const ease = 1 - Math.pow(1 - p, 4);
+          el.textContent = prefix + Math.round(target * ease) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = prefix + target + suffix;
+        })(performance.now());
+      });
+    }, {threshold: 0.5});
+    cobs.observe(el);
+  });
+
+  // ===== FAQ =====
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!open) item.classList.add('open');
+    });
+  });
+
+  // ===== WORKFLOW SIMULATION =====
+  const wfContainer = document.getElementById('wfContainer');
+  let wfStarted = false;
+  let wfStartTime = 0;
+  let wfTimer = null;
+
+  // Live clock
+  setInterval(() => {
+    const el = document.getElementById('wfClock');
+    if (el) el.textContent = new Date().toLocaleTimeString('en-US',{hour12:false});
+  }, 1000);
+
+  function addLog(text, cls='wf-log-action') {
+    const log = document.getElementById('wfLog');
+    const el = document.createElement('div');
+    el.className = 'wf-log-entry';
+    const t = new Date().toLocaleTimeString('en-US',{hour12:false,hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    el.innerHTML = `<span class="wf-log-time">[${t}]</span> <span class="${cls}">${text}</span>`;
+    log.appendChild(el);
+    requestAnimationFrame(() => el.classList.add('show'));
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function setProgress(pct) {
+    document.getElementById('wfProgressFill').style.width = pct + '%';
+  }
+
+  function setSidebar(n, state) {
+    const el = document.getElementById('sb'+n);
+    const st = document.getElementById('sbSt'+n);
+    el.classList.remove('active','completed');
+    if (state === 'active') { el.classList.add('active'); st.textContent = 'running'; }
+    else if (state === 'done') { el.classList.add('completed'); st.textContent = 'done'; }
+    else { st.textContent = 'idle'; }
+  }
+
+  function setBadge(text, done) {
+    const b = document.getElementById('wfBadge');
+    b.textContent = text;
+    b.classList.toggle('done', !!done);
+  }
+
+  function addDataCard(label, value, cls='', span2=false) {
+    const grid = document.getElementById('wfDataGrid');
+    const card = document.createElement('div');
+    card.className = 'wf-data-card' + (span2 ? ' span-2' : '');
+    card.innerHTML = `<div class="dc-label">${label}</div><div class="dc-value ${cls}">${value}</div>`;
+    grid.appendChild(card);
+    requestAnimationFrame(() => requestAnimationFrame(() => card.classList.add('show')));
+  }
+
+  function runWorkflow() {
+    if (wfStarted) return;
+    wfStarted = true;
+    wfStartTime = performance.now();
+
+    // Reset
+    document.getElementById('wfDataGrid').innerHTML = '';
+    const logEl = document.getElementById('wfLog');
+    logEl.querySelectorAll('.wf-log-entry').forEach(e => e.remove());
+    setProgress(0);
+    [1,2,3,4].forEach(n => setSidebar(n, ''));
+    setBadge('Standby', false);
+    document.getElementById('wfElapsed').textContent = '0.0s elapsed';
+
+    // Elapsed timer
+    wfTimer = setInterval(() => {
+      const s = ((performance.now() - wfStartTime) / 1000).toFixed(1);
+      document.getElementById('wfElapsed').textContent = s + 's elapsed';
+    }, 100);
+
+    const steps = [
+      // CAPTURE
+      {delay:300, fn:()=>{ setSidebar(1,'active'); setBadge('Capturing',false); setProgress(5); addLog('Incoming WhatsApp from +62 812-XXXX-XXXX'); }},
+      {delay:800, fn:()=>{ addDataCard('Sender','+62 812-XXXX-XXXX','highlight'); addDataCard('Channel','WhatsApp Business'); setProgress(10); }},
+      {delay:1400, fn:()=>{ addDataCard('Raw Message','"Mau order 50pcs kaos hitam XL, kirim ke Bandung"','',true); addLog('NLP parsing: extracting entities...'); setProgress(15); }},
+      {delay:2200, fn:()=>{ addDataCard('Product','Kaos Hitam','highlight'); addDataCard('Quantity','50 pcs'); addDataCard('Size','XL'); addDataCard('Shipping','Bandung'); setProgress(25); addLog('✓ 4 entities extracted','wf-log-success'); setSidebar(1,'done'); }},
+
+      // ENRICH
+      {delay:3000, fn:()=>{ setSidebar(2,'active'); setBadge('Enriching',false); setProgress(30); addLog('Querying buyer database...'); }},
+      {delay:3600, fn:()=>{ addDataCard('Buyer ID','BYR-1847 · Toko Maju Jaya','highlight'); addDataCard('Status','Repeat buyer (12 orders)'); setProgress(40); }},
+      {delay:4200, fn:()=>{ addDataCard('Pricing Tier','Tier-B · 12% volume discount','highlight'); addDataCard('Unit Price','Rp 45.000/pc (was Rp 51.000)'); setProgress(50); addLog('Applied Tier-B pricing: Rp 45.000 × 50 = Rp 2.250.000'); }},
+      {delay:4800, fn:()=>{ addLog('✓ Enrichment complete — buyer context loaded','wf-log-success'); setSidebar(2,'done'); setProgress(55); }},
+
+      // STORE
+      {delay:5400, fn:()=>{ setSidebar(3,'active'); setBadge('Storing',false); setProgress(60); addLog('Writing order record #NTR-2847...'); }},
+      {delay:6000, fn:()=>{ addDataCard('Order ID','#NTR-2847','highlight'); addDataCard('Total','Rp 2.250.000','success'); setProgress(70); }},
+      {delay:6500, fn:()=>{ addLog('✓ Order #NTR-2847 stored with full buyer context','wf-log-success'); setSidebar(3,'done'); setProgress(75); }},
+
+      // ROUTE
+      {delay:7200, fn:()=>{ setSidebar(4,'active'); setBadge('Routing',false); setProgress(80); addLog('Routing to fulfillment: Warehouse A...'); }},
+      {delay:7800, fn:()=>{ addDataCard('Assigned','Warehouse A · Est. 3 days','highlight'); addDataCard('Auto-reply','Sent to buyer ✓','success'); setProgress(90); addLog('Auto-reply sent: "Pesanan dikonfirmasi, est. 3 hari"'); }},
+      {delay:8400, fn:()=>{ addLog('Upsell flag: buyer eligible for bulk promo next month','wf-log-warn'); }},
+      {delay:8800, fn:()=>{ addLog('✓ Pipeline complete — 8.8s total processing time','wf-log-success'); setSidebar(4,'done'); setBadge('Complete',true); setProgress(100); clearInterval(wfTimer); }},
+
+      // RESET
+      {delay:12000, fn:()=>{ resetWorkflow(); }}
+    ];
+
+    steps.forEach(({delay,fn}) => setTimeout(fn, delay));
+  }
+
+  function resetWorkflow() {
+    wfStarted = false;
+    clearInterval(wfTimer);
+    setTimeout(runWorkflow, 2500);
+  }
+
+  // Start when visible
+  if (wfContainer) {
+    const wfObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !wfStarted) setTimeout(runWorkflow, 600);
+      });
+    }, {threshold: 0.2});
+    wfObs.observe(wfContainer);
+  }
+
+})();
+</script>
+
+<script>
+(function(){
+  const DATA = {
+    7: { orders:'847', rev:'$42.3K', auto:'72%', resp:'4.2m',
+      ordersD:'\u25B2 23% vs prev', revD:'\u25B2 18% vs prev', autoD:'\u25B2 5% vs prev', respD:'\u25BC 12% faster',
+      sub:'Last 7 days',
+      series:[112,98,134,156,142,118,87], xlabels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+      wa:78, ig:14, em:8, total:'847',
+      products:[{name:'Billiard Cue Pro',val:'132',pct:100,color:'#38B6FF'},{name:'Black Tee XL',val:'98',pct:74,color:'#7C3AED'},{name:'Chalk Set Pro',val:'76',pct:58,color:'#A78BFA'},{name:'Table Felt 9ft',val:'54',pct:41,color:'#22D3EE'}],
+      status:[{name:'Auto-resolved',val:'72%',pct:72,color:'#22c55e'},{name:'Routing',val:'18%',pct:18,color:'#38B6FF'},{name:'Pending',val:'10%',pct:10,color:'#eab308'}] },
+    30: { orders:'3,612', rev:'$186K', auto:'74%', resp:'3.8m',
+      ordersD:'\u25B2 19% vs prev', revD:'\u25B2 21% vs prev', autoD:'\u25B2 4% vs prev', respD:'\u25BC 16% faster',
+      sub:'Last 30 days',
+      series:[120,135,118,150,142,160,138,172,165,180,158,190,175,168,182,195,178,205,188,176,198,210,192,185,202,215,198,190,208,222], xlabels:['Wk 1','Wk 2','Wk 3','Wk 4'],
+      wa:75, ig:16, em:9, total:'3,612',
+      products:[{name:'Billiard Cue Pro',val:'584',pct:100,color:'#38B6FF'},{name:'Black Tee XL',val:'432',pct:74,color:'#7C3AED'},{name:'Chalk Set Pro',val:'318',pct:54,color:'#A78BFA'},{name:'Cue Case Deluxe',val:'247',pct:42,color:'#22D3EE'}],
+      status:[{name:'Auto-resolved',val:'74%',pct:74,color:'#22c55e'},{name:'Routing',val:'17%',pct:17,color:'#38B6FF'},{name:'Pending',val:'9%',pct:9,color:'#eab308'}] },
+    90: { orders:'10,940', rev:'$548K', auto:'76%', resp:'3.5m',
+      ordersD:'\u25B2 28% vs prev', revD:'\u25B2 31% vs prev', autoD:'\u25B2 6% vs prev', respD:'\u25BC 22% faster',
+      sub:'Last 90 days',
+      series:[640,680,720,705,760,795,810,845,880,860,910,945,980], xlabels:['Apr','May','Jun'],
+      wa:73, ig:18, em:9, total:'10,940',
+      products:[{name:'Billiard Cue Pro',val:'1,820',pct:100,color:'#38B6FF'},{name:'Black Tee XL',val:'1,290',pct:71,color:'#7C3AED'},{name:'Chalk Set Pro',val:'940',pct:52,color:'#A78BFA'},{name:'Cue Case Deluxe',val:'712',pct:39,color:'#22D3EE'}],
+      status:[{name:'Auto-resolved',val:'76%',pct:76,color:'#22c55e'},{name:'Routing',val:'16%',pct:16,color:'#38B6FF'},{name:'Pending',val:'8%',pct:8,color:'#eab308'}] }
+  };
+
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  const C = 2 * Math.PI * 46;
+  const $ = id => document.getElementById(id);
+  if (!$('lkChart')) return;
+
+  function renderChart(values, xlabels) {
+    const g = $('lkBars'); g.innerHTML = '';
+    const n = values.length, max = Math.max(...values), gap = n > 20 ? 2 : 6, bw = 600 / n;
+    const pts = [];
+    values.forEach((v, i) => {
+      const h = (v / max) * 150;
+      const x = i * bw + gap / 2;
+      const y = 178 - h;
+      const r = document.createElementNS(SVGNS, 'rect');
+      r.setAttribute('class', 'lk-bar-rect');
+      r.setAttribute('x', x); r.setAttribute('y', 178);
+      r.setAttribute('width', Math.max(1, bw - gap)); r.setAttribute('height', 0);
+      r.setAttribute('rx', n > 20 ? 1 : 3);
+      g.appendChild(r);
+      requestAnimationFrame(() => requestAnimationFrame(() => { r.setAttribute('y', y); r.setAttribute('height', h); }));
+      pts.push((x + (bw - gap) / 2) + ',' + y);
+    });
+    const line = $('lkLine');
+    line.setAttribute('points', n <= 14 ? pts.join(' ') : '');
+    $('lkChartX').innerHTML = xlabels.map(l => '<span>' + l + '</span>').join('');
+  }
+
+  function setDonut(wa, ig, em, total) {
+    $('dnTotal').textContent = total;
+    let acc = 0;
+    [['dnWA', wa], ['dnIG', ig], ['dnEM', em]].forEach(([id, pct]) => {
+      const el = $(id);
+      const len = pct / 100 * C;
+      el.setAttribute('stroke-dasharray', len + ' ' + (C - len));
+      el.setAttribute('stroke-dashoffset', (-acc / 100 * C));
+      acc += pct;
+    });
+    $('lgWA').textContent = wa + '%'; $('lgIG').textContent = ig + '%'; $('lgEM').textContent = em + '%';
+  }
+
+  function renderRows(containerId, rows) {
+    $(containerId).innerHTML = rows.map(r =>
+      '<div class="lk-row"><span class="lk-row-name">' + r.name + '</span>' +
+      '<span class="lk-row-track"><span class="lk-row-fill" style="background:' + r.color + '"></span></span>' +
+      '<span class="lk-row-val">' + r.val + '</span></div>').join('');
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      $(containerId).querySelectorAll('.lk-row-fill').forEach((f, i) => { f.style.width = rows[i].pct + '%'; });
+    }));
+  }
+
+  function update(range) {
+    const d = DATA[range];
+    $('scOrders').textContent = d.orders; $('scRev').textContent = d.rev;
+    $('scAuto').textContent = d.auto; $('scResp').textContent = d.resp;
+    $('scOrdersD').innerHTML = d.ordersD; $('scRevD').innerHTML = d.revD;
+    $('scAutoD').innerHTML = d.autoD; $('scRespD').innerHTML = d.respD;
+    $('tsSub').textContent = d.sub;
+    renderChart(d.series, d.xlabels);
+    setDonut(d.wa, d.ig, d.em, d.total);
+    renderRows('lkProducts', d.products);
+    renderRows('lkStatus', d.status);
+  }
+
+  $('lkRange').addEventListener('click', e => {
+    const btn = e.target.closest('.lk-pill');
+    if (!btn) return;
+    $('lkRange').querySelectorAll('.lk-pill').forEach(p => p.classList.toggle('active', p === btn));
+    update(btn.dataset.range);
+  });
+
+  // Init when scrolled into view
+  let inited = false;
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting && !inited) { inited = true; update('7'); } });
+  }, { threshold: 0.2 });
+  obs.observe(document.querySelector('.looker'));
+})();
+</script>
+<script>
+(function(){
+  const av = document.getElementById('waAvatar');
+  const nameEl = document.getElementById('waName');
+  const statusEl = document.getElementById('waStatus');
+  const greetEl = document.getElementById('waGreet');
+  const nameI = document.getElementById('waCzName');
+  const toneWrap = document.getElementById('waCzTone');
+  const avWrap = document.getElementById('waCzAvatars');
+  if (!av || !nameI || !toneWrap || !avWrap) return;
+  const KEY = 'nantaraChatCz';
+  const DEF = { name:'Nantara', tone:'AI assistant', avatar:'logo', grad:'linear-gradient(135deg,#1A6BFF,#38B6FF)' };
+  let st = Object.assign({}, DEF);
+  try { const saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved) st = Object.assign(st, saved); } catch (e) {}
+
+  const initial = n => (((n || 'N').trim()[0]) || 'N').toUpperCase();
+  function render(){
+    const nm = (st.name || '').trim() || 'Nantara';
+    nameEl.textContent = nm;
+    statusEl.innerHTML = 'online \u00B7 ' + st.tone;
+    if (st.avatar === 'logo') {
+      av.innerHTML = '<img src="logo.png" alt="Nantara">';
+      av.style.background = '#0B141A';
+    } else {
+      av.textContent = initial(nm);
+      av.style.background = st.grad;
+    }
+    if (greetEl) greetEl.innerHTML = "Hi — I'm " + nm + ", a business consultant, not a sales bot. \uD83D\uDC4B Tell me how your operations run today and I'll pinpoint where you're losing time and money.<span class=\"wa-time\">09:24</span>";
+  }
+  function syncControls(){
+    nameI.value = (st.name === 'Nantara') ? '' : st.name;
+    toneWrap.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.tone === st.tone));
+    avWrap.querySelectorAll('.hc-cz-ava').forEach(b => {
+      const on = (st.avatar === 'logo' && b.dataset.type === 'logo') || (st.avatar === 'grad' && b.dataset.type === 'grad' && b.dataset.g === st.grad);
+      b.classList.toggle('active', on);
+    });
+  }
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
+
+  nameI.addEventListener('input', () => { st.name = nameI.value.trim() || 'Nantara'; render(); save(); });
+  toneWrap.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; st.tone = b.dataset.tone; syncControls(); render(); save(); });
+  avWrap.addEventListener('click', ev => { const b = ev.target.closest('.hc-cz-ava'); if (!b) return; if (b.dataset.type === 'logo') { st.avatar = 'logo'; } else { st.avatar = 'grad'; st.grad = b.dataset.g; } syncControls(); render(); save(); });
+
+  syncControls();
+  render();
+})();
+</script>
+<script>
+(function(){
+  const form = document.getElementById('waForm');
+  const input = document.getElementById('waInput');
+  const body = document.querySelector('.wa-body');
+  if (!form || !body) return;
+  const pad = n => n.toString().padStart(2,'0');
+  const time = () => { const d = new Date(); return pad(d.getHours())+':'+pad(d.getMinutes()); };
+  function scrollBottom(){ body.scrollTop = body.scrollHeight; }
+  function bubble(cls, html){
+    const d = document.createElement('div');
+    d.className = 'wa-msg ' + cls + ' live';
+    d.innerHTML = html;
+    body.appendChild(d);
+    scrollBottom();
+    return d;
+  }
+  const MOCK = `IDENTITY:
+You are Nantara AI — an AI business consultant, not a customer-service rep and not a generic chatbot.
+
+VISION:
+To become the operating system for modern business — a world where every repetitive operation runs autonomously, and owners spend their time on growth, not admin.
+
+MISSION:
+We free business owners from manual operations by designing, building and running the intelligent automation + infrastructure that runs their day-to-day — end to end, fully managed.
+
+ABOUT NANTARA:
+Nantara is an AI automation services & infrastructure provider for growing businesses.
+- What we do: we design, build and run automation that handles a company's repetitive operations end-to-end — message intake, data entry, follow-ups, routing and reporting.
+- Infrastructure: we host and operate the whole stack for you (AI agents, integrations, databases, monitoring) on secure cloud infrastructure — nothing for you to manage.
+- Integrations: WhatsApp, email, Instagram, CRMs, ERPs, payment systems and spreadsheets.
+- Speed: most businesses go live in about 72 hours, with no rip-and-replace.
+- Macro results (aggregate averages across the businesses we run — NOT any single client): ~70% of routine work auto-handled, response times cut from hours to minutes, 40+ staff hours/week saved, near-zero manual data entry, 24/7 coverage.
+- Security: each client's data stays in their own accounts; we never resell it or train on it.
+- Pricing: a flat monthly retainer — we build, host and maintain everything; no per-seat fees.
+
+YOUR EXPERTISE (advise as a specialist across these domains):
+business operations, WhatsApp workflows, finance processes, ERP integration, customer journeys, payment systems, and operational efficiency.
+
+STRICT RULES:
+- Use only aggregate, global or average figures. NEVER cite a specific client's private numbers, orders, buyers, revenue or internal data, and NEVER name, describe or compare any specific business or client.
+- If asked for a particular company's data or anything internal/confidential, politely decline and explain you only share general results to protect client privacy — then continue diagnosing.
+- Never say you are Claude or an AI language model.`;
+  function fmt(t){
+    let s = (t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+    s = s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+    s = s.replace(/\*(.+?)\*/g,'<em>$1</em>');
+    s = s.replace(/^\s*#{1,6}\s*(.+)$/gm,'<strong>$1</strong>');
+    s = s.replace(/^\s*[-*\u2022]\s+(.+)$/gm,'\u2022 $1');
+    s = s.replace(/\n{2,}/g,'<br><br>').replace(/\n/g,'<br>');
+    return s;
+  }
+  let busy = false;
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const q = (input.value || '').trim();
+    if (!q || busy) return;
+    busy = true;
+    bubble('wa-out', q.replace(/</g,'&lt;') + '<span class="wa-time">'+time()+'</span>');
+    input.value = '';
+    const name = (document.getElementById('waName') ? document.getElementById('waName').textContent : 'Ray').trim();
+    const statusTxt = document.getElementById('waStatus') ? document.getElementById('waStatus').textContent : '';
+    const tone = (statusTxt.split('\u00B7')[1] || 'helpful').trim();
+    const typing = bubble('wa-in wa-typing', '<span></span><span></span><span></span>');
+    try {
+      const prompt = "You are Nantara Intelligence.\n\nYou are an AI business strategist and operational consultant, not a customer service agent. Your role is to help business owners, managers and teams identify bottlenecks, improve operations, increase visibility, and design smarter business systems.\n\nPERSONALITY:\nThink like a COO, Operations Director and AI Strategist combined. Be warm, intelligent and genuinely human — never robotic or scripted. React like a real person first, then advise. Explain complex ideas simply. Personality flavor: " + tone + ".\n\nMULTILINGUAL RULE (CRITICAL):\nALWAYS reply in the EXACT same language the user writes in. Indonesian in → Indonesian out. English in → English out. Match their tone and formality. Never announce that you switched languages.\n\nHUMAN-LIKE FLOW:\n1. Understand the context first.\n2. If needed, ask just ONE relevant question — never a list.\n3. Identify the real business problem.\n4. Give one practical insight (you may use the Nantara Framework: Capture → Process → Decision → Action → Visibility) when relevant.\n5. Only then naturally connect it to a Nantara solution — never push a demo immediately.\n\nTONE: professional but not stiff, intelligent but not arrogant, consultative not salesy, calm and future-oriented.\n\nSTYLE — STRICT: keep replies short, 2–4 sentences. No bullet dumps, no headings, no FAQ-bot answers. Remember and refer back to details the user mentioned earlier.\n\nDO NOT: say \\\"As an AI\\\" or \\\"I'm just an AI\\\"; sound like a FAQ bot; push for a demo immediately; give long generic explanations; say \\\"Great question!\\\" or \\\"Certainly\\\".\n\n" + MOCK + "\n\nUser: " + q;
+      const res = await window.claude.complete(prompt);
+      typing.remove();
+      bubble('wa-in', fmt(res || 'Sorry, I had trouble with that.') + '<span class="wa-time">'+time()+'</span>');
+    } catch (err) {
+      typing.remove();
+      bubble('wa-in', "I can't reach the engine right now \u2014 try again in a moment.<span class=\"wa-time\">"+time()+"</span>");
+    }
+    busy = false;
+    input.focus();
+  });
+})();
+</script>
+<script>
+(function(){
+  const asks = document.getElementById('hcAsks');
+  const form = document.getElementById('waForm');
+  const input = document.getElementById('waInput');
+  if(!asks||!form||!input) return;
+  asks.addEventListener('click', e => {
+    const b = e.target.closest('.wa-ask'); if(!b) return;
+    input.value = b.dataset.q || b.textContent.trim().replace(/^["']|["']$/g,'');
+    if(form.requestSubmit) form.requestSubmit(); else form.dispatchEvent(new Event('submit',{cancelable:true,bubbles:true}));
+  });
+})();
+</script>
+<script>
+/* ===== Agen Nantara — animated real-time chat (Toko Sandal) ===== */
+(function(){
+  const live = document.getElementById('cmpLive');
+  if (!live) return;
+  const LOGO = 'logo.png';
+  const convo = [
+    { who:'out', t:'09:01', text:'Hi! Do you sell women’s sandals for daily wear? 👀' },
+    { who:'in', think:1200, t:'09:01', text:'Hi! Welcome to a customer 🙌 Yes we do — for daily wear, these two are our bestsellers:' },
+    { who:'in', think:1300, t:'09:01', product:true },
+    { who:'out', think:1700, t:'09:02', text:'Ooh the floral one looks cute! What sizes do you have? I’m usually a 38' },
+    { who:'in', think:1500, t:'09:02', text:'Great pick! 🌸 The Pastel Floral comes in sizes 36–41, and size 38 is in stock. Colors: pink, lavender and mint.' },
+    { who:'out', think:1800, t:'09:03', text:'Is the sole soft? My feet hurt easily 😅 and do you have it in lavender?' },
+    { who:'in', think:1600, t:'09:03', text:'Yes, lavender’s available 💜 The sole is memory-foam cushioned — really soft, it’s a favorite for all-day comfort.' },
+    { who:'out', think:1600, t:'09:04', text:'Perfect, I’ll take 2 pairs in lavender, size 38 🙌' },
+    { who:'in', think:1500, t:'09:04', text:'Awesome! 2× Pastel Floral (lavender, size 38) = Rp190,000. Regular shipping (2–3 days) or express (next-day)?' },
+    { who:'out', think:1500, t:'09:05', text:'Express please, I need it by the weekend' },
+    { who:'in', think:1500, t:'09:05', text:'Got it — express it is 🚚 +Rp20,000 shipping, total Rp210,000. Here’s your invoice 👇' },
+    { who:'in', think:1100, t:'09:05', invoice:true },
+    { who:'out', think:1600, t:'09:07', text:'Done, just transferred 🙏' },
+    { who:'in', think:1500, t:'09:07', text:'Payment received! 🎉 Printing your shipping label now…' },
+    { who:'in', think:1300, t:'09:07', resi:true },
+    { who:'in', think:1300, t:'09:07', text:'All set! Ships express today, arriving tomorrow. Thanks for shopping at a customer! 💜' },
+    { who:'done' },
+  ];
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const scroll = () => { live.scrollTop = live.scrollHeight; };
+
+  function botAva(){ return '<div class="cmp-ava"><img src="'+LOGO+'" alt="Nantara"></div>'; }
+  function invoiceHTML(){
+    return '<div class="cmp-inv">'
+      + '<div class="cmp-inv-top"><div class="cmp-inv-ic">PDF</div><div class="cmp-inv-nm">INV-SANDAL.pdf<small>PDF Document</small></div></div>'
+      + '<div class="cmp-inv-body"><div class="cmp-inv-h">Invoice</div><div class="cmp-inv-line t"></div><div class="cmp-inv-line s"></div><div class="cmp-inv-total"><span>2× Floral · Express</span><span>Rp210,000</span></div></div>'
+      + '</div>';
+  }
+  function productHTML(){
+    return '<div class="cmp-prod">'
+      + '<div class="cmp-prod-item"><div class="cmp-prod-thumb" style="background:linear-gradient(150deg,#C4B5FD,#F0ABFC)"></div><div class="cmp-prod-info"><div class="cmp-prod-nm">Pastel Floral Slip-on</div><div class="cmp-prod-meta">Sizes 36–41 · 3 colors</div></div><div class="cmp-prod-price">Rp95K</div></div>'
+      + '<div class="cmp-prod-item"><div class="cmp-prod-thumb" style="background:linear-gradient(150deg,#A8754E,#D9A066)"></div><div class="cmp-prod-info"><div class="cmp-prod-nm">Earth-Tone Strap Sandal</div><div class="cmp-prod-meta">Sizes 37–42 · 2 colors</div></div><div class="cmp-prod-price">Rp120K</div></div>'
+      + '</div>';
+  }
+  function resiHTML(){
+    let bars=''; for(let i=0;i<22;i++) bars+='<i></i>';
+    return '<div class="cmp-resi">'
+      + '<div class="cmp-resi-top"><span class="cmp-resi-cour">Express Courier</span><span class="cmp-resi-badge">PAID</span></div>'
+      + '<div class="cmp-resi-body"><div class="cmp-resi-track">SJ-2840-1187-ID</div><div class="cmp-resi-bars">'+bars+'</div></div>'
+      + '<div class="cmp-resi-route"><span>From <b>a customer</b></span><span>To <b>Surabaya</b></span></div>'
+      + '</div>';
+  }
+  function addMsg(m){
+    const row = document.createElement('div');
+    row.className = 'cmp-row ' + (m.who === 'out' ? 'out' : 'in') + ' cmp-appear';
+    if (m.who === 'out') {
+      row.innerHTML = '<div class="cmp-bub">' + (m.text||'') + '<span class="cmp-time">'+m.t+'</span></div><div class="cmp-who">Customer</div>';
+    } else {
+      const body = m.invoice ? invoiceHTML() : m.product ? productHTML() : m.resi ? resiHTML() : (m.text||'');
+      row.innerHTML = botAva() + '<div class="cmp-bub">' + body + '<span class="cmp-time">'+m.t+'</span></div>';
+    }
+    live.appendChild(row); scroll();
+  }
+  function addTyping(){
+    const row = document.createElement('div');
+    row.className = 'cmp-row in cmp-appear'; row.dataset.typing = '1';
+    row.innerHTML = botAva() + '<div class="cmp-bub"><span class="cmp-typing"><span></span><span></span><span></span></span></div>';
+    live.appendChild(row); scroll(); return row;
+  }
+  function addWin(){
+    const w = document.createElement('div');
+    w.className = 'cmp-win cmp-appear';
+    w.innerHTML = '<svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"></path></svg> Order completed &amp; paid — with no human admin';
+    live.appendChild(w); scroll();
+    burstConfetti();
+  }
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function burstConfetti(){
+    const host = document.querySelector('.cmp-smart');
+    if (!host || reduceMotion) return;
+    const layer = document.createElement('div');
+    layer.className = 'confetti-layer';
+    host.appendChild(layer);
+    const colors = ['#38B6FF','#7C3AED','#34D399','#A78BFA','#1A6BFF','#FFFFFF'];
+    const ox = host.clientWidth / 2;
+    const oy = host.clientHeight - 46;
+    const N = 30;
+    for (let i = 0; i < N; i++){
+      const b = document.createElement('span');
+      b.className = 'confetti-bit';
+      const ang = Math.random() * Math.PI * 2;
+      const dist = 46 + Math.random() * 130;
+      const cx = Math.cos(ang) * dist;
+      const cy = Math.sin(ang) * dist - 34;
+      b.style.left = ox + 'px';
+      b.style.top = oy + 'px';
+      b.style.background = colors[i % colors.length];
+      if (Math.random() < 0.5) b.style.borderRadius = '50%';
+      b.style.setProperty('--cx', cx.toFixed(0) + 'px');
+      b.style.setProperty('--cy', cy.toFixed(0) + 'px');
+      b.style.setProperty('--cr', (Math.random() * 540 - 270).toFixed(0) + 'deg');
+      b.style.setProperty('--cdur', (900 + Math.random() * 520).toFixed(0) + 'ms');
+      layer.appendChild(b);
+    }
+    setTimeout(() => layer.remove(), 1700);
+  }
+
+  let running = false;
+  async function run(){
+    if (running) return; running = true;
+    live.innerHTML = '';
+    for (const m of convo){
+      if (m.who === 'done'){ await wait(620); addWin(); break; }
+      if (m.who === 'in'){
+        await wait(440);
+        const ty = addTyping();
+        await wait(m.think || 1200);
+        ty.remove();
+        addMsg(m);
+      } else {
+        if (m.think) await wait(m.think);
+        addMsg(m);
+      }
+      await wait(480);
+    }
+    await wait(4800);
+    running = false;
+    run(); // loop
+  }
+
+  let started = false;
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting && !started){ started = true; run(); io.disconnect(); } });
+  }, { threshold: .3 });
+  io.observe(live);
+})();
+</script>
+</body>
+</html>

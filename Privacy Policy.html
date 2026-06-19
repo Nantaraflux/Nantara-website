@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Nantara AI</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta property="og:title" content="Privacy Policy — Nantara AI">
+  <meta property="og:description" content="How Nantara AI collects, uses, and protects your information. Zero data stored on our servers.">
+  <meta property="og:image" content="logo.png">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Gentium+Plus:wght@400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #38B6FF; --blue-dark: #1A6BFF;
+      --purple: #8B3DFF; --purple-mid: #7C3AED; --violet: #A78BFA;
+      --bg: #060609; --bg-card: #0C0B18;
+      --white: #FFFFFF; --text: rgba(255,255,255,0.88);
+      --text-muted: rgba(255,255,255,0.65); --text-dim: rgba(255,255,255,0.4);
+      --border: rgba(255,255,255,0.07); --border-bright: rgba(255,255,255,0.14);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px; line-height: 1.75;
+      color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    a { color: var(--blue); text-decoration: none; transition: color 0.15s; }
+    a:hover { color: var(--violet); }
+
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(6,6,9,0.88); backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px dashed var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 90px; padding: 0 clamp(20px, 5vw, 48px);
+    }
+    .nav-logo {
+      font-family: 'Gentium Plus', serif; font-weight: 700; font-size: 22px;
+      color: var(--white); display: flex; align-items: center; gap: 2px; text-decoration: none;
+    }
+    .nav-logo img { height: 80px; width: 80px; object-fit: contain; margin-right: -18px; }
+    .nav-back {
+      font-size: 14px; font-weight: 500; color: var(--text-muted);
+      display: flex; align-items: center; gap: 6px; transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--white); }
+    .nav-back svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    .pp-hero {
+      padding: clamp(60px, 8vw, 100px) clamp(20px, 5vw, 48px) clamp(40px, 5vw, 64px);
+      position: relative; overflow: hidden; text-align: center;
+    }
+    .pp-hero-glow {
+      position: absolute; z-index: 0; width: 700px; height: 500px;
+      top: -200px; left: 50%; transform: translateX(-50%);
+      background: radial-gradient(ellipse at center, rgba(30,80,255,0.3) 0%, rgba(100,40,230,0.15) 40%, transparent 70%);
+      filter: blur(40px); pointer-events: none;
+    }
+    .pp-hero h1 {
+      font-size: clamp(36px, 5vw, 56px); font-weight: 800; color: var(--white);
+      line-height: 1.1; letter-spacing: -0.03em; position: relative; margin-bottom: 16px;
+    }
+    .pp-hero p { font-size: 16px; color: var(--text-muted); position: relative; max-width: 480px; margin: 0 auto; }
+    .pp-hero .effective {
+      font-family: 'DM Mono', monospace; font-size: 13px; color: var(--blue);
+      letter-spacing: 0.04em; margin-top: 16px; display: block; position: relative;
+    }
+
+    .pp-content {
+      max-width: 780px; margin: 0 auto;
+      padding: 0 clamp(20px, 5vw, 48px) clamp(80px, 8vw, 120px);
+    }
+    .pp-section { margin-bottom: 48px; }
+    .pp-section h2 {
+      font-size: clamp(22px, 2.5vw, 28px); font-weight: 700; color: var(--white);
+      letter-spacing: -0.02em; margin-bottom: 16px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--border);
+    }
+    .pp-section h3 {
+      font-size: 18px; font-weight: 600; color: var(--white); margin: 24px 0 10px;
+    }
+    .pp-section p { font-size: 15px; line-height: 1.8; color: var(--text-muted); margin-bottom: 14px; }
+    .pp-section ul { list-style: none; padding: 0; margin: 0 0 16px 0; }
+    .pp-section li {
+      font-size: 15px; line-height: 1.75; color: var(--text-muted);
+      padding: 4px 0 4px 24px; position: relative;
+    }
+    .pp-section li::before {
+      content: ''; position: absolute; left: 0; top: 12px;
+      width: 6px; height: 6px; border-radius: 50%; background: var(--purple-mid);
+    }
+    .section-num {
+      font-family: 'DM Mono', monospace; font-size: 12px; color: var(--blue);
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; display: block;
+    }
+    .highlight-box {
+      background: var(--bg-card); border: 1px solid var(--border-bright);
+      border-radius: 10px; padding: 20px 24px; margin: 20px 0;
+      font-size: 14px; color: var(--text-muted); line-height: 1.75;
+    }
+    .highlight-box strong { color: var(--white); }
+
+    .pp-footer {
+      border-top: 1px solid var(--border);
+      padding: 48px clamp(20px, 5vw, 48px);
+      max-width: 1200px; margin: 0 auto;
+    }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-left { display: flex; align-items: center; gap: 16px; }
+    .footer-logo {
+      font-family: 'Gentium Plus', serif; font-weight: 700; font-size: 18px;
+      color: var(--white); display: flex; align-items: center; gap: 2px; text-decoration: none;
+    }
+    .footer-logo img { height: 40px; width: 40px; object-fit: contain; margin-right: -10px; }
+    .footer-copy { font-size: 13px; color: var(--text-dim); }
+    .footer-socials { display: flex; gap: 10px; }
+    .footer-socials a {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+    }
+    .footer-socials a:hover {
+      border-color: var(--purple-mid); background: rgba(139,61,255,0.08); transform: translateY(-2px);
+    }
+    .footer-socials svg { width: 18px; height: 18px; fill: var(--text-muted); }
+    .footer-socials a:hover svg { fill: var(--white); }
+
+    canvas#starfield {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0;
+    }
+    .nav, .pp-hero, .pp-content, .pp-footer { position: relative; z-index: 1; }
+
+    @media (max-width: 600px) {
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+      .footer-left { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="Nantara AI Landing Page v5.html" class="nav-logo">
+      <img src="logo.png" alt="Nantara AI">
+      <span>Nantara AI</span>
+    </a>
+    <a href="Nantara AI Landing Page v5.html" class="nav-back">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
+      Back to Home
+    </a>
+  </div>
+</nav>
+
+<div class="pp-hero">
+  <div class="pp-hero-glow"></div>
+  <h1>Privacy Policy</h1>
+  <p>How Nantara AI collects, uses, and protects your information.</p>
+  <span class="effective">Last Updated: June 7, 2026</span>
+</div>
+
+<div class="pp-content">
+
+  <div class="pp-section">
+    <span class="section-num">Section 01</span>
+    <h2>Introduction</h2>
+    <p>Nantara AI ("we", "us", "our") is committed to protecting your privacy. This Privacy Policy explains how we handle information when you use our Order Intelligence System and related services.</p>
+    <div class="highlight-box">
+      <strong>Our core principle:</strong> We do not store your business data on our servers. All order data, buyer information, and business records live in your own accounts. Period.
+    </div>
+  </div>
+
+  <div class="pp-section">
+    <span class="section-num">Section 02</span>
+    <h2>Information We Collect</h2>
+    <h3>Account Information</h3>
+    <p>When you sign up for Nantara AI, we collect:</p>
+    <ul>
+      <li>Your name, email address, and phone number</li>
+      <li>Company name and business details</li>
+      <li>Billing information for subscription payments</li>
+    </ul>
+    <h3>Service Configuration Data</h3>
+    <p>To set up and maintain your order intelligence system, we temporarily access:</p>
+    <ul>
+      <li>Product catalogs, pricing tiers, and business policies you provide during onboarding</li>
+      <li>WhatsApp Business API credentials (used solely for system integration)</li>
+      <li>Database and CRM connection details (used solely for workflow automation)</li>
+    </ul>
+    <h3>Usage Analytics</h3>
+    <p>We collect anonymized usage metrics to improve our service:</p>
+    <ul>
+      <li>System performance data (response times, resolution rates, uptime)</li>
+      <li>Feature usage patterns (which automations are most active)</li>
+      <li>Error logs for debugging and optimization</li>
+    </ul>
+  </div>
+
+  <div class="pp-section">
+    <span class="section-num">Section 03</span>
+    <h2>How We Use Your Information</h2>
+    <p>We use the information we collect exclusively for:</p>
+    <ul>
+      <li>Setting up, configuring, and maintaining your order intelligence system</li>
+      <li>Processing subscription payments and managing your account</li>
+      <li>Providing customer support and technical assistance</li>
+      <li>Improving system performance and developing new features</li>
+      <li>Sending service-related communications (system updates, maintenance notices)</li>
+      <li>Generating monthly performance reports for your review</li>
+    </ul>
+    <p>We will never use your information for advertising, sell it to third parties, or share it with anyone outside of Nantara AI without your explicit consent.</p>
+  </div>
+
+  <div class="pp-section">
+    <span class="section-num">Section 04</span>
+    <h2>Data Storage &amp; Ownership</h2>
+    <div class="highlight-box">
+      <strong>Zero data on our servers.</strong> This is not a marketing claim — it's our architecture. All order data, buyer records, and business information are stored exclusively in your own accounts (your database workspace, your CRM, your WhatsApp).
+    </div>
+    <p>Specifically:</p>
+    <ul>
+      <li>Order data, buyer information, and transaction records are stored in your own database account</li>
+      <li>CRM data remains in your CRM platform</li>
+      <li>WhatsApp conversation data is processed in real-time and routed to your systems — we do not retain copies</li>
+      <li>Nantara AI only stores your account credentials, billing info, and system configuration settings on our infrastructure</li>
+      <li>Upon service termination, we delete all configuration data and revoke all access credentials within 30 days</li>
+    </ul>
+  </div>
+
+  <div class="pp-section">
+    <span class="section-num">Section 05</span>
+    <h2>Data Security</h2>
+    <p>We implement industry-standard security measures to protect the information we handle:</p>
+    <ul>
+      <li>All data transmissions are encrypted using TLS 1.3</li>
+      <li>API credentials and access tokens are encrypted at rest</li>
+      <li>Access to client configurations is restricted to authorized team members on a need-to-know basis</li>
+      <li>We conduct regular security reviews of our integration workflows</li>
+      <li>Third-party service connections use OAuth 2.0 or equivalent secure authentication protocols</li>
+    </ul>
+  </div>
+
+  <div class="pp-section">
+    <span class="section-num">Section 06</span>
+    <h2>Third-Party Services</h2>
+    <p>Nantara AI integrates with the following categories of third-party services to deliver our product:</p>
+    <ul>
+      <li>Messaging platforms (WhatsApp Business API) — for order capture and buyer communication</li>
+      <li>Database platforms — for order logging and data management</li>
+      <li>CRM platforms — for fulfillment routing and buyer relationship management</li>
+      <li>AI language models — for order interpretation, enrichment, and intelligent routing</li>
+      <li>Payment processors — for secure subscription billing</li>
+    </ul>
+    <p>Each third-party service is governed by its own privacy policy. We select partners that meet our security and privacy standards, but we recommend reviewing their policies independently.</p>
+  </div>
+
+  <div class="pp-section">
+    <span class="section-num">Section 07</span>
+    <h2>Cookies &amp; Tracking</h2>
+    <p>Our website uses minimal cookies:</p>
+    <ul>
+      <li>Essential cookies for website functionality and session management</li>
+      <li>Analytics cookies to understand how visitors interact with our website (anonymized, no personal identification)</li>
+    </ul>
+    <p>We do not use advertising cookies or tracking pixels. We do not build advertising profiles from your browsing behavior.</p>
+  </div>
+
+  <div class="pp-section">
+    <span class="section-num">Section 08</span>
+    <h2>Your Rights</h2>
+    <p>You have the right to:</p>
+    <ul>
+      <li>Access the personal information we hold about you</li>
+      <li>Request correction of inaccurate information</li>
+      <li>Request deletion of your account and associated data</li>
+      <li>Withdraw consent for data processing at any time</li>
+      <li>Export your account information in a portable format</li>
+      <li>Object to specific uses of your information</li>
+    </ul>
+    <p>To exercise any of these rights, contact us at <a href="mailto:nantaraai@gmail.com">nantaraai@gmail.com</a>. We will respond within 14 business days.</p>
+  </div>
+
+  <div class="pp-section">
+    <span class="section-num">Section 09</span>
+    <h2>Data Retention</h2>
+    <ul>
+      <li>Account information is retained for the duration of your active subscription plus 90 days after termination</li>
+      <li>Billing records are retained for 5 years as required by tax and financial regulations</li>
+      <li>System configuration data is deleted within 30 days of service termination</li>
+      <li>Anonymized usage analytics may be retained indefinitely for service improvement</li>
+    </ul>
+  </div>
+
+  <div class="pp-section">
+    <span class="section-num">Section 10</span>
+    <h2>Children's Privacy</h2>
+    <p>Nantara AI is a B2B service designed for business use. We do not knowingly collect information from individuals under the age of 18. If you believe we have inadvertently collected such information, please contact us immediately.</p>
+  </div>
+
+  <div class="pp-section">
+    <span class="section-num">Section 11</span>
+    <h2>Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time to reflect changes in our practices or applicable laws. We will notify active subscribers of material changes via email at least 14 days before they take effect. The "Last Updated" date at the top of this page indicates the most recent revision.</p>
+  </div>
+
+  <div class="pp-section">
+    <span class="section-num">Section 12</span>
+    <h2>Contact Us</h2>
+    <p>If you have questions about this Privacy Policy or how we handle your data:</p>
+    <div class="highlight-box">
+      <strong>Nantara AI</strong><br>
+      Email: <a href="mailto:nantaraai@gmail.com">nantaraai@gmail.com</a><br>
+      Website: <a href="https://nantarai.com">nantarai.com</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="pp-footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <a href="Nantara AI Landing Page v5.html" class="footer-logo">
+        <img src="logo.png" alt="Nantara AI">
+        <span>Nantara AI</span>
+      </a>
+      <span class="footer-copy">&copy; 2026 Nantara AI. All rights reserved.</span>
+    </div>
+    <div class="footer-socials">
+      <a href="https://instagram.com/nantaraai" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <a href="https://tiktok.com/@nantaraai" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16.6 5.82A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let W, H;
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+const stars = Array.from({length: 150}, () => ({
+  x: Math.random(), y: Math.random(),
+  r: Math.random() * 1.1 + 0.3, a: Math.random() * 0.5 + 0.2,
+  speed: Math.random() * 0.00006 + 0.00002,
+  twinkle: Math.random() * 0.003 + 0.001,
+  offset: Math.random() * Math.PI * 2,
+  color: Math.random() > 0.7 ? '160,180,255' : Math.random() > 0.5 ? '200,180,255' : '255,255,255'
+}));
+let t = 0;
+(function draw() {
+  ctx.clearRect(0, 0, W, H);
+  t++;
+  stars.forEach(s => {
+    s.y -= s.speed;
+    if (s.y < -0.02) { s.y = 1.02; s.x = Math.random(); }
+    const tw = Math.sin(t * s.twinkle + s.offset) * 0.3 + 0.7;
+    ctx.beginPath();
+    ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${s.color},${s.a * tw})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+})();
+</script>
+
+</body>
+</html>

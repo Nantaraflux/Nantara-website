@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nantara — Field Guide to Agentic AI</title>
+<meta name="description" content="What makes an AI agentic? An interactive field guide to autonomous agents — the loop, the capabilities, and the levels of autonomy.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Gentium+Plus:wght@400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="image-slot.js"></script>
+<style>
+  :root{
+    --bg:#030305; --bg-2:#06060c; --bg-card:#0a0a12; --bg-card-2:#0d0d18;
+    --blue:#38B6FF; --blue-dark:#1A6BFF; --purple:#8B3DFF; --purple-mid:#7C3AED; --violet:#A78BFA; --cyan:#22D3EE;
+    --white:#fff;
+    --text:rgba(255,255,255,0.90); --muted:rgba(255,255,255,0.56); --dim:rgba(255,255,255,0.38);
+    --border:rgba(255,255,255,0.07); --border-2:rgba(255,255,255,0.13);
+    --max:1180px; --px:clamp(20px,5vw,52px);
+    --grad:linear-gradient(135deg,var(--blue-dark),var(--purple));
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Plus Jakarta Sans',-apple-system,sans-serif;
+    font-size:16px; line-height:1.65; color:var(--text); background:var(--bg);
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:rgba(124,58,237,0.4);color:#fff;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--px);position:relative;z-index:2;}
+
+  /* aurora glow blobs */
+  .aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+  .aurora span{position:absolute;border-radius:50%;filter:blur(120px);opacity:.5;}
+  .aurora .a1{width:640px;height:640px;top:-180px;left:-120px;background:radial-gradient(circle,rgba(26,107,255,.30),transparent 70%);}
+  .aurora .a2{width:720px;height:720px;top:380px;right:-220px;background:radial-gradient(circle,rgba(139,61,255,.24),transparent 70%);}
+  .aurora .a3{width:520px;height:520px;bottom:-160px;left:30%;background:radial-gradient(circle,rgba(34,211,238,.14),transparent 70%);}
+
+  /* ===== eyebrow / labels ===== */
+  .eyebrow{
+    font-family:'DM Mono',monospace; font-size:12px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--blue); display:inline-flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:'';width:26px;height:1px;background:linear-gradient(90deg,var(--blue),transparent);}
+  .serif{font-family:'Gentium Plus',serif;}
+
+  /* ===== NAV ===== */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;transition:all .4s cubic-bezier(.16,1,.3,1);}
+  .nav.scrolled{background:rgba(3,3,5,.72);backdrop-filter:blur(22px) saturate(1.6);border-bottom:1px solid var(--border);padding:11px 0;}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;}
+  .nav-logo{font-family:'Gentium Plus',serif;font-weight:700;font-size:20px;color:var(--white);display:flex;align-items:center;}
+  .nav-logo img{height:52px;width:52px;object-fit:contain;margin-right:-10px;}
+  .nav-links{display:flex;align-items:center;gap:34px;}
+  .nav-links a{font-size:13px;font-weight:500;color:var(--muted);transition:color .2s;}
+  .nav-links a:hover{color:var(--white);}
+  .nav-cta{font-size:13.5px;font-weight:700;color:#fff;padding:9px 22px;border-radius:9px;background:var(--grad);transition:all .25s;}
+  .nav-cta:hover{filter:brightness(1.15);box-shadow:0 0 26px rgba(26,107,255,.4);transform:translateY(-1px);}
+  @media(max-width:760px){.nav-links a:not(.nav-cta){display:none;}}
+
+  /* ===== HERO ===== */
+  .hero{padding:clamp(140px,17vh,210px) 0 40px;text-align:center;}
+  .hero h1{
+    font-family:'Gentium Plus',serif; font-weight:700; letter-spacing:-.02em; line-height:1.02;
+    font-size:clamp(44px,7.4vw,92px); margin:26px auto 0; max-width:14ch;
+  }
+  .hero h1 em{font-style:italic;background:linear-gradient(120deg,var(--blue),var(--violet) 60%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .hero p.sub{max-width:60ch;margin:30px auto 0;font-size:clamp(16px,1.7vw,19px);color:var(--muted);line-height:1.7;}
+  .hero-meta{margin-top:34px;display:flex;gap:30px;justify-content:center;flex-wrap:wrap;font-family:'DM Mono',monospace;font-size:12px;color:var(--dim);letter-spacing:.04em;}
+  .hero-meta b{color:var(--text);font-weight:500;}
+
+  /* ===== STAGE / ORB ===== */
+  .stage-sec{padding:clamp(40px,6vh,80px) 0 clamp(60px,8vh,110px);}
+  .stage-shell{
+    display:grid; grid-template-columns:1.18fr .82fr; gap:clamp(20px,3vw,44px); align-items:stretch;
+    border:1px solid var(--border); border-radius:26px; padding:clamp(20px,3vw,40px);
+    background:linear-gradient(170deg,rgba(13,13,24,.74),rgba(7,7,14,.62));
+    backdrop-filter:blur(10px);
+    box-shadow:0 40px 120px -40px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  .orb-stage{position:relative;min-height:clamp(380px,52vh,560px);border-radius:20px;overflow:hidden;cursor:grab;
+    background:radial-gradient(circle at 50% 46%,rgba(26,107,255,.10),transparent 60%);}
+  .orb-stage:active{cursor:grabbing;}
+  .orb-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+  .orbit-ring{position:absolute;top:50%;left:50%;border:1px solid rgba(255,255,255,.05);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;}
+
+  /* central agent core */
+  .core{
+    position:absolute;top:50%;left:50%;width:148px;height:148px;border-radius:50%;z-index:5;
+    transform:translate(-50%,-50%); will-change:transform;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    background:radial-gradient(circle at 38% 32%,rgba(255,255,255,.9),rgba(56,182,255,.85) 26%,rgba(124,58,237,.92) 72%,rgba(26,107,255,.85));
+    box-shadow:0 0 0 1px rgba(255,255,255,.25) inset, 0 0 46px rgba(56,182,255,.5), 0 0 110px rgba(124,58,237,.45);
+    cursor:grab;
+  }
+  .core:active{cursor:grabbing;}
+  .core::after{content:'';position:absolute;top:14%;left:18%;width:34%;height:26%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.85),transparent 70%);filter:blur(2px);}
+  .core-label{position:relative;z-index:2;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.5);line-height:1.4;padding:0 8px;}
+  .core-label b{display:block;font-family:'Gentium Plus',serif;font-size:19px;letter-spacing:-.01em;text-transform:none;font-weight:700;}
+  @keyframes coreBreath{0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,.25) inset,0 0 42px rgba(56,182,255,.45),0 0 100px rgba(124,58,237,.4);}50%{box-shadow:0 0 0 1px rgba(255,255,255,.3) inset,0 0 60px rgba(56,182,255,.6),0 0 140px rgba(124,58,237,.55);}}
+  .core.breath{animation:coreBreath 4.5s ease-in-out infinite;}
+
+  /* capability bubbles */
+  .bub{
+    position:absolute;z-index:4;width:var(--s,84px);height:var(--s,84px);border-radius:50%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center;
+    transform:translate(-50%,-50%); will-change:transform,left,top;
+    background:linear-gradient(160deg,rgba(20,22,38,.92),rgba(10,10,20,.92));
+    border:1px solid var(--border-2);
+    box-shadow:0 10px 30px -10px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.06);
+    cursor:pointer;transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s,border-color .25s,background .25s;
+  }
+  .bub .g{font-size:20px;line-height:1;filter:drop-shadow(0 0 8px rgba(56,182,255,.6));}
+  .bub .t{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;}
+  .bub:hover,.bub.sel{border-color:rgba(56,182,255,.55);box-shadow:0 0 0 1px rgba(56,182,255,.4),0 14px 40px -8px rgba(26,107,255,.45);}
+  .bub:hover .t,.bub.sel .t{color:#fff;}
+  .bub.sel{background:linear-gradient(160deg,rgba(28,34,66,.95),rgba(14,14,28,.95));}
+
+  /* info panel */
+  .panel{display:flex;flex-direction:column;justify-content:center;padding:clamp(6px,1vw,18px) clamp(4px,1vw,14px);}
+  .panel-kicker{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);}
+  .panel-step{font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);letter-spacing:.14em;}
+  .panel h3{font-family:'Gentium Plus',serif;font-weight:700;font-size:clamp(26px,3vw,38px);letter-spacing:-.015em;margin:14px 0 0;line-height:1.08;}
+  .panel .lead{font-size:16px;color:var(--text);margin-top:16px;line-height:1.7;}
+  .panel .detail{font-size:14.5px;color:var(--muted);margin-top:16px;line-height:1.75;padding-top:18px;border-top:1px solid var(--border);}
+  .panel .hint{margin-top:22px;font-family:'DM Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.04em;display:flex;align-items:center;gap:8px;}
+  .panel .hint .dot{width:6px;height:6px;border-radius:50%;background:var(--blue);box-shadow:0 0 10px var(--blue);animation:hintPulse 1.8s ease-in-out infinite;}
+  @keyframes hintPulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+  .panel-fade{animation:pf .4s cubic-bezier(.16,1,.3,1);}
+  @keyframes pf{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  @media(max-width:860px){.stage-shell{grid-template-columns:1fr;} .orb-stage{min-height:440px;}}
+
+  /* ===== SECTION SHELL ===== */
+  section.block{padding:clamp(64px,9vh,128px) 0;}
+  .sec-head{max-width:62ch;}
+  .sec-head h2{font-family:'Gentium Plus',serif;font-weight:700;font-size:clamp(30px,4.4vw,54px);letter-spacing:-.02em;line-height:1.05;margin-top:20px;}
+  .sec-head p{color:var(--muted);font-size:clamp(16px,1.7vw,18px);margin-top:20px;line-height:1.7;}
+
+  /* definition: vs comparison */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:50px;}
+  .vs-card{border:1px solid var(--border);border-radius:20px;padding:clamp(22px,2.6vw,34px);background:var(--bg-card);}
+  .vs-card.agent{border-color:rgba(56,182,255,.28);background:linear-gradient(165deg,rgba(13,17,32,.9),rgba(10,10,20,.7));box-shadow:0 24px 70px -30px rgba(26,107,255,.4);}
+  .vs-tag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);}
+  .vs-card.agent .vs-tag{color:var(--blue);}
+  .vs-card h4{font-family:'Gentium Plus',serif;font-weight:700;font-size:24px;margin:10px 0 22px;}
+  .vs-row{display:flex;gap:14px;padding:13px 0;border-top:1px solid var(--border);font-size:14.5px;color:var(--muted);}
+  .vs-row:first-of-type{border-top:none;}
+  .vs-row .ic{flex:none;width:18px;color:var(--dim);font-family:'DM Mono',monospace;}
+  .vs-card.agent .vs-row{color:var(--text);}
+  .vs-card.agent .vs-row .ic{color:var(--blue);}
+  @media(max-width:760px){.vs{grid-template-columns:1fr;}}
+
+  /* ===== AGENT LOOP ===== */
+  .loop{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:54px;}
+  .loop-step{position:relative;border:1px solid var(--border);border-radius:18px;padding:24px 20px 26px;background:var(--bg-card);cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);overflow:hidden;}
+  .loop-step::before{content:'';position:absolute;inset:0;background:var(--grad);opacity:0;transition:opacity .3s;z-index:0;}
+  .loop-step.on{border-color:rgba(56,182,255,.4);transform:translateY(-4px);box-shadow:0 24px 60px -24px rgba(26,107,255,.5);}
+  .loop-step.on::before{opacity:.10;}
+  .loop-step>*{position:relative;z-index:1;}
+  .loop-n{font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);letter-spacing:.1em;}
+  .loop-step h5{font-family:'Gentium Plus',serif;font-weight:700;font-size:21px;margin:12px 0 10px;}
+  .loop-step p{font-size:13.5px;color:var(--muted);line-height:1.6;}
+  .loop-arrow{position:absolute;top:50%;right:-11px;transform:translateY(-50%);z-index:3;color:var(--dim);font-size:14px;}
+  .loop-step:last-child .loop-arrow{display:none;}
+  .loop-foot{margin-top:22px;display:flex;align-items:center;gap:12px;font-family:'DM Mono',monospace;font-size:12px;color:var(--dim);letter-spacing:.04em;}
+  .loop-foot .ar{color:var(--blue);}
+  @media(max-width:900px){.loop{grid-template-columns:repeat(2,1fr);} .loop-arrow{display:none;}}
+  @media(max-width:480px){.loop{grid-template-columns:1fr;}}
+
+  /* ===== IMAGE SECTION ===== */
+  .img-split{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(28px,4vw,64px);align-items:center;margin-top:24px;}
+  .img-split image-slot{width:100%;height:clamp(320px,42vw,460px);border:1px solid var(--border-2);box-shadow:0 40px 110px -40px rgba(0,0,0,.85);}
+  .img-cap{font-family:'DM Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.06em;margin-top:14px;}
+  .img-list{margin-top:30px;display:flex;flex-direction:column;gap:18px;}
+  .img-li{display:flex;gap:16px;align-items:flex-start;}
+  .img-li .num{flex:none;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;color:var(--blue);background:rgba(56,182,255,.08);border:1px solid rgba(56,182,255,.2);}
+  .img-li b{font-weight:600;display:block;margin-bottom:2px;}
+  .img-li p{font-size:14px;color:var(--muted);line-height:1.6;}
+  @media(max-width:820px){.img-split{grid-template-columns:1fr;}}
+
+  /* ===== LEVELS ===== */
+  .levels{margin-top:50px;border:1px solid var(--border);border-radius:22px;overflow:hidden;background:var(--bg-card);}
+  .lvl{display:grid;grid-template-columns:120px 1fr 200px;gap:24px;align-items:center;padding:24px clamp(20px,2.6vw,34px);border-top:1px solid var(--border);transition:background .25s;}
+  .lvl:first-child{border-top:none;}
+  .lvl:hover{background:var(--bg-card-2);}
+  .lvl-tag{font-family:'DM Mono',monospace;font-size:13px;color:var(--violet);letter-spacing:.06em;display:flex;align-items:center;gap:10px;}
+  .lvl-bar{width:44px;height:5px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden;}
+  .lvl-bar i{display:block;height:100%;background:var(--grad);}
+  .lvl-name{font-family:'Gentium Plus',serif;font-weight:700;font-size:19px;}
+  .lvl-name small{display:block;font-family:'Plus Jakarta Sans';font-weight:400;font-size:13.5px;color:var(--muted);margin-top:4px;letter-spacing:0;}
+  .lvl-eg{font-family:'DM Mono',monospace;font-size:12px;color:var(--dim);text-align:right;}
+  @media(max-width:760px){.lvl{grid-template-columns:1fr;gap:8px;}.lvl-eg{text-align:left;}.lvl-bar{display:none;}}
+
+  /* ===== CLOSING CTA ===== */
+  .cta{position:relative;text-align:center;border:1px solid var(--border);border-radius:28px;padding:clamp(48px,7vw,84px) var(--px);overflow:hidden;
+    background:radial-gradient(circle at 50% 0%,rgba(124,58,237,.22),transparent 60%),linear-gradient(180deg,rgba(13,13,24,.7),rgba(6,6,12,.6));}
+  .cta h2{font-family:'Gentium Plus',serif;font-weight:700;font-size:clamp(30px,4.6vw,52px);letter-spacing:-.02em;line-height:1.06;}
+  .cta p{color:var(--muted);max-width:54ch;margin:22px auto 0;font-size:17px;}
+  .cta-actions{margin-top:38px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .btn{font-size:15px;font-weight:700;padding:15px 30px;border-radius:11px;transition:all .25s;}
+  .btn-primary{color:#fff;background:var(--grad);}
+  .btn-primary:hover{filter:brightness(1.15);box-shadow:0 0 32px rgba(26,107,255,.45);transform:translateY(-2px);}
+  .btn-ghost{color:var(--text);border:1px solid var(--border-2);}
+  .btn-ghost:hover{border-color:var(--blue);color:#fff;}
+
+  /* footer */
+  footer{border-top:1px solid var(--border);padding:40px 0;}
+  .foot-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;}
+  .foot-logo{display:flex;align-items:center;font-family:'Gentium Plus',serif;font-weight:700;font-size:18px;}
+  .foot-logo img{height:44px;width:44px;object-fit:contain;margin-right:-8px;}
+  .foot-inner small{color:var(--dim);font-size:12.5px;font-family:'DM Mono',monospace;}
+
+  /* reveal */
+  .sr{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+  .sr.in{opacity:1;transform:none;}
+
+  @media(prefers-reduced-motion:reduce){
+    .core.breath{animation:none;} .sr{opacity:1;transform:none;transition:none;}
+    .panel .hint .dot{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="Nantara AI Landing Page v5.html" class="nav-logo"><img src="logo.png" alt="Nantara"><span>Nantara</span></a>
+    <div class="nav-links">
+      <a href="#define">What it is</a>
+      <a href="#loop">The loop</a>
+      <a href="#levels">Levels</a>
+      <a href="Nantara AI Landing Page v5.html" class="nav-cta">See it live</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero wrap">
+  <span class="eyebrow">Field Guide · 01 — Foundations</span>
+  <h1>What makes an AI&nbsp;<em>agentic?</em></h1>
+  <p class="sub">A chatbot answers. An <b style="color:var(--text);font-weight:600">agent</b> acts — it takes a goal, decides the steps, reaches for tools, and keeps going until the job is done. Drag the core. Tap a bubble. Learn how autonomy actually works.</p>
+  <div class="hero-meta">
+    <span><b>6</b> capabilities</span>
+    <span><b>1</b> loop</span>
+    <span><b>5</b> levels of autonomy</span>
+    <span><b>~7 min</b> read</span>
+  </div>
+</header>
+
+<!-- INTERACTIVE STAGE -->
+<section class="stage-sec wrap">
+  <div class="stage-shell sr">
+    <div class="orb-stage" id="orbStage">
+      <canvas class="orb-canvas" id="orbCanvas"></canvas>
+      <div class="orbit-ring" style="width:300px;height:300px;"></div>
+      <div class="orbit-ring" style="width:460px;height:460px;"></div>
+      <div class="core breath" id="core">
+        <span class="core-label"><b id="coreTitle">Agent</b><span id="coreSub">drag me</span></span>
+      </div>
+      <!-- bubbles injected by JS -->
+    </div>
+
+    <div class="panel" id="panel">
+      <div class="panel-step" id="panelStep">CAPABILITY · 6</div>
+      <h3 id="panelTitle" class="serif">The anatomy of an agent</h3>
+      <p class="lead" id="panelLead">Six capabilities turn a language model into something that can be trusted with a goal. Tap any bubble orbiting the core to see what each one really means — and why a plain chatbot has none of them.</p>
+      <p class="detail" id="panelDetail">Together they form a single loop: perceive the situation, reason about it, plan a move, act through a tool, observe the result — then do it again until the goal is met.</p>
+      <div class="hint"><span class="dot"></span><span id="panelHint">Tip — drag the glowing core and watch the orbit follow</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEFINITION / VS -->
+<section class="block wrap" id="define">
+  <div class="sec-head sr">
+    <span class="eyebrow">02 — The distinction</span>
+    <h2>Generative gives you output.<br>Agentic gives you outcomes.</h2>
+    <p>Generative AI is a brilliant one-shot machine: you ask, it produces. Agentic AI wraps that same intelligence in a loop and points it at a goal — so instead of handing you a draft, it does the work, checks itself, and comes back when it's finished.</p>
+  </div>
+  <div class="vs sr">
+    <div class="vs-card">
+      <div class="vs-tag">Generative AI</div>
+      <h4 class="serif">The responder</h4>
+      <div class="vs-row"><span class="ic">→</span> Reacts to a single prompt</div>
+      <div class="vs-row"><span class="ic">→</span> One turn in, one output out</div>
+      <div class="vs-row"><span class="ic">→</span> Stateless — forgets after the answer</div>
+      <div class="vs-row"><span class="ic">→</span> You drive every step</div>
+      <div class="vs-row"><span class="ic">→</span> Produces content</div>
+      <div class="vs-row" style="color:var(--dim)"><span class="ic">"</span> "Write me a restock email"</div>
+    </div>
+    <div class="vs-card agent">
+      <div class="vs-tag">Agentic AI</div>
+      <h4 class="serif">The operator</h4>
+      <div class="vs-row"><span class="ic">◆</span> Pursues a goal you set once</div>
+      <div class="vs-row"><span class="ic">◆</span> Many turns, until the goal is met</div>
+      <div class="vs-row"><span class="ic">◆</span> Remembers context across steps</div>
+      <div class="vs-row"><span class="ic">◆</span> It drives itself</div>
+      <div class="vs-row"><span class="ic">◆</span> Takes actions in the real world</div>
+      <div class="vs-row" style="color:var(--text)"><span class="ic">"</span> "Win back every buyer who lapsed this month"</div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENT LOOP -->
+<section class="block wrap" id="loop">
+  <div class="sec-head sr">
+    <span class="eyebrow">03 — The engine</span>
+    <h2>The agent loop</h2>
+    <p>Strip away the buzzwords and every agent runs the same five-beat cycle. It repeats this loop — sometimes hundreds of times — until the goal is reached. Hover a step to follow the cycle.</p>
+  </div>
+  <div class="loop sr" id="loopGrid">
+    <div class="loop-step" data-i="0"><div class="loop-n">01</div><h5 class="serif">Perceive</h5><p>Take in the goal and the current state — messages, data, the last tool's result, the world as it is right now.</p><span class="loop-arrow">➜</span></div>
+    <div class="loop-step" data-i="1"><div class="loop-n">02</div><h5 class="serif">Reason</h5><p>Work out what matters, what's missing, and what the single best next move would be.</p><span class="loop-arrow">➜</span></div>
+    <div class="loop-step" data-i="2"><div class="loop-n">03</div><h5 class="serif">Plan</h5><p>Choose a concrete action and the right tool to carry it out — the API, the query, the message.</p><span class="loop-arrow">➜</span></div>
+    <div class="loop-step" data-i="3"><div class="loop-n">04</div><h5 class="serif">Act</h5><p>Execute. Call the function, run the code, send the reply, write the record. Reach into the world.</p><span class="loop-arrow">➜</span></div>
+    <div class="loop-step" data-i="4"><div class="loop-n">05</div><h5 class="serif">Observe</h5><p>Read the outcome. Did it work? What changed, what's left? Then start the loop again.</p><span class="loop-arrow">➜</span></div>
+  </div>
+  <div class="loop-foot sr"><span class="ar">↻</span> Loops back to <b style="color:var(--text);font-weight:500;margin-left:4px">Perceive</b>&nbsp;— autonomously, until the goal is met or it asks for help.</div>
+</section>
+
+<!-- IMAGE SECTION -->
+<section class="block wrap">
+  <div class="sec-head sr">
+    <span class="eyebrow">04 — Under the hood</span>
+    <h2>An agent is a model wearing a toolbelt</h2>
+  </div>
+  <div class="img-split sr">
+    <div>
+      <image-slot id="agentDiagram" shape="rounded" radius="20" placeholder="Drop an architecture diagram or hero render"></image-slot>
+      <div class="img-cap">// drop your own diagram, screenshot, or product render</div>
+    </div>
+    <div>
+      <p style="color:var(--muted);font-size:16px;line-height:1.75;">The language model is the brain — but a brain alone can only think out loud. What turns it into an agent is the scaffolding around it: the parts that let it remember, decide, and reach into real systems.</p>
+      <div class="img-list">
+        <div class="img-li"><span class="num">1</span><div><b>Model</b><p>The reasoning core that interprets the goal and chooses each next move.</p></div></div>
+        <div class="img-li"><span class="num">2</span><div><b>Tools</b><p>APIs, databases, search, code execution — the agent's hands in the real world.</p></div></div>
+        <div class="img-li"><span class="num">3</span><div><b>Memory</b><p>Short-term scratchpad plus long-term recall, so context survives across steps.</p></div></div>
+        <div class="img-li"><span class="num">4</span><div><b>Orchestrator</b><p>The loop controller that decides when to keep going, retry, or hand back to a human.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEVELS -->
+<section class="block wrap" id="levels">
+  <div class="sec-head sr">
+    <span class="eyebrow">05 — How far does it go</span>
+    <h2>Five levels of autonomy</h2>
+    <p>"Agentic" isn't a switch — it's a dial. Most products today live around Level 2; the frontier is pushing into Level 3 and beyond.</p>
+  </div>
+  <div class="levels sr">
+    <div class="lvl">
+      <div class="lvl-tag"><span class="lvl-bar"><i style="width:18%"></i></span>L0</div>
+      <div class="lvl-name serif">Assisted<small>You do the work; the AI suggests as you go.</small></div>
+      <div class="lvl-eg">e.g. autocomplete</div>
+    </div>
+    <div class="lvl">
+      <div class="lvl-tag"><span class="lvl-bar"><i style="width:38%"></i></span>L1</div>
+      <div class="lvl-name serif">Reactive<small>Completes a single task each time you ask for it.</small></div>
+      <div class="lvl-eg">e.g. a chatbot</div>
+    </div>
+    <div class="lvl">
+      <div class="lvl-tag"><span class="lvl-bar"><i style="width:58%"></i></span>L2</div>
+      <div class="lvl-name serif">Orchestrated<small>Chains tools to finish a defined workflow — you approve.</small></div>
+      <div class="lvl-eg">e.g. a copilot</div>
+    </div>
+    <div class="lvl">
+      <div class="lvl-tag"><span class="lvl-bar"><i style="width:80%"></i></span>L3</div>
+      <div class="lvl-name serif">Autonomous<small>Owns a goal end-to-end; escalates only on exceptions.</small></div>
+      <div class="lvl-eg">e.g. an agent</div>
+    </div>
+    <div class="lvl">
+      <div class="lvl-tag"><span class="lvl-bar"><i style="width:100%"></i></span>L4</div>
+      <div class="lvl-name serif">Self-directed<small>Sets its own sub-goals, spawns sub-agents, refines its strategy.</small></div>
+      <div class="lvl-eg">e.g. agent swarms · emerging</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="block wrap">
+  <div class="cta sr">
+    <span class="eyebrow" style="justify-content:center;">Bring it to your business</span>
+    <h2 class="serif">Nantara is an agent —<br>not another chatbot.</h2>
+    <p>It perceives your orders, reasons about your buyers, and acts on WhatsApp before you've finished your coffee. Everything in this guide, running on your store.</p>
+    <div class="cta-actions">
+      <a href="Nantara AI Landing Page v5.html" class="btn btn-primary">See Nantara in action</a>
+      <a href="#define" class="btn btn-ghost">Re-read the guide</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <a href="Nantara AI Landing Page v5.html" class="foot-logo"><img src="logo.png" alt="Nantara"><span>Nantara</span></a>
+    <small>Field Guide to Agentic AI · 2026</small>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const noMotion = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* ===== nav scroll ===== */
+  const nav=document.getElementById('nav');
+  const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>20);
+  onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+
+  /* ===== scroll reveal ===== */
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+  document.querySelectorAll('.sr').forEach(el=>io.observe(el));
+
+  /* ===== STARFIELD ===== */
+  if(!noMotion){
+    const c=document.createElement('canvas');
+    c.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1';
+    document.body.prepend(c);
+    const x=c.getContext('2d'); let W,H;
+    const rs=()=>{W=c.width=innerWidth;H=c.height=innerHeight;}; rs(); addEventListener('resize',rs);
+    const stars=Array.from({length:300},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.7+.3,s:Math.random()*.00018+.00004,a:Math.random(),tw:Math.random()*.02+.004}));
+    (function d(){
+      x.clearRect(0,0,W,H);
+      for(const s of stars){
+        s.y-=s.s; if(s.y<-.02){s.y=1.02;s.x=Math.random();}
+        s.a+=s.tw; const al=.3+Math.abs(Math.sin(s.a))*.6;
+        x.beginPath(); x.arc(s.x*W,s.y*H,s.r,0,7); x.fillStyle='rgba(180,200,255,'+al+')'; x.fill();
+      }
+      requestAnimationFrame(d);
+    })();
+  }
+
+  /* ===== AGENT CORE / ORBIT ===== */
+  const CAPS=[
+    {g:'◉',t:'Autonomy',h:'#38B6FF',title:'Autonomy',
+      lead:'Acts toward a goal without being told each step. You set the outcome — the agent decides the moves.',
+      detail:'A generative model waits for the next prompt. An agent is handed an objective — "reconcile this week\u2019s orders" — and keeps working the loop on its own until it\u2019s finished or genuinely stuck.'},
+    {g:'✸',t:'Reasoning',h:'#7C3AED',title:'Reasoning',
+      lead:'Breaks a fuzzy goal into concrete sub-steps and weighs the trade-offs before committing to a move.',
+      detail:'Instead of guessing in one shot, it thinks: what do I know, what\u2019s missing, what\u2019s the smartest next action? This is where "chain-of-thought" earns its keep.'},
+    {g:'⊞',t:'Planning',h:'#22D3EE',title:'Planning',
+      lead:'Sequences multi-step actions in the right order — and rewrites the plan when reality changes.',
+      detail:'Booking, then confirming, then notifying. A plan is only useful if the agent can revise it mid-flight when step two returns something unexpected.'},
+    {g:'⚙',t:'Tool Use',h:'#38B6FF',title:'Tool Use',
+      lead:'Reaches outside itself — calling APIs, running code, querying databases, searching the web — to actually get things done.',
+      detail:'Language alone changes nothing. Tools are the agent\u2019s hands: they let a thought become a sent message, a written record, a real transaction.'},
+    {g:'◈',t:'Memory',h:'#A78BFA',title:'Memory',
+      lead:'Carries context across steps and sessions, so the agent never restarts from zero.',
+      detail:'A scratchpad holds the current task; long-term memory recalls who a buyer is and what they ordered last month. Without it, every turn is amnesia.'},
+    {g:'⟲',t:'Adaptation',h:'#8B3DFF',title:'Adaptation',
+      lead:'Watches the result of every action and corrects course when the outcome isn\u2019t what it expected.',
+      detail:'A tool errors, a buyer replies oddly, a number looks wrong — the agent notices, adjusts, and tries another path instead of charging ahead blindly.'},
+  ];
+
+  const stage=document.getElementById('orbStage');
+  const canvas=document.getElementById('orbCanvas');
+  const ctx=canvas.getContext('2d');
+  const core=document.getElementById('core');
+  const coreTitle=document.getElementById('coreTitle');
+  const coreSub=document.getElementById('coreSub');
+  let W,H,cx,cy,R;
+  let coreX=0,coreY=0, dragCoreX=0,dragCoreY=0; // core offset from center
+  let dragging=false, dragStart={x:0,y:0,ox:0,oy:0};
+  let selected=-1;
+  let t0=performance.now();
+
+  // build bubbles
+  const bubbles=CAPS.map((c,i)=>{
+    const el=document.createElement('div');
+    el.className='bub';
+    el.style.setProperty('--s','84px');
+    el.innerHTML='<span class="g" style="color:'+c.h+'">'+c.g+'</span><span class="t">'+c.t+'</span>';
+    el.addEventListener('click',(e)=>{e.stopPropagation();select(i);});
+    el.addEventListener('mouseenter',()=>{b.hover=true;});
+    el.addEventListener('mouseleave',()=>{b.hover=false;});
+    stage.appendChild(el);
+    const b={el,ang:(i/CAPS.length)*Math.PI*2,hover:false};
+    return b;
+  });
+
+  function layoutBubbles(){
+    bubbles.forEach((b,i)=>{
+      const ringR=R*(i<3?0.78:1.12);
+      const ex=cx+Math.cos(b.ang)*ringR;
+      const ey=cy+Math.sin(b.ang)*ringR*0.62;
+      b.x=ex; b.y=ey;
+      b.el.style.left=ex+'px'; b.el.style.top=ey+'px';
+      b.el.style.transform='translate(-50%,-50%)';
+    });
+  }
+  function resize(){
+    const r=stage.getBoundingClientRect();
+    W=canvas.width=r.width||600; H=canvas.height=r.height||460;
+    cx=W/2; cy=H/2; R=Math.min(W,H)*0.34;
+    layoutBubbles();
+  }
+  resize(); new ResizeObserver(resize).observe(stage);
+
+  function select(i){
+    selected=i;
+    bubbles.forEach((b,j)=>b.el.classList.toggle('sel',j===i));
+    const c=CAPS[i];
+    coreTitle.textContent=c.t; coreSub.textContent='capability';
+    const p=document.getElementById('panel');
+    document.getElementById('panelStep').textContent='CAPABILITY · 0'+(i+1)+' / 06';
+    document.getElementById('panelTitle').textContent=c.title;
+    document.getElementById('panelLead').textContent=c.lead;
+    document.getElementById('panelDetail').textContent=c.detail;
+    document.getElementById('panelHint').textContent='Tap another bubble, or drag the core to explore';
+    p.classList.remove('panel-fade'); void p.offsetWidth; p.classList.add('panel-fade');
+  }
+
+  // pointer drag on core / stage
+  function pointerDown(e){
+    const p=e.touches?e.touches[0]:e;
+    dragging=true; core.classList.remove('breath');
+    dragStart={x:p.clientX,y:p.clientY,ox:dragCoreX,oy:dragCoreY};
+  }
+  function pointerMove(e){
+    if(!dragging)return;
+    const p=e.touches?e.touches[0]:e;
+    dragCoreX=dragStart.ox+(p.clientX-dragStart.x);
+    dragCoreY=dragStart.oy+(p.clientY-dragStart.y);
+    // clamp
+    const lim=Math.min(W,H)*0.22;
+    const d=Math.hypot(dragCoreX,dragCoreY);
+    if(d>lim){dragCoreX*=lim/d;dragCoreY*=lim/d;}
+  }
+  function pointerUp(){ if(!dragging)return; dragging=false; }
+  core.addEventListener('mousedown',pointerDown);
+  stage.addEventListener('mousedown',pointerDown);
+  window.addEventListener('mousemove',pointerMove);
+  window.addEventListener('mouseup',pointerUp);
+  core.addEventListener('touchstart',pointerDown,{passive:true});
+  stage.addEventListener('touchstart',pointerDown,{passive:true});
+  window.addEventListener('touchmove',pointerMove,{passive:true});
+  window.addEventListener('touchend',pointerUp);
+
+  // clicking empty stage deselects
+  stage.addEventListener('click',(e)=>{
+    if(e.target===stage||e.target===canvas){
+      selected=-1; bubbles.forEach(b=>b.el.classList.remove('sel'));
+      coreTitle.textContent='Agent'; coreSub.textContent='drag me';
+    }
+  });
+
+  // mouse parallax (subtle) when not dragging
+  let mx=0,my=0;
+  stage.addEventListener('mousemove',(e)=>{
+    const r=stage.getBoundingClientRect();
+    mx=((e.clientX-r.left)/r.width-.5);
+    my=((e.clientY-r.top)/r.height-.5);
+  });
+  stage.addEventListener('mouseleave',()=>{mx=0;my=0;});
+
+  function frame(now){
+    const dt=(now-t0)/1000; t0=now;
+    // ease core toward drag target + parallax
+    const px=mx*18, py=my*18;
+    const tx=dragCoreX+(dragging?0:px), ty=dragCoreY+(dragging?0:py);
+    coreX+=(tx-coreX)*Math.min(1,dt*8);
+    coreY+=(ty-coreY)*Math.min(1,dt*8);
+    // spring back when released
+    if(!dragging){ dragCoreX*=0.90; dragCoreY*=0.90; if(Math.abs(dragCoreX)<.4&&Math.abs(dragCoreY)<.4&&!core.classList.contains('breath')){core.classList.add('breath');} }
+    core.style.transform='translate(-50%,-50%) translate('+coreX+'px,'+coreY+'px)';
+
+    ctx.clearRect(0,0,W,H);
+    const ccx=cx+coreX, ccy=cy+coreY;
+
+    bubbles.forEach((b,i)=>{
+      const speed=b.hover?0.04:0.18;
+      b.ang+=dt*speed*(i%2?1:-1.0);
+      const ringR=R*(i<3?0.78:1.12);
+      const ex=cx+Math.cos(b.ang)*ringR + mx*(i<3?10:22);
+      const ey=cy+Math.sin(b.ang)*ringR*0.62 + my*(i<3?10:22);
+      b.x=ex; b.y=ey;
+      const isSel=selected===i;
+      const sc=b.hover||isSel?1.16:1;
+      b.el.style.left=ex+'px'; b.el.style.top=ey+'px';
+      b.el.style.transform='translate(-50%,-50%) scale('+sc+')';
+      b.el.style.zIndex=Math.round(50+Math.sin(b.ang)*10);
+
+      // connection line
+      const active=isSel||b.hover;
+      ctx.beginPath();
+      ctx.moveTo(ccx,ccy); ctx.lineTo(ex,ey);
+      const grd=ctx.createLinearGradient(ccx,ccy,ex,ey);
+      const col=CAPS[i].h;
+      grd.addColorStop(0,'rgba(56,182,255,'+(active?0.5:0.10)+')');
+      grd.addColorStop(1,hexA(col,active?0.55:0.12));
+      ctx.strokeStyle=grd; ctx.lineWidth=active?1.6:0.8; ctx.stroke();
+
+      // travelling pulse on active line
+      if(active){
+        const tprog=(now/900+i)%1;
+        const pxp=ccx+(ex-ccx)*tprog, pyp=ccy+(ey-ccy)*tprog;
+        ctx.beginPath(); ctx.arc(pxp,pyp,2.4,0,7); ctx.fillStyle=col; ctx.fill();
+      }
+    });
+    requestAnimationFrame(frame);
+  }
+  function hexA(hex,a){const n=parseInt(hex.slice(1),16);return'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')';}
+  requestAnimationFrame(frame);
+
+  // auto-select first capability shortly after load to invite interaction
+  setTimeout(()=>{ if(selected===-1) select(0); }, 1400);
+
+  /* ===== AGENT LOOP cycler ===== */
+  const steps=[...document.querySelectorAll('.loop-step')];
+  let li=0, loopTimer=null, loopHover=false;
+  function lightStep(i){steps.forEach((s,j)=>s.classList.toggle('on',j===i));}
+  function startLoop(){ stopLoop(); loopTimer=setInterval(()=>{ if(loopHover)return; li=(li+1)%steps.length; lightStep(li);},1400); }
+  function stopLoop(){ if(loopTimer)clearInterval(loopTimer); }
+  steps.forEach((s,i)=>{
+    s.addEventListener('mouseenter',()=>{loopHover=true;li=i;lightStep(i);});
+    s.addEventListener('mouseleave',()=>{loopHover=false;});
+  });
+  const loopGrid=document.getElementById('loopGrid');
+  const lio=new IntersectionObserver((es)=>{es.forEach(e=>{ if(e.isIntersecting){lightStep(0);startLoop();} else {stopLoop();}})},{threshold:.3});
+  lio.observe(loopGrid);
+})();
+</script>
+</body>
+</html>

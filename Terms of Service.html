@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — Nantara AI</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta property="og:title" content="Terms of Service — Nantara AI">
+  <meta property="og:description" content="Read the terms governing your use of Nantara AI's Order Intelligence System.">
+  <meta property="og:image" content="logo.png">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Gentium+Plus:wght@400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #38B6FF;
+      --blue-dark: #1A6BFF;
+      --purple: #8B3DFF;
+      --purple-mid: #7C3AED;
+      --violet: #A78BFA;
+      --bg: #060609;
+      --bg-card: #0C0B18;
+      --bg-surface: #14122A;
+      --white: #FFFFFF;
+      --text: rgba(255,255,255,0.88);
+      --text-muted: rgba(255,255,255,0.65);
+      --text-dim: rgba(255,255,255,0.4);
+      --border: rgba(255,255,255,0.07);
+      --border-bright: rgba(255,255,255,0.14);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px; line-height: 1.75;
+      color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--blue); text-decoration: none; transition: color 0.15s; }
+    a:hover { color: var(--violet); }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(6,6,9,0.88);
+      backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px dashed var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 90px; padding: 0 clamp(20px, 5vw, 48px);
+    }
+    .nav-logo {
+      font-family: 'Gentium Plus', serif; font-weight: 700; font-size: 22px;
+      color: var(--white); display: flex; align-items: center; gap: 2px;
+      text-decoration: none; letter-spacing: -0.01em;
+    }
+    .nav-logo img { height: 80px; width: 80px; object-fit: contain; margin-right: -18px; }
+    .nav-back {
+      font-size: 14px; font-weight: 500; color: var(--text-muted);
+      display: flex; align-items: center; gap: 6px; transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--white); }
+    .nav-back svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* ===== HERO ===== */
+    .tos-hero {
+      padding: clamp(60px, 8vw, 100px) clamp(20px, 5vw, 48px) clamp(40px, 5vw, 64px);
+      position: relative; overflow: hidden; text-align: center;
+    }
+    .tos-hero-glow {
+      position: absolute; z-index: 0;
+      width: 700px; height: 500px;
+      top: -200px; left: 50%; transform: translateX(-50%);
+      background: radial-gradient(ellipse at center,
+        rgba(30, 80, 255, 0.3) 0%,
+        rgba(100, 40, 230, 0.15) 40%,
+        transparent 70%
+      );
+      filter: blur(40px); pointer-events: none;
+    }
+    .tos-hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 800; color: var(--white);
+      line-height: 1.1; letter-spacing: -0.03em;
+      position: relative; margin-bottom: 16px;
+    }
+    .tos-hero p {
+      font-size: 16px; color: var(--text-muted);
+      position: relative; max-width: 480px; margin: 0 auto;
+    }
+    .tos-hero .effective {
+      font-family: 'DM Mono', monospace; font-size: 13px;
+      color: var(--blue); letter-spacing: 0.04em;
+      margin-top: 16px; display: block; position: relative;
+    }
+
+    /* ===== CONTENT ===== */
+    .tos-content {
+      max-width: 780px; margin: 0 auto;
+      padding: 0 clamp(20px, 5vw, 48px) clamp(80px, 8vw, 120px);
+    }
+
+    .tos-section { margin-bottom: 48px; }
+
+    .tos-section h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(22px, 2.5vw, 28px);
+      font-weight: 700; color: var(--white);
+      letter-spacing: -0.02em; margin-bottom: 16px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--border);
+    }
+
+    .tos-section h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px; font-weight: 600; color: var(--white);
+      margin: 24px 0 10px;
+    }
+
+    .tos-section p {
+      font-size: 15px; line-height: 1.8;
+      color: var(--text-muted); margin-bottom: 14px;
+    }
+
+    .tos-section ul {
+      list-style: none; padding: 0; margin: 0 0 16px 0;
+    }
+    .tos-section li {
+      font-size: 15px; line-height: 1.75; color: var(--text-muted);
+      padding: 4px 0 4px 24px; position: relative;
+    }
+    .tos-section li::before {
+      content: '';
+      position: absolute; left: 0; top: 12px;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--purple-mid);
+    }
+
+    .highlight-box {
+      background: var(--bg-card); border: 1px solid var(--border-bright);
+      border-radius: 10px; padding: 20px 24px;
+      margin: 20px 0; font-size: 14px; color: var(--text-muted);
+      line-height: 1.75;
+    }
+    .highlight-box strong { color: var(--white); }
+
+    .section-num {
+      font-family: 'DM Mono', monospace; font-size: 12px;
+      color: var(--blue); letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 8px; display: block;
+    }
+
+    /* ===== FOOTER ===== */
+    .tos-footer {
+      border-top: 1px solid var(--border);
+      padding: 48px clamp(20px, 5vw, 48px);
+      max-width: 1200px; margin: 0 auto;
+    }
+    .tos-footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .tos-footer-left {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .tos-footer-logo {
+      font-family: 'Gentium Plus', serif; font-weight: 700; font-size: 18px;
+      color: var(--white); display: flex; align-items: center; gap: 2px;
+      text-decoration: none;
+    }
+    .tos-footer-logo img { height: 40px; width: 40px; object-fit: contain; margin-right: -10px; }
+    .tos-footer-copy { font-size: 13px; color: var(--text-dim); }
+    .tos-footer-socials { display: flex; gap: 10px; }
+    .tos-footer-socials a {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .tos-footer-socials a:hover {
+      border-color: var(--purple-mid); background: rgba(139,61,255,0.08);
+      transform: translateY(-2px);
+    }
+    .tos-footer-socials svg { width: 18px; height: 18px; fill: var(--text-muted); }
+    .tos-footer-socials a:hover svg { fill: var(--white); }
+
+    /* ===== STARS ===== */
+    canvas#starfield {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 0;
+    }
+    .nav, .tos-hero, .tos-content, .tos-footer { position: relative; z-index: 1; }
+
+    @media (max-width: 600px) {
+      .tos-footer-inner { flex-direction: column; align-items: center; text-align: center; }
+      .tos-footer-left { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<!-- ====== NAV ====== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="Nantara AI Landing Page v5.html" class="nav-logo">
+      <img src="logo.png" alt="Nantara AI">
+      <span>Nantara AI</span>
+    </a>
+    <a href="Nantara AI Landing Page v5.html" class="nav-back">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
+      Back to Home
+    </a>
+  </div>
+</nav>
+
+<!-- ====== HERO ====== -->
+<div class="tos-hero">
+  <div class="tos-hero-glow"></div>
+  <h1>Terms of Service</h1>
+  <p>Please read these terms carefully before using Nantara AI's Order Intelligence System.</p>
+  <span class="effective">Effective Date: June 7, 2026</span>
+</div>
+
+<!-- ====== CONTENT ====== -->
+<div class="tos-content">
+
+  <div class="tos-section">
+    <span class="section-num">Section 01</span>
+    <h2>Agreement Overview</h2>
+    <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("Client", "you") and Nantara AI ("Company", "we", "us") governing your use of our Order Intelligence System and related services.</p>
+    <p>By subscribing to or using any Nantara AI service, you acknowledge that you have read, understood, and agree to be bound by these Terms. If you are entering into these Terms on behalf of a company or other entity, you represent that you have the authority to bind that entity.</p>
+    <div class="highlight-box">
+      <strong>In plain language:</strong> By using Nantara AI, you agree to these terms. If you're signing up for your company, make sure you're authorized to do so.
+    </div>
+  </div>
+
+  <div class="tos-section">
+    <span class="section-num">Section 02</span>
+    <h2>Services Description</h2>
+    <p>Nantara AI provides an automated Order Intelligence System designed for B2B suppliers. Our services include:</p>
+    <ul>
+      <li>Automated order capture from WhatsApp and other messaging channels</li>
+      <li>AI-powered order enrichment using buyer history, pricing tiers, and product catalogs</li>
+      <li>Automated order logging and database management</li>
+      <li>CRM integration and real-time fulfillment routing</li>
+      <li>Predictive analytics and upsell recommendations</li>
+      <li>Monthly performance reporting and system optimization</li>
+    </ul>
+    <p>We reserve the right to modify, improve, or discontinue any feature of the service with reasonable notice to active subscribers.</p>
+  </div>
+
+  <div class="tos-section">
+    <span class="section-num">Section 03</span>
+    <h2>Client Responsibilities</h2>
+    <p>To ensure optimal performance of the Nantara AI system, you agree to:</p>
+    <ul>
+      <li>Provide accurate and complete product catalogs, pricing information, and business policies during onboarding</li>
+      <li>Grant necessary access to your WhatsApp Business account, database platform, and CRM tools</li>
+      <li>Ensure that your use of the service complies with all applicable laws and regulations, including data protection laws in your jurisdiction</li>
+      <li>Maintain the confidentiality of your account credentials</li>
+      <li>Promptly notify Nantara AI of any unauthorized access or security breaches</li>
+      <li>Not use the service for any unlawful, fraudulent, or harmful purpose</li>
+    </ul>
+  </div>
+
+  <div class="tos-section">
+    <span class="section-num">Section 04</span>
+    <h2>Data Ownership &amp; Privacy</h2>
+    <p>Your data remains entirely yours. Nantara AI operates under a strict data ownership policy:</p>
+    <ul>
+      <li>All order data, buyer information, and business records are stored in your own accounts (e.g., your Airtable workspace, your CRM)</li>
+      <li>Nantara AI does not store, retain, or claim ownership of any client data on our servers</li>
+      <li>We access your data solely to configure, maintain, and optimize the automated workflows</li>
+      <li>We will never sell, share, or disclose your data to third parties</li>
+      <li>Upon termination of service, all access credentials will be revoked and no copies of your data will be retained by Nantara AI</li>
+    </ul>
+    <div class="highlight-box">
+      <strong>Our promise:</strong> Zero data stored on our servers. You own everything — always. We build and maintain the system; your data never leaves your infrastructure.
+    </div>
+  </div>
+
+  <div class="tos-section">
+    <span class="section-num">Section 05</span>
+    <h2>Service Level &amp; Deployment</h2>
+    <p>Nantara AI commits to the following service standards:</p>
+    <ul>
+      <li>Initial system deployment within 48 hours of onboarding completion</li>
+      <li>System availability of 99.5% uptime for automated workflows (subject to third-party platform availability)</li>
+      <li>Monthly optimization reviews to improve AI resolution rates and system performance</li>
+      <li>Responsive support based on your subscription tier (Standard: email support; Large: 2-hour priority response with weekly check-in calls)</li>
+    </ul>
+    <p>Service levels are dependent on the availability and uptime of third-party platforms including WhatsApp Business API, Airtable, and your CRM provider. Nantara AI is not liable for downtime caused by third-party platform outages.</p>
+  </div>
+
+  <div class="tos-section">
+    <span class="section-num">Section 06</span>
+    <h2>Payment &amp; Billing</h2>
+    <ul>
+      <li>Subscription fees are billed monthly in advance on the date of initial activation</li>
+      <li>One-time setup fees are due before deployment begins</li>
+      <li>All fees are quoted in USD or IDR as specified in your service agreement</li>
+      <li>Late payments exceeding 15 days may result in temporary suspension of optimization services</li>
+      <li>Price changes will be communicated with at least 30 days' written notice before the next billing cycle</li>
+    </ul>
+  </div>
+
+  <div class="tos-section">
+    <span class="section-num">Section 07</span>
+    <h2>30-Day Results Guarantee</h2>
+    <p>Nantara AI offers a 30-day results guarantee for all new clients:</p>
+    <ul>
+      <li>If you do not see measurable improvement in your order processing within the first 30 days of deployment, you are eligible for a full refund of your one-time setup fee</li>
+      <li>Refund requests must be submitted in writing within 35 days of system go-live date</li>
+      <li>Measurable improvement includes but is not limited to: reduction in order response time, decrease in lost or missed orders, and increase in automated order resolution</li>
+      <li>This guarantee does not cover monthly subscription fees already incurred</li>
+    </ul>
+  </div>
+
+  <div class="tos-section">
+    <span class="section-num">Section 08</span>
+    <h2>Termination &amp; Cancellation</h2>
+    <p>Either party may terminate the service agreement under the following conditions:</p>
+    <ul>
+      <li>You may cancel your subscription at any time. Cancellation takes effect at the end of the current billing cycle</li>
+      <li>Upon cancellation, your automated workflows remain functional — Nantara AI simply stops maintaining, monitoring, and optimizing them</li>
+      <li>Nantara AI may terminate service with 30 days' written notice if the client violates these Terms, fails to pay fees for more than 30 days, or uses the service for unlawful purposes</li>
+      <li>No long-term contracts are required. There are no early termination penalties</li>
+    </ul>
+  </div>
+
+  <div class="tos-section">
+    <span class="section-num">Section 09</span>
+    <h2>Limitation of Liability</h2>
+    <p>To the maximum extent permitted by applicable law:</p>
+    <ul>
+      <li>Nantara AI's total liability for any claims arising from or related to the service shall not exceed the total fees paid by the client in the 3 months preceding the claim</li>
+      <li>Nantara AI shall not be liable for indirect, incidental, consequential, or punitive damages, including loss of revenue, lost profits, or business interruption</li>
+      <li>Nantara AI is not responsible for errors resulting from inaccurate or incomplete data provided by the client</li>
+      <li>We do not guarantee specific revenue increases, order volumes, or business outcomes</li>
+    </ul>
+  </div>
+
+  <div class="tos-section">
+    <span class="section-num">Section 10</span>
+    <h2>Intellectual Property</h2>
+    <ul>
+      <li>Nantara AI retains all intellectual property rights to the system architecture, AI models, workflow configurations, and proprietary methodologies</li>
+      <li>Clients receive a non-exclusive, non-transferable license to use the configured workflows during their active subscription</li>
+      <li>Client data, brand assets, product catalogs, and business information remain the exclusive property of the client</li>
+    </ul>
+  </div>
+
+  <div class="tos-section">
+    <span class="section-num">Section 11</span>
+    <h2>Modifications to Terms</h2>
+    <p>Nantara AI reserves the right to update or modify these Terms at any time. We will notify active subscribers of material changes via email at least 14 days before they take effect. Continued use of the service after changes become effective constitutes acceptance of the revised Terms.</p>
+  </div>
+
+  <div class="tos-section">
+    <span class="section-num">Section 12</span>
+    <h2>Governing Law</h2>
+    <p>These Terms shall be governed by and construed in accordance with the laws of the Republic of Indonesia. Any disputes arising from these Terms or the use of our services shall be resolved through good-faith negotiation. If a resolution cannot be reached, disputes will be submitted to the competent courts in Jakarta, Indonesia.</p>
+  </div>
+
+  <div class="tos-section">
+    <span class="section-num">Section 13</span>
+    <h2>Contact</h2>
+    <p>If you have any questions about these Terms, please contact us:</p>
+    <div class="highlight-box">
+      <strong>Nantara AI</strong><br>
+      Email: <a href="mailto:nantaraai@gmail.com">nantaraai@gmail.com</a><br>
+      Website: <a href="https://nantarai.com">nantarai.com</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ====== FOOTER ====== -->
+<div class="tos-footer">
+  <div class="tos-footer-inner">
+    <div class="tos-footer-left">
+      <a href="Nantara AI Landing Page v5.html" class="tos-footer-logo">
+        <img src="logo.png" alt="Nantara AI">
+        <span>Nantara AI</span>
+      </a>
+      <span class="tos-footer-copy">&copy; 2026 Nantara AI. All rights reserved.</span>
+    </div>
+    <div class="tos-footer-socials">
+      <!-- Instagram -->
+      <a href="#" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <!-- TikTok -->
+      <a href="#" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16.6 5.82A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Starfield
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let W, H;
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+
+const stars = Array.from({length: 150}, () => ({
+  x: Math.random(), y: Math.random(),
+  r: Math.random() * 1.1 + 0.3,
+  a: Math.random() * 0.5 + 0.2,
+  speed: Math.random() * 0.00006 + 0.00002,
+  twinkle: Math.random() * 0.003 + 0.001,
+  offset: Math.random() * Math.PI * 2,
+  color: Math.random() > 0.7 ? '160,180,255' : Math.random() > 0.5 ? '200,180,255' : '255,255,255'
+}));
+
+let t = 0;
+(function draw() {
+  ctx.clearRect(0, 0, W, H);
+  t++;
+  stars.forEach(s => {
+    s.y -= s.speed;
+    if (s.y < -0.02) { s.y = 1.02; s.x = Math.random(); }
+    const tw = Math.sin(t * s.twinkle + s.offset) * 0.3 + 0.7;
+    ctx.beginPath();
+    ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${s.color},${s.a * tw})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+})();
+</script>
+
+</body>
+</html>

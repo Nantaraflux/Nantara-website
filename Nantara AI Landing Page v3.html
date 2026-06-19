@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" data-font="1">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nantara AI — Order Intelligence System for B2B Suppliers</title>
+  <meta name="description" content="Automate your entire B2B order pipeline. WhatsApp → AI → Airtable → CRM. Live in 48 hours. Zero manual entry. $299/month.">
+
+  <!-- Google Fonts — all 3 pairs -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles-v3.css">
+</head>
+<body>
+
+<!-- Aurora background orbs -->
+<div class="aurora" aria-hidden="true">
+  <div class="aurora-orb aurora-orb-1"></div>
+  <div class="aurora-orb aurora-orb-2"></div>
+  <div class="aurora-orb aurora-orb-3"></div>
+</div>
+
+<!-- ====== NAVIGATION ====== -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="logo.png" alt="Nantara AI">
+      <span>Nantara AI</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#problem">Problem</a>
+      <a href="#solution">Solution</a>
+      <a href="#how">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <div class="nav-cta">
+        <a href="https://calendly.com/nantara" class="btn btn-primary">Book Demo</a>
+      </div>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ====== HERO ====== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">Order Intelligence System</div>
+      <h1>Your B2B Order<br><span class="grad-text">Chaos Ends Here</span></h1>
+      <p class="hero-sub">Nantara automates your entire order pipeline — from WhatsApp capture to fulfillment tracking. Zero manual entry. Zero errors. 24/7.</p>
+      <p class="hero-body">Suppliers with $500K–$5M revenue waste 40+ hours/week on manual order processing. Buyers wait hours for response. Orders get lost. Revenue leaks.<br><br>Nantara fixes this. Every order is automatically captured from WhatsApp, enriched with buyer history, routed to your team, and tracked in real-time. No chatbot. No fragmented tools. One intelligent system.</p>
+      <div class="hero-ctas">
+        <a href="#how" class="btn btn-primary">See How It Works</a>
+        <a href="https://calendly.com/nantara" class="btn btn-outline">Schedule Demo</a>
+      </div>
+    </div>
+
+    <!-- Flow Diagram -->
+    <div class="hero-flow">
+      <p class="flow-label-top">Automated Order Pipeline</p>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-icon blue">
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+          </div>
+          <span class="flow-name">WhatsApp</span>
+          <span class="flow-sub">Buyer message</span>
+        </div>
+        <div class="flow-arrow">
+          <svg viewBox="0 0 32 32"><path d="M6 16h20M20 10l6 6-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon purple">
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+          </div>
+          <span class="flow-name">AI Engine</span>
+          <span class="flow-sub">LLM enrichment</span>
+        </div>
+        <div class="flow-arrow">
+          <svg viewBox="0 0 32 32"><path d="M6 16h20M20 10l6 6-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon blue">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
+          </div>
+          <span class="flow-name">Airtable</span>
+          <span class="flow-sub">Order database</span>
+        </div>
+        <div class="flow-arrow">
+          <svg viewBox="0 0 32 32"><path d="M6 16h20M20 10l6 6-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon purple">
+            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+          </div>
+          <span class="flow-name">CRM</span>
+          <span class="flow-sub">Fulfillment</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-value">70%+</div>
+        <div class="stat-label">Order resolution rate (Day 1)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">48 hours</div>
+        <div class="stat-label">From call to live</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">$0</div>
+        <div class="stat-label">Setup infrastructure cost for you</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PROBLEM ====== -->
+<section class="problem section-blue" id="problem">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">The Problem</div>
+      <h2>Why B2B Suppliers Are Drowning in Order Chaos</h2>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+        <h3>Orders scattered everywhere</h3>
+        <p>WhatsApp, email, Tokopedia, Shopee. No single source of truth. Orders get missed, duplicated, or delayed.</p>
+      </div>
+      <div class="problem-card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+        </div>
+        <h3>Manual data entry kills your team</h3>
+        <p>Buyer message WA → write to Excel → copy to Airtable → input to fulfillment → notify buyer. 4 systems, 40+ hours/week wasted.</p>
+      </div>
+      <div class="problem-card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        </div>
+        <h3>Repeat orders = missed upsell</h3>
+        <p>Buyer ordered before? No context. You re-quote at old price. Lose upsell. Buyer thinks you overcharge. They leave.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SOLUTION ====== -->
+<section class="solution" id="solution">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">The Solution</div>
+      <h2>Meet Nantara — Order Intelligence System</h2>
+    </div>
+    <p class="solution-intro">Not a chatbot. Not a database. Not a CRM replacement.<br>We connect all four — WhatsApp + AI brain + Airtable + your CRM — into one intelligent order system.</p>
+
+    <div class="solution-layers">
+      <div class="layer">
+        <div class="layer-num n1">01</div>
+        <div class="layer-content">
+          <h3>WhatsApp Intake</h3>
+          <p>Every buyer message is automatically captured with full context — who, what, quantity, deadline.</p>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-num n2">02</div>
+        <div class="layer-content">
+          <h3>AI Enrichment (Claude LLM)</h3>
+          <p>AI instantly checks buyer history, pricing tier, past orders, standard terms, volume discounts.</p>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-num n1">03</div>
+        <div class="layer-content">
+          <h3>Database (Airtable)</h3>
+          <p>Order is logged with all enriched data. Buyer history grows. System gets smarter every day.</p>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-num n2">04</div>
+        <div class="layer-content">
+          <h3>CRM Integration</h3>
+          <p>Auto-route to fulfillment team. Status updates buyer in real-time. Prediction for next order.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-value">48h</div>
+        <div class="diff-label">Go-live time</div>
+        <p>Most solutions take 2–3 weeks. Ours is live in 48 hours and already learning your catalog.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-value">100%</div>
+        <div class="diff-label">Your data</div>
+        <p>All order data lives in your Airtable account. We build the system. You own everything.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-value">70%+</div>
+        <div class="diff-label">Resolution rate</div>
+        <p>Generic chatbots resolve 30–40%. Our AI trains on your products, policies, pricing — we hit 70%+ without human handoff.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== HOW IT WORKS ====== -->
+<section class="how-it-works section-purple" id="how">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Process</div>
+      <h2>From Chaos to System in 3 Steps</h2>
+    </div>
+    <div class="timeline">
+      <div class="step">
+        <div class="step-badge">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </div>
+        <div class="step-tag">Day 1</div>
+        <h3>Setup</h3>
+        <p>You tell us your products, pricing, policies. We configure AI. We connect your WhatsApp, Airtable, CRM.</p>
+      </div>
+      <div class="step">
+        <div class="step-badge">
+          <svg viewBox="0 0 24 24"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+        </div>
+        <div class="step-tag">Day 2</div>
+        <h3>Go Live</h3>
+        <p>System is live. AI starts answering buyer questions. Orders auto-log to Airtable. Your team sees everything in one dashboard.</p>
+      </div>
+      <div class="step">
+        <div class="step-badge">
+          <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+        </div>
+        <div class="step-tag">Day 3+</div>
+        <h3>Optimize</h3>
+        <p>AI learns from every interaction. Resolution rate climbs daily. We monitor, optimize, report monthly. You focus on growth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== RESULTS ====== -->
+<section class="results" id="results">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Results</div>
+      <h2>Here's What Happens When Order Chaos Ends</h2>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric">
+        <div class="metric-value">70%</div>
+        <div class="metric-label">Orders handled automatically<br>(zero manual entry)</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">4h → 5min</div>
+        <div class="metric-label">Response time reduction</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">+18%</div>
+        <div class="metric-label">Repeat order rate<br>(from upsell automation)</div>
+      </div>
+    </div>
+    <div class="case-study">
+      <div>
+        <div class="case-meta">Case Study</div>
+        <h3>Fashion Wholesale Supplier, $1.2M/year revenue</h3>
+        <a href="#" class="btn btn-outline" style="margin-top: 20px;">Read Full Case Study</a>
+      </div>
+      <div class="case-col">
+        <div class="case-before">
+          <strong>Before:</strong> 50 WA messages/day, 8-hour response time, 1–2 orders lost daily
+        </div>
+        <div class="case-after">
+          <strong>After:</strong> Same 50 messages, answered in 5 min, zero orders lost, upsell +15%
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PRICING ====== -->
+<section class="pricing section-blue" id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Pricing</div>
+      <h2>Pricing That Fits Your Stage</h2>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-badge">For new suppliers</div>
+        <h3>Starter</h3>
+        <div class="price-amount">$299–399<span style="font-size:16px;color:var(--text-dim)">/mo</span></div>
+        <div class="price-local">Rp 3–4 juta/bulan</div>
+        <div class="price-setup">Setup: $399 one-time · Rp 4 juta</div>
+        <div class="price-features">
+          <div class="price-feature"><span class="check">✓</span> WhatsApp automation</div>
+          <div class="price-feature"><span class="check">✓</span> Airtable logging (basic)</div>
+          <div class="price-feature"><span class="check">✓</span> Manual CRM sync</div>
+          <div class="price-feature"><span class="cross">✗</span> Priority support</div>
+        </div>
+        <a href="https://calendly.com/nantara" class="btn btn-outline">Start Free Trial</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">Most Popular</div>
+        <h3>Medium</h3>
+        <div class="price-amount">$499–599<span style="font-size:16px;color:var(--text-dim)">/mo</span></div>
+        <div class="price-local">Rp 5–6 juta/bulan</div>
+        <div class="price-setup">Setup: $599 one-time · Rp 6 juta</div>
+        <div class="price-features">
+          <div class="price-feature"><span class="check">✓</span> Full stack: WA + AI + Airtable + CRM</div>
+          <div class="price-feature"><span class="check">✓</span> Auto CRM sync</div>
+          <div class="price-feature"><span class="check">✓</span> Monthly optimization</div>
+          <div class="price-feature"><span class="check">✓</span> Monthly performance report</div>
+          <div class="price-feature"><span class="check">✓</span> Email support</div>
+        </div>
+        <a href="https://calendly.com/nantara" class="btn btn-primary">Get Started Now</a>
+      </div>
+      <div class="price-card">
+        <div class="price-badge">For enterprises</div>
+        <h3>Large</h3>
+        <div class="price-amount">$799–999<span style="font-size:16px;color:var(--text-dim)">/mo</span></div>
+        <div class="price-local">Rp 8–10 juta/bulan</div>
+        <div class="price-setup">Setup: $899 one-time · Rp 8 juta</div>
+        <div class="price-features">
+          <div class="price-feature"><span class="check">✓</span> Everything in Medium</div>
+          <div class="price-feature"><span class="check">✓</span> Priority support (2-hour response)</div>
+          <div class="price-feature"><span class="check">✓</span> Weekly check-in calls</div>
+          <div class="price-feature"><span class="check">✓</span> Custom integrations</div>
+          <div class="price-feature"><span class="check">✓</span> Advanced analytics dashboard</div>
+        </div>
+        <a href="mailto:hello@nantara.io" class="btn btn-outline">Contact Sales</a>
+      </div>
+    </div>
+    <p class="pricing-note">All plans include: 48-hour deployment, client-hosted infrastructure, AI trained on your catalog, monthly monitoring. No long-term contract.</p>
+  </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">FAQ</div>
+      <h2>Common Questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How is this different from a chatbot?<svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 7.5L10 12.5L15 7.5"></path></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">Chatbots answer questions. Nantara automates your entire order pipeline — capture, enrich, route, track, and predict. We turn scattered WA messages into tracked, error-free orders.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do I need technical skills to set this up?<svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 7.5L10 12.5L15 7.5"></path></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">No. We handle setup in 48 hours. You just need to give us access to your WhatsApp, Airtable account, and CRM. We do the rest.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What if I'm not happy in the first 30 days?<svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 7.5L10 12.5L15 7.5"></path></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">We offer a 30-day results guarantee. If you don't see improvement, we'll refund your setup fee.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do you store my data?<svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 7.5L10 12.5L15 7.5"></path></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">No. Your data lives in your Airtable account. You own everything. We just build and maintain the workflow.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can I switch to a different tier later?<svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 7.5L10 12.5L15 7.5"></path></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. Upgrade or downgrade anytime. Changes take effect the next billing cycle.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What if I cancel?<svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 7.5L10 12.5L15 7.5"></path></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">You keep the workflow. We just stop maintaining and optimizing it. Your system continues to run.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== BOTTOM CTA ====== -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to End Order Chaos?</h2>
+    <p>Join B2B suppliers who've automated 70%+ of their orders.<br>48-hour setup. No long-term commitment.</p>
+    <div class="cta-buttons">
+      <a href="https://calendly.com/nantara" class="btn btn-primary btn-lg">Schedule 15-Min Demo</a>
+      <a href="#results" class="btn btn-outline">View Case Study</a>
+    </div>
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linejoin="round"></path></svg>
+        30-day money-back guarantee
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        48-hour live deployment
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        Zero data stored on our servers
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">
+          <img src="logo.png" alt="Nantara AI">
+          <span>Nantara AI</span>
+        </a>
+        <p>Order Intelligence for B2B Suppliers</p>
+        <p class="muted" style="margin-top:16px;color:var(--text-dim);font-size:13px">Get weekly insights for B2B suppliers</p>
+        <form class="footer-signup" onsubmit="event.preventDefault();this.querySelector('button').textContent='Subscribed!';this.querySelector('input').value='';">
+          <input type="email" placeholder="you@company.com" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#solution">Solution</a>
+        <a href="#how">How It Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Blog</a>
+        <a href="#">Case Studies</a>
+        <a href="#">Documentation</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Security</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Nantara AI. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="#" aria-label="X / Twitter"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.35 29 29 0 0 0-.46-5.33zM9.75 15.02V8.48l5.75 3.27-5.75 3.27z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ====== FONT SWITCHER PANEL ====== -->
+<div class="font-panel" id="fontPanel">
+  <div class="font-panel-header">
+    <span class="font-panel-label">Typography</span>
+    <button class="font-panel-toggle" id="fontPanelToggle" title="Collapse">−</button>
+  </div>
+  <div class="font-panel-body">
+    <button class="font-btn active" data-pair="1">
+      <span class="fp-name">Sora + Outfit</span>
+      <span class="fp-desc">AI-forward · Modern geometric</span>
+    </button>
+    <button class="font-btn" data-pair="2">
+      <span class="fp-name">Space Grotesk + Inter</span>
+      <span class="fp-desc">Brutalist tech · High contrast</span>
+    </button>
+    <button class="font-btn" data-pair="3">
+      <span class="fp-name">Poppins + Roboto Flex</span>
+      <span class="fp-desc">Friendly pro · Variable fonts</span>
+    </button>
+  </div>
+</div>
+
+<script>
+// FAQ Accordion
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+  });
+});
+
+// Mobile Nav
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => {
+  document.getElementById('navLinks').classList.remove('open');
+}));
+
+// Font switcher
+const stored = localStorage.getItem('nantara-font') || '1';
+setFont(stored);
+
+document.querySelectorAll('.font-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const pair = btn.dataset.pair;
+    setFont(pair);
+    localStorage.setItem('nantara-font', pair);
+  });
+});
+
+function setFont(pair) {
+  document.documentElement.setAttribute('data-font', pair);
+  document.querySelectorAll('.font-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.pair === pair);
+  });
+}
+
+// Font panel collapse
+document.getElementById('fontPanelToggle').addEventListener('click', () => {
+  const panel = document.getElementById('fontPanel');
+  const collapsed = panel.classList.toggle('collapsed');
+  document.getElementById('fontPanelToggle').textContent = collapsed ? '+' : '−';
+});
+</script>
+
+</body>
+</html>
