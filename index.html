@@ -37,19 +37,17 @@
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; background-color: #050816; }
-
-    html, body {
-      overflow-x: hidden;
-      max-width: 100%;
-    }
+    /* Safety net: nothing may exceed viewport width */
+    .section, .hero, .testimonials, .final-cta, .workflow-section, footer { overflow-x: clip; }
+    html { scroll-behavior: smooth; background-color: #050816; overflow-x: clip; max-width: 100%; }
 
     body {
       font-family: 'Montserrat', -apple-system, sans-serif;
       font-size: 17px; line-height: 1.65;
       color: var(--text); background: transparent;
+      overflow-x: clip;
+      max-width: 100%;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
       position: relative;
     }
     /* Subtle enterprise ambient — one refined gradient, no sparkle */
@@ -121,7 +119,7 @@
     /* ===== HERO (Editorial + Dashboard) ===== */
     .hero {
       min-height: auto; display: flex; flex-direction: column;
-      align-items: center; position: relative; overflow: visible;
+      align-items: center; position: relative; overflow: hidden;
       background: transparent;
       text-align: center; padding: 0 20px clamp(20px, 4vh, 60px);
     }
@@ -1368,6 +1366,7 @@
       .testi-track-wrap {
         mask-image: none;
         -webkit-mask-image: none;
+      }
     }
     .testi-track {
       display: flex; gap: 16px;
@@ -1522,6 +1521,8 @@
     .hub-node {
       position: absolute; z-index: 12;
       width: 54px; height: 54px; border-radius: 50%;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
       background: rgba(10,10,20,0.92);
       border: 1.5px solid rgba(255,255,255,0.1);
       display: flex; align-items: center; justify-content: center;
@@ -1533,7 +1534,7 @@
       box-shadow: 0 0 28px rgba(56,182,255,0.25);
       transform: translate(-50%, -50%) scale(1.12);
     }
-    .hub-node svg { width: 24px; height: 24px; }
+    .hub-node svg { width: 24px; height: 24px; flex-shrink: 0; display: block; max-width: 24px; max-height: 24px; pointer-events: none; }
     .hub-node-label {
       position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%);
       font-size: 10px; font-weight: 600; color: var(--text-dim);
