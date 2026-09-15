@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nantara — Field Guide to Agentic AI</title>
-<meta name="description" content="What makes an AI agentic? An interactive field guide to autonomous agents — the loop, the capabilities, and the levels of autonomy.">
+<title>Nantara, Field Guide to Agentic AI</title>
+<meta name="description" content="What makes an AI agentic? An interactive field guide to autonomous agents, the loop, the capabilities, and the levels of autonomy.">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -220,6 +220,11 @@
     .panel .hint .dot{animation:none;}
   }
 </style>
+<link rel="stylesheet" href="i18n.css">
+<script src="i18n-extra.js" defer></script>
+<script src="i18n-guide.js" defer></script>
+<script src="i18n-demo.js" defer></script>
+<script src="i18n.js" defer></script>
 </head>
 <body>
 
@@ -240,9 +245,9 @@
 
 <!-- HERO -->
 <header class="hero wrap">
-  <span class="eyebrow">Field Guide · 01 — Foundations</span>
+  <span class="eyebrow">Field Guide · 01, Foundations</span>
   <h1>What makes an AI&nbsp;<em>agentic?</em></h1>
-  <p class="sub">A chatbot answers. An <b style="color:var(--text);font-weight:600">agent</b> acts — it takes a goal, decides the steps, reaches for tools, and keeps going until the job is done. Drag the core. Tap a bubble. Learn how autonomy actually works.</p>
+  <p class="sub">A chatbot answers. An <b style="color:var(--text);font-weight:600">agent</b> acts, it takes a goal, decides the steps, reaches for tools, and keeps going until the job is done. Drag the core. Tap a bubble. Learn how autonomy actually works.</p>
   <div class="hero-meta">
     <span><b>6</b> capabilities</span>
     <span><b>1</b> loop</span>
@@ -267,9 +272,9 @@
     <div class="panel" id="panel">
       <div class="panel-step" id="panelStep">CAPABILITY · 6</div>
       <h3 id="panelTitle" class="serif">The anatomy of an agent</h3>
-      <p class="lead" id="panelLead">Six capabilities turn a language model into something that can be trusted with a goal. Tap any bubble orbiting the core to see what each one really means — and why a plain chatbot has none of them.</p>
-      <p class="detail" id="panelDetail">Together they form a single loop: perceive the situation, reason about it, plan a move, act through a tool, observe the result — then do it again until the goal is met.</p>
-      <div class="hint"><span class="dot"></span><span id="panelHint">Tip — drag the glowing core and watch the orbit follow</span></div>
+      <p class="lead" id="panelLead">Six capabilities turn a language model into something that can be trusted with a goal. Tap any bubble orbiting the core to see what each one really means, and why a plain chatbot has none of them.</p>
+      <p class="detail" id="panelDetail">Together they form a single loop: perceive the situation, reason about it, plan a move, act through a tool, observe the result, then do it again until the goal is met.</p>
+      <div class="hint"><span class="dot"></span><span id="panelHint">Tip, drag the glowing core and watch the orbit follow</span></div>
     </div>
   </div>
 </section>
@@ -277,9 +282,9 @@
 <!-- DEFINITION / VS -->
 <section class="block wrap" id="define">
   <div class="sec-head sr">
-    <span class="eyebrow">02 — The distinction</span>
+    <span class="eyebrow">02, The distinction</span>
     <h2>Generative gives you output.<br>Agentic gives you outcomes.</h2>
-    <p>Generative AI is a brilliant one-shot machine: you ask, it produces. Agentic AI wraps that same intelligence in a loop and points it at a goal — so instead of handing you a draft, it does the work, checks itself, and comes back when it's finished.</p>
+    <p>Generative AI is a brilliant one-shot machine: you ask, it produces. Agentic AI wraps that same intelligence in a loop and points it at a goal, so instead of handing you a draft, it does the work, checks itself, and comes back when it's finished.</p>
   </div>
   <div class="vs sr">
     <div class="vs-card">
@@ -287,7 +292,7 @@
       <h4 class="serif">The responder</h4>
       <div class="vs-row"><span class="ic">→</span> Reacts to a single prompt</div>
       <div class="vs-row"><span class="ic">→</span> One turn in, one output out</div>
-      <div class="vs-row"><span class="ic">→</span> Stateless — forgets after the answer</div>
+      <div class="vs-row"><span class="ic">→</span> Stateless, forgets after the answer</div>
       <div class="vs-row"><span class="ic">→</span> You drive every step</div>
       <div class="vs-row"><span class="ic">→</span> Produces content</div>
       <div class="vs-row" style="color:var(--dim)"><span class="ic">"</span> "Write me a restock email"</div>
@@ -308,24 +313,24 @@
 <!-- AGENT LOOP -->
 <section class="block wrap" id="loop">
   <div class="sec-head sr">
-    <span class="eyebrow">03 — The engine</span>
+    <span class="eyebrow">03, The engine</span>
     <h2>The agent loop</h2>
-    <p>Strip away the buzzwords and every agent runs the same five-beat cycle. It repeats this loop — sometimes hundreds of times — until the goal is reached. Hover a step to follow the cycle.</p>
+    <p>Strip away the buzzwords and every agent runs the same five-beat cycle. It repeats this loop, sometimes hundreds of times, until the goal is reached. Hover a step to follow the cycle.</p>
   </div>
   <div class="loop sr" id="loopGrid">
-    <div class="loop-step" data-i="0"><div class="loop-n">01</div><h5 class="serif">Perceive</h5><p>Take in the goal and the current state — messages, data, the last tool's result, the world as it is right now.</p><span class="loop-arrow">➜</span></div>
+    <div class="loop-step" data-i="0"><div class="loop-n">01</div><h5 class="serif">Perceive</h5><p>Take in the goal and the current state, messages, data, the last tool's result, the world as it is right now.</p><span class="loop-arrow">➜</span></div>
     <div class="loop-step" data-i="1"><div class="loop-n">02</div><h5 class="serif">Reason</h5><p>Work out what matters, what's missing, and what the single best next move would be.</p><span class="loop-arrow">➜</span></div>
-    <div class="loop-step" data-i="2"><div class="loop-n">03</div><h5 class="serif">Plan</h5><p>Choose a concrete action and the right tool to carry it out — the API, the query, the message.</p><span class="loop-arrow">➜</span></div>
+    <div class="loop-step" data-i="2"><div class="loop-n">03</div><h5 class="serif">Plan</h5><p>Choose a concrete action and the right tool to carry it out, the API, the query, the message.</p><span class="loop-arrow">➜</span></div>
     <div class="loop-step" data-i="3"><div class="loop-n">04</div><h5 class="serif">Act</h5><p>Execute. Call the function, run the code, send the reply, write the record. Reach into the world.</p><span class="loop-arrow">➜</span></div>
     <div class="loop-step" data-i="4"><div class="loop-n">05</div><h5 class="serif">Observe</h5><p>Read the outcome. Did it work? What changed, what's left? Then start the loop again.</p><span class="loop-arrow">➜</span></div>
   </div>
-  <div class="loop-foot sr"><span class="ar">↻</span> Loops back to <b style="color:var(--text);font-weight:500;margin-left:4px">Perceive</b>&nbsp;— autonomously, until the goal is met or it asks for help.</div>
+  <div class="loop-foot sr"><span class="ar">↻</span> Loops back to <b style="color:var(--text);font-weight:500;margin-left:4px">Perceive</b>&nbsp;, autonomously, until the goal is met or it asks for help.</div>
 </section>
 
 <!-- IMAGE SECTION -->
 <section class="block wrap">
   <div class="sec-head sr">
-    <span class="eyebrow">04 — Under the hood</span>
+    <span class="eyebrow">04, Under the hood</span>
     <h2>An agent is a model wearing a toolbelt</h2>
   </div>
   <div class="img-split sr">
@@ -334,10 +339,10 @@
       <div class="img-cap">// drop your own diagram, screenshot, or product render</div>
     </div>
     <div>
-      <p style="color:var(--muted);font-size:16px;line-height:1.75;">The language model is the brain — but a brain alone can only think out loud. What turns it into an agent is the scaffolding around it: the parts that let it remember, decide, and reach into real systems.</p>
+      <p style="color:var(--muted);font-size:16px;line-height:1.75;">The language model is the brain, but a brain alone can only think out loud. What turns it into an agent is the scaffolding around it: the parts that let it remember, decide, and reach into real systems.</p>
       <div class="img-list">
         <div class="img-li"><span class="num">1</span><div><b>Model</b><p>The reasoning core that interprets the goal and chooses each next move.</p></div></div>
-        <div class="img-li"><span class="num">2</span><div><b>Tools</b><p>APIs, databases, search, code execution — the agent's hands in the real world.</p></div></div>
+        <div class="img-li"><span class="num">2</span><div><b>Tools</b><p>APIs, databases, search, code execution, the agent's hands in the real world.</p></div></div>
         <div class="img-li"><span class="num">3</span><div><b>Memory</b><p>Short-term scratchpad plus long-term recall, so context survives across steps.</p></div></div>
         <div class="img-li"><span class="num">4</span><div><b>Orchestrator</b><p>The loop controller that decides when to keep going, retry, or hand back to a human.</p></div></div>
       </div>
@@ -348,9 +353,9 @@
 <!-- LEVELS -->
 <section class="block wrap" id="levels">
   <div class="sec-head sr">
-    <span class="eyebrow">05 — How far does it go</span>
+    <span class="eyebrow">05, How far does it go</span>
     <h2>Five levels of autonomy</h2>
-    <p>"Agentic" isn't a switch — it's a dial. Most products today live around Level 2; the frontier is pushing into Level 3 and beyond.</p>
+    <p>"Agentic" isn't a switch, it's a dial. Most products today live around Level 2; the frontier is pushing into Level 3 and beyond.</p>
   </div>
   <div class="levels sr">
     <div class="lvl">
@@ -365,7 +370,7 @@
     </div>
     <div class="lvl">
       <div class="lvl-tag"><span class="lvl-bar"><i style="width:58%"></i></span>L2</div>
-      <div class="lvl-name serif">Orchestrated<small>Chains tools to finish a defined workflow — you approve.</small></div>
+      <div class="lvl-name serif">Orchestrated<small>Chains tools to finish a defined workflow, you approve.</small></div>
       <div class="lvl-eg">e.g. a copilot</div>
     </div>
     <div class="lvl">
@@ -385,7 +390,7 @@
 <section class="block wrap">
   <div class="cta sr">
     <span class="eyebrow" style="justify-content:center;">Bring it to your business</span>
-    <h2 class="serif">Nantara is an agent —<br>not another chatbot.</h2>
+    <h2 class="serif">Nantara is an agent, <br>not another chatbot.</h2>
     <p>It perceives your orders, reasons about your buyers, and acts on WhatsApp before you've finished your coffee. Everything in this guide, running on your store.</p>
     <div class="cta-actions">
       <a href="Nantara AI Landing Page v5.html" class="btn btn-primary">See Nantara in action</a>
@@ -436,23 +441,23 @@
   /* ===== AGENT CORE / ORBIT ===== */
   const CAPS=[
     {g:'◉',t:'Autonomy',h:'#38B6FF',title:'Autonomy',
-      lead:'Acts toward a goal without being told each step. You set the outcome — the agent decides the moves.',
-      detail:'A generative model waits for the next prompt. An agent is handed an objective — "reconcile this week\u2019s orders" — and keeps working the loop on its own until it\u2019s finished or genuinely stuck.'},
+      lead:'Acts toward a goal without being told each step. You set the outcome, the agent decides the moves.',
+      detail:'A generative model waits for the next prompt. An agent is handed an objective, "reconcile this week\u2019s orders", and keeps working the loop on its own until it\u2019s finished or genuinely stuck.'},
     {g:'✸',t:'Reasoning',h:'#7C3AED',title:'Reasoning',
       lead:'Breaks a fuzzy goal into concrete sub-steps and weighs the trade-offs before committing to a move.',
       detail:'Instead of guessing in one shot, it thinks: what do I know, what\u2019s missing, what\u2019s the smartest next action? This is where "chain-of-thought" earns its keep.'},
     {g:'⊞',t:'Planning',h:'#22D3EE',title:'Planning',
-      lead:'Sequences multi-step actions in the right order — and rewrites the plan when reality changes.',
+      lead:'Sequences multi-step actions in the right order, and rewrites the plan when reality changes.',
       detail:'Booking, then confirming, then notifying. A plan is only useful if the agent can revise it mid-flight when step two returns something unexpected.'},
     {g:'⚙',t:'Tool Use',h:'#38B6FF',title:'Tool Use',
-      lead:'Reaches outside itself — calling APIs, running code, querying databases, searching the web — to actually get things done.',
+      lead:'Reaches outside itself, calling APIs, running code, querying databases, searching the web, to actually get things done.',
       detail:'Language alone changes nothing. Tools are the agent\u2019s hands: they let a thought become a sent message, a written record, a real transaction.'},
     {g:'◈',t:'Memory',h:'#A78BFA',title:'Memory',
       lead:'Carries context across steps and sessions, so the agent never restarts from zero.',
       detail:'A scratchpad holds the current task; long-term memory recalls who a buyer is and what they ordered last month. Without it, every turn is amnesia.'},
     {g:'⟲',t:'Adaptation',h:'#8B3DFF',title:'Adaptation',
       lead:'Watches the result of every action and corrects course when the outcome isn\u2019t what it expected.',
-      detail:'A tool errors, a buyer replies oddly, a number looks wrong — the agent notices, adjusts, and tries another path instead of charging ahead blindly.'},
+      detail:'A tool errors, a buyer replies oddly, a number looks wrong, the agent notices, adjusts, and tries another path instead of charging ahead blindly.'},
   ];
 
   const stage=document.getElementById('orbStage');

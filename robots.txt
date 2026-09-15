@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nantaraflux.github.io/Nantara-website/sitemap.xml
