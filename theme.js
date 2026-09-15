@@ -1,0 +1,8 @@
+(()=>{
+const root=document.documentElement;let theme='dark';try{theme=localStorage.getItem('nantara-theme')==='light'?'light':'dark'}catch{}root.dataset.theme=theme;
+document.addEventListener('DOMContentLoaded',()=>{const button=document.createElement('button');button.type='button';button.className='theme-toggle';button.innerHTML='<svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>';
+function label(){button.setAttribute('aria-label',theme==='dark'?'Warm white theme':'Dark theme');button.setAttribute('aria-pressed',String(theme==='light'));button.title=theme==='dark'?'Warm white / Putih hangat':'Dark / Gelap'}label();
+const nav=document.querySelector('.nav-inner');if(nav){const cta=nav.querySelector('.nav-cta');if(cta){const menu=nav.querySelector('.nav-toggle');if(menu)menu.before(button);else nav.append(button)}else{const back=nav.querySelector('.nav-back');if(back){const group=document.createElement('div');group.className='theme-nav-actions';back.before(group);group.append(button,back)}else nav.append(button)}}else{button.classList.add('theme-floating');document.body.append(button)}
+let timer;button.onclick=()=>{clearTimeout(timer);root.classList.add('theme-changing');theme=theme==='dark'?'light':'dark';root.dataset.theme=theme;label();try{localStorage.setItem('nantara-theme',theme)}catch{}timer=setTimeout(()=>root.classList.remove('theme-changing'),650)};
+});
+})();
