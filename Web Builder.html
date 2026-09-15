@@ -355,8 +355,9 @@
 <script src="i18n-guide.js" defer></script>
 <script src="i18n-demo.js" defer></script>
 <script src="i18n-web.js" defer></script>
-<script src="i18n-web.js" defer></script>
 <script src="i18n.js" defer></script>
+<link rel="stylesheet" href="web-showcase.css">
+<script src="web-showcase.js" defer></script>
 </head>
 <body>
 
@@ -397,6 +398,40 @@
         <p>Bring a reference, a rough sketch, or just an idea. We can help with the structure, content, design, and interactive features. Start with a consultation so we can agree on the right scope.</p>
       </div>
     </div>
+  </section>
+</div>
+
+<div class="container">
+  <section class="web-showcase" aria-labelledby="showcase-title">
+    <div class="values-header">
+      <span class="mission-tag">A Look at the Possibilities</span>
+      <h2 id="showcase-title">See what your website could become.</h2>
+      <p class="showcase-caption">Illustrative concepts. Each project is designed around your brand and requirements.</p>
+    </div>
+    <div class="showcase-tabs" role="tablist" aria-label="Website examples">
+      <button type="button" role="tab" id="tab-landing" aria-controls="mock-landing" aria-selected="true" tabindex="0">Landing Page</button>
+      <button type="button" role="tab" id="tab-interactive" aria-controls="mock-interactive" aria-selected="false" tabindex="-1">Interactive Experience</button>
+      <button type="button" role="tab" id="tab-dashboard" aria-controls="mock-dashboard" aria-selected="false" tabindex="-1">Business Dashboard</button>
+    </div>
+    <div class="mock-browser">
+      <div class="mock-toolbar"><span class="mock-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mock-url">Preview · Website concept</span><span class="mock-preview-label">DESIGN PREVIEW</span></div>
+      <div class="mock-landing mock-panel" role="tabpanel" id="mock-landing" aria-labelledby="tab-landing">
+        <div class="sample-nav"><b>FORMA<span>®</span></b><span>Objects &nbsp; Studio &nbsp; Journal</span><span class="sample-nav-end">Collection 2026 ↗</span></div>
+        <div class="sample-hero">
+          <div class="sample-copy"><span class="sample-eyebrow">CONSIDERED DESIGN. EVERYDAY LIVING.</span><h3>Less, but<br><em>better.</em></h3><p>Thoughtful objects for spaces that feel like you.</p><span class="sample-button">Explore the collection ↗</span><div class="sample-footnote"><span>01 / 03</span><span>Made to be kept.</span></div></div>
+          <div class="sample-art" role="img" aria-label="Sculptural blue chair in a sunlit architectural room"><div class="sample-window"></div><div class="sample-plinth"></div><div class="chair-back"></div><div class="chair-seat"></div><div class="chair-leg leg-one"></div><div class="chair-leg leg-two"></div><div class="sample-art-label">The Arc Chair<br><small>Form meets function.</small></div><div class="sample-art-index">F / 01</div></div>
+        </div>
+        <div class="sample-bottom"><span>Independent design studio</span><span>Built with intention</span><span>Objects that last</span></div>
+      </div>
+      <div class="mock-interactive mock-panel" role="tabpanel" id="mock-interactive" aria-labelledby="tab-interactive" hidden>
+        <div class="sample-nav"><b>ATELIER<span> / </span></b><span>Your workspace, reimagined.</span><span class="sample-nav-end">Design your space ↗</span></div>
+        <div class="config-layout"><div class="config-scene" role="img" aria-label="Workspace preview with a desk, screen and selectable ambient lighting"><span class="config-scene-label">YOUR SPACE / LIVE PREVIEW</span><div class="config-light"></div><div class="config-screen"><span>Make room<br>for good work.</span></div><div class="config-desk"></div><div class="config-desk-leg"></div><div class="config-plant"><i></i><i></i><i></i></div><span class="config-caption">A workspace that feels like yours.</span></div><div class="config-controls"><span class="sample-eyebrow">DESIGNED BY YOU</span><h3>Make it<br>your own.</h3><p>Try the controls. Watch your space change.</p><fieldset><legend>Choose your atmosphere</legend><div class="config-swatches"><button type="button" data-atmosphere="warm" aria-pressed="true"><i style="background:#deac80"></i>Warm</button><button type="button" data-atmosphere="cool" aria-pressed="false"><i style="background:#8daed1"></i>Cool</button><button type="button" data-atmosphere="sage" aria-pressed="false"><i style="background:#9cbaa3"></i>Sage</button></div></fieldset><label class="config-range-label" for="mock-brightness">Ambient light</label><input id="mock-brightness" type="range" min="20" max="100" value="70"><div class="config-summary"><span>One idea. Your configuration.</span><b>Built around you.</b></div></div></div>
+      </div>
+      <div class="mock-dashboard mock-panel" role="tabpanel" id="mock-dashboard" aria-labelledby="tab-dashboard" hidden>
+        <aside class="dash-sidebar"><b>PULSE<span> / </span></b><span class="dash-nav-active">Overview</span><span>Orders</span><span>Customers</span><span>Reports</span><div class="dash-sidebar-foot">Northline Studio<br><small>Workspace</small></div></aside><div class="dash-content"><div class="dash-heading"><div><span class="sample-eyebrow">WORKSPACE / OVERVIEW</span><h3>Your business, in focus.</h3></div><span class="dash-date">This month</span></div><div class="dash-kpis"><div><span>Revenue</span><b>Rp128.4M</b><small>+18.6% this month</small></div><div><span>Orders</span><b>842</b><small>+12.4% this month</small></div><div><span>Conversion</span><b>4.8%</b><small>+0.7 points</small></div></div><div class="dash-chart-card"><div><b>Revenue overview</b><span>Illustrative data</span></div><svg class="dash-chart" viewBox="0 0 640 150" role="img" aria-label="Illustrative revenue chart trending upward"><defs><linearGradient id="mock-chart-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#7965ef" stop-opacity=".35"/><stop offset="1" stop-color="#7965ef" stop-opacity="0"/></linearGradient></defs><path d="M0 35H640M0 75H640M0 115H640" stroke="#e8e9f0" fill="none"/><path d="M0 130C35 130 36 90 70 98S105 125 140 80S185 105 220 66S265 85 300 52S350 82 390 46S440 64 480 30S520 45 560 20S610 30 640 8V150H0Z" fill="url(#mock-chart-fill)"/><path d="M0 130C35 130 36 90 70 98S105 125 140 80S185 105 220 66S265 85 300 52S350 82 390 46S440 64 480 30S520 45 560 20S610 30 640 8" stroke="#7965ef" stroke-width="3" fill="none"/></svg><div class="dash-chart-labels"><span>Week 1</span><span>Week 2</span><span>Week 3</span><span>Week 4</span></div></div><div class="dash-orders"><b>Recent orders</b><div><span>#ORD-0842</span><span>Studio Arc</span><span class="order-paid">Paid</span><b>Rp2.4M</b></div><div><span>#ORD-0841</span><span>Field & Form</span><span class="order-pending">Pending</span><b>Rp1.8M</b></div></div></div>
+      </div>
+    </div>
+    <div class="showcase-bottom"><span>Different ideas. The same attention to detail.</span><a href="https://wa.me/message/7DRPFHKTWGPDE1">Let’s discuss your website ↗</a></div>
   </section>
 </div>
 

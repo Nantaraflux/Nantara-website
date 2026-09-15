@@ -47,3 +47,62 @@ Have a website|Punya ide website
 in mind?|yang ingin diwujudkan?
 Tell us about your business, share a reference, or describe the experience you want to create. Let’s discuss the possibilities first.|Ceritakan bisnis Anda, kirim referensi, atau jelaskan pengalaman yang ingin dibuat. Mari konsultasikan kemungkinannya terlebih dahulu.
 Discuss Your Website|Konsultasikan Website Anda`;
+window.NANTARA_EXTRA_TRANSLATIONS+='\n'+`A Look at the Possibilities|Gambaran Kemungkinannya
+See what your website could become.|Lihat seperti apa website Anda nantinya.
+Illustrative concepts. Each project is designed around your brand and requirements.|Contoh konsep. Setiap proyek dirancang sesuai merek dan kebutuhan Anda.
+Landing Page|Landing Page
+Interactive Experience|Pengalaman Interaktif
+Business Dashboard|Dasbor Bisnis
+Preview · Website concept|Pratinjau · Konsep website
+DESIGN PREVIEW|PRATINJAU DESAIN
+Objects   Studio   Journal|Produk   Studio   Jurnal
+Collection 2026 ↗|Koleksi 2026 ↗
+CONSIDERED DESIGN. EVERYDAY LIVING.|DESAIN PENUH MAKNA. UNTUK KESEHARIAN.
+Less, but|Sederhana, tetapi
+better.|lebih baik.
+Thoughtful objects for spaces that feel like you.|Produk yang dirancang untuk ruang yang mencerminkan diri Anda.
+Explore the collection ↗|Jelajahi koleksi ↗
+Made to be kept.|Dibuat untuk bertahan.
+The Arc Chair|Kursi Arc
+Form meets function.|Desain berpadu fungsi.
+Independent design studio|Studio desain independen
+Built with intention|Dibangun dengan tujuan
+Objects that last|Produk yang tahan lama
+Your workspace, reimagined.|Ruang kerja Anda, dirancang ulang.
+Design your space ↗|Rancang ruang Anda ↗
+YOUR SPACE / LIVE PREVIEW|RUANG ANDA / PRATINJAU LANGSUNG
+Make room|Siapkan ruang
+for good work.|untuk karya terbaik.
+A workspace that feels like yours.|Ruang kerja yang mencerminkan diri Anda.
+DESIGNED BY YOU|DIRANCANG OLEH ANDA
+Make it|Sesuaikan
+your own.|dengan gaya Anda.
+Try the controls. Watch your space change.|Coba pengaturannya dan lihat ruang Anda berubah.
+Choose your atmosphere|Pilih suasana Anda
+Warm|Hangat
+Cool|Sejuk
+Sage|Hijau Sage
+Ambient light|Pencahayaan ruangan
+One idea. Your configuration.|Satu ide, pengaturan Anda.
+Built around you.|Dibangun untuk Anda.
+Overview|Ringkasan
+Customers|Pelanggan
+Reports|Laporan
+Workspace|Ruang Kerja
+WORKSPACE / OVERVIEW|RUANG KERJA / RINGKASAN
+Your business, in focus.|Bisnis Anda, dalam satu tampilan.
+This month|Bulan ini
++18.6% this month|+18,6% bulan ini
++12.4% this month|+12,4% bulan ini
+Conversion|Konversi
++0.7 points|+0,7 poin
+Revenue overview|Ringkasan pendapatan
+Illustrative data|Data contoh
+Week 1|Minggu 1
+Week 2|Minggu 2
+Week 3|Minggu 3
+Week 4|Minggu 4
+Recent orders|Pesanan terbaru
+Paid|Lunas
+Different ideas. The same attention to detail.|Beragam ide, perhatian yang sama pada setiap detail.
+Let’s discuss your website ↗|Mari konsultasikan website Anda ↗`;
