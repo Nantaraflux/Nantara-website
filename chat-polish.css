@@ -1,4 +1,5 @@
 body,button,input,select,textarea{font-family:'Segoe UI',Arial,sans-serif}
+.hero-headline .accel{font-family:'Segoe UI',Arial,sans-serif;font-weight:600;font-style:normal;letter-spacing:-.035em}
 #waChat .wa-body{text-align:left;scroll-behavior:auto}#waChat .wa-msg{font-family:'Segoe UI',Arial,sans-serif;font-size:14px;line-height:1.6;text-align:left;letter-spacing:0;overflow-wrap:anywhere}#waChat .wa-time{display:block;text-align:right;font-size:11px}
 .chat-demo-bar{padding:12px 16px;background:#142127;color:#b5c1c5;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11px;line-height:1.5}.chat-demo-bar button{background:none;border:0;color:#74d9c2;cursor:pointer;font:600 12px 'Segoe UI',sans-serif;padding:5px}
 .chat-options{display:flex;flex-wrap:wrap;gap:8px;padding:12px 0;clear:both}.chat-options button{border:1px solid #345951;border-radius:20px;background:#142b29;color:#d7efe9;padding:10px 13px;cursor:pointer;font:500 13px/1.4 'Segoe UI',sans-serif;text-align:left}.chat-options button:hover{background:#204039}.chat-options button:focus-visible,.chat-demo-bar button:focus-visible{outline:2px solid #74d9c2;outline-offset:3px}
