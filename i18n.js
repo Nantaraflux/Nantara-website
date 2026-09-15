@@ -10,8 +10,8 @@ Book Demo|Jadwalkan Demo
 Book a Demo|Jadwalkan Demo
 See Nantara run your operations live|Lihat Nantara menjalankan operasional Anda
 Free 15-min demo · live in 5-7 days · no commitment|Demo gratis 15 menit · siap dalam 5–7 hari · tanpa komitmen
-Agentic.|Cerdas.
-Autonomous.|Mandiri.
+Agentic.|Agentic.
+Autonomous.|Autonomous.
 That|yang
 Acts,|Bertindak,
 Not|Lebih dari
