@@ -5,4 +5,5 @@ html[data-theme=light] .language-bar{border-color:#252b3620;background:#e9e3d866
 .nav{top:0!important}body{padding-top:0}html{scroll-padding-top:100px}.language-floating{position:fixed;right:70px;top:20px;z-index:15000}.theme-nav-actions{gap:4px}.nav-inner>.language-bar{margin-left:8px}
 .language-switching .hero-headline,.language-switching .hero-subline,.language-switching .about-hero h1,.language-switching .about-hero p{animation:languageReveal .32s cubic-bezier(.22,1,.36,1)}@keyframes languageReveal{0%{opacity:.35;transform:translateY(5px)}100%{opacity:1;transform:translateY(0)}}
 @media(max-width:560px){.language-bar{width:74px;height:32px}.language-bar:before{width:32px}.language-bar[data-active=id]:before{transform:translateX(34px)}.language-bar button{font-size:10px}.nav-inner>.language-bar{margin-left:0}.nav-inner{gap:5px}}
+@media (min-width:1041px){.nav .nav-inner>.language-bar{margin-left:0}}
 @media(prefers-reduced-motion:reduce){.language-bar:before,.language-bar button{transition:none}.language-switching *{animation:none!important}}

@@ -169,6 +169,16 @@
       width: 36px; height: 36px; align-items: center; justify-content: center;
     }
     .nav-toggle svg { width: 20px; height: 20px; stroke: var(--white); }
+    @media (min-width: 1041px) {
+      .nav-inner { gap: 8px; }
+      .nav-logo img { width: 50px; height: 50px; margin-right: -10px; }
+      .nav-logo span { font-size: 19px; }
+      .nav-links { gap: 10px; }
+      .nav-links a { font-size: 12px; }
+      a.nav-cta { font-size: 12px; padding: 9px 10px; }
+      .nav-inner > .language-bar { margin-left: 0; }
+      .nav-inner > .theme-toggle { margin: 0; }
+    }
 
     /* ===== HERO (Editorial + Dashboard) ===== */
     .hero {
@@ -1682,7 +1692,7 @@
     .sr-delay-5 { transition-delay: 0.40s; }
 
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 1320px) {
+    @media (max-width: 1040px) {
       .nav-links { display: none; }
       .nav-toggle { display: flex; }
       .nav-links.open {
@@ -1853,7 +1863,7 @@
       opacity: 0; transition: opacity 0.3s;
     }
     .nav-backdrop.show { display: block; opacity: 1; }
-    @media (max-width: 1320px) {
+    @media (max-width: 1040px) {
       .nav-links {
         transform: translateY(-6px); opacity: 0;
         transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.25s;
@@ -1900,7 +1910,7 @@
     .wa-send:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; pointer-events: none; }
 
     /* Mobile touch targets */
-    @media (max-width: 1320px) {
+    @media (max-width: 1040px) {
       .wa-send { min-width: 44px; min-height: 44px; }
       .wa-ask { min-height: 44px; padding: 10px 14px; }
       .faq-q { min-height: 56px; }
@@ -1913,7 +1923,7 @@
 <link rel="stylesheet" href="enhancements.css">
 <script src="site-config.js" defer></script>
 <script src="enhancements.js" defer></script>
-<link rel="stylesheet" href="language-toggle.css?v=20260915-9">
+<link rel="stylesheet" href="language-toggle.css?v=20260916-10">
 <script src="i18n-extra.js" defer></script>
 <script src="i18n-guide.js" defer></script>
 <script src="i18n-demo.js" defer></script>
