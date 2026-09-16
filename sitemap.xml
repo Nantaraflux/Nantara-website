@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://nantaraflux.github.io/Nantara-website/</loc></url>
-<url><loc>https://nantaraflux.github.io/Nantara-website/About.html</loc></url>
-<url><loc>https://nantaraflux.github.io/Nantara-website/Privacy%20Policy.html</loc></url>
-<url><loc>https://nantaraflux.github.io/Nantara-website/Terms%20of%20Service.html</loc></url>
-<url><loc>https://nantaraflux.github.io/Nantara-website/Web%20Builder.html</loc></url>
+<url><loc>https://nantaraflux.github.io/Nantara-website/</loc><lastmod>2026-09-16</lastmod><priority>1.0</priority></url>
+<url><loc>https://nantaraflux.github.io/Nantara-website/About.html</loc><lastmod>2026-09-16</lastmod><priority>0.7</priority></url>
+<url><loc>https://nantaraflux.github.io/Nantara-website/Agentic%20AI%20-%20Field%20Guide.html</loc><lastmod>2026-09-16</lastmod><priority>0.6</priority></url>
+<url><loc>https://nantaraflux.github.io/Nantara-website/Privacy%20Policy.html</loc><lastmod>2026-09-16</lastmod><priority>0.3</priority></url>
+<url><loc>https://nantaraflux.github.io/Nantara-website/Terms%20of%20Service.html</loc><lastmod>2026-09-16</lastmod><priority>0.3</priority></url>
+<url><loc>https://nantaraflux.github.io/Nantara-website/Web%20Builder.html</loc><lastmod>2026-09-16</lastmod><priority>0.7</priority></url>
 </urlset>

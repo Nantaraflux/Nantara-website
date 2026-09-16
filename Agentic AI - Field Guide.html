@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Gentium+Plus:wght@400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="image-slot.js"></script>
 <style>
   :root{
     --bg:#030305; --bg-2:#06060c; --bg-card:#0a0a12; --bg-card-2:#0d0d18;
@@ -170,7 +169,14 @@
 
   /* ===== IMAGE SECTION ===== */
   .img-split{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(28px,4vw,64px);align-items:center;margin-top:24px;}
-  .img-split image-slot{width:100%;height:clamp(320px,42vw,460px);border:1px solid var(--border-2);box-shadow:0 40px 110px -40px rgba(0,0,0,.85);}
+  .agent-diagram{width:100%;min-height:clamp(320px,42vw,460px);border:1px solid var(--border-2);border-radius:20px;box-shadow:0 40px 110px -40px rgba(0,0,0,.85);background:radial-gradient(circle at 50% 48%,rgba(56,200,255,.14),transparent 34%),rgba(9,13,30,.8);display:grid;grid-template-columns:1fr 1.1fr 1fr;grid-template-rows:1fr 1fr;gap:16px;padding:28px;align-items:center;position:relative;overflow:hidden;}
+  .agent-diagram::before,.agent-diagram::after{content:"";position:absolute;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,rgba(56,200,255,.6),transparent);top:50%;}
+  .agent-diagram::after{left:50%;right:auto;top:18%;bottom:18%;width:1px;height:auto;background:linear-gradient(180deg,transparent,rgba(139,92,246,.65),transparent);}
+  .diagram-node{position:relative;z-index:1;padding:18px 14px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:rgba(12,17,35,.9);text-align:center;backdrop-filter:blur(12px);}
+  .diagram-node strong{display:block;color:var(--text);font-size:15px;margin-bottom:4px}.diagram-node span{display:block;color:var(--muted);font-size:12px;line-height:1.45}
+  .diagram-core{grid-column:2;grid-row:1 / span 2;padding:28px 16px;border-color:rgba(56,200,255,.4);box-shadow:0 0 36px rgba(56,200,255,.12)}
+  .diagram-core strong{font-family:var(--serif);font-size:27px;color:var(--cyan)}
+  @media(max-width:640px){.agent-diagram{grid-template-columns:1fr 1fr;grid-template-rows:auto;padding:18px}.diagram-core{grid-column:1 / -1;grid-row:auto}.agent-diagram::before,.agent-diagram::after{display:none}}
   .img-cap{font-family:'DM Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.06em;margin-top:14px;}
   .img-list{margin-top:30px;display:flex;flex-direction:column;gap:18px;}
   .img-li{display:flex;gap:16px;align-items:flex-start;}
@@ -224,7 +230,7 @@
 <script src="i18n-extra.js" defer></script>
 <script src="i18n-guide.js" defer></script>
 <script src="i18n-demo.js" defer></script>
-<script src="i18n.js?v=20260915-9" defer></script>
+<script src="i18n.js?v=20260916-10" defer></script>
 <link rel="stylesheet" href="theme.css?v=20260915-8">
 <script src="theme.js?v=20260915-8"></script>
 </head>
@@ -337,8 +343,14 @@
   </div>
   <div class="img-split sr">
     <div>
-      <image-slot id="agentDiagram" shape="rounded" radius="20" placeholder="Drop an architecture diagram or hero render"></image-slot>
-      <div class="img-cap">// drop your own diagram, screenshot, or product render</div>
+      <div class="agent-diagram" role="img" aria-label="Agent architecture showing a model connected to tools, memory, goals, and review rules">
+        <div class="diagram-node"><strong>Goals</strong><span>What success looks like</span></div>
+        <div class="diagram-node diagram-core"><strong>Model</strong><span>Reasons, chooses, and adapts</span></div>
+        <div class="diagram-node"><strong>Tools</strong><span>APIs and business systems</span></div>
+        <div class="diagram-node"><strong>Memory</strong><span>Context across every step</span></div>
+        <div class="diagram-node"><strong>Review rules</strong><span>Limits and human approval</span></div>
+      </div>
+      <div class="img-cap">// the model coordinates context, tools, and review rules</div>
     </div>
     <div>
       <p style="color:var(--muted);font-size:16px;line-height:1.75;">The language model is the brain, but a brain alone can only think out loud. What turns it into an agent is the scaffolding around it: the parts that let it remember, decide, and reach into real systems.</p>

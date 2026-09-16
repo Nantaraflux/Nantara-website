@@ -1,5 +1,7 @@
 (()=>{
-const entries=`How it works|Cara kerja
+const entries=`Business Automation for WhatsApp Orders – Nantara AI|Otomasi Bisnis untuk Pesanan WhatsApp – Nantara AI
+Nantara provides business automation for B2B suppliers, connecting WhatsApp orders, customer records, invoicing, fulfillment, and reporting in one managed workflow.|Nantara menyediakan otomasi bisnis untuk pemasok B2B dengan menghubungkan pesanan WhatsApp, data pelanggan, faktur, pengiriman, dan laporan dalam satu alur kerja.
+How it works|Cara kerja
 How It Works|Cara Kerja
 Services|Layanan
 Operations|Operasional
@@ -126,10 +128,10 @@ Faster order fulfillment|Pemrosesan pesanan lebih cepat
 Hours to live deployment|Waktu hingga sistem aktif
 Average order response time|Rata-rata waktu respons pesanan
 Order accuracy rate|Tingkat akurasi pesanan
-Agentic Capabilities|Kemampuan Agen
-One Agentic System.|Satu Sistem Cerdas.
-Every Order, Handled.|Setiap Pesanan Tertangani.
-Nantara's agentic AI connects customer communication, operations, finance, and fulfillment, deciding, executing, and following up without you lifting a finger.|AI Nantara menghubungkan komunikasi pelanggan, operasional, keuangan, dan pengiriman, lalu mengambil keputusan, menjalankan tugas, dan menindaklanjuti secara otomatis.
+Business Automation|Otomasi Bisnis
+WhatsApp order automation|Otomasi pesanan WhatsApp
+built around your operation.|yang mengikuti operasional Anda.
+Nantara connects customer messages, order records, finance, and fulfillment in one managed workflow. Your team keeps the tools it already uses while repetitive work runs automatically.|Nantara menghubungkan pesan pelanggan, catatan pesanan, keuangan, dan pengiriman dalam satu alur kerja yang terkelola. Tim Anda tetap menggunakan alat yang sudah ada sementara pekerjaan berulang berjalan otomatis.
 Order Intelligence|Pengelolaan Pesanan Cerdas
 Capture customer orders from WhatsApp and convert them into structured records, automatically, with full context.|Ubah pesanan pelanggan dari WhatsApp menjadi catatan terstruktur secara otomatis, lengkap dengan konteksnya.
 Every message becomes a tracked, verified order record. No manual entry. No data lost between channels.|Setiap pesan menjadi catatan pesanan yang terlacak dan terverifikasi. Tanpa input manual atau data yang hilang antar kanal.
@@ -286,9 +288,9 @@ If you booked a demo, check your booking confirmation for the meeting details. T
 const dictionary=new Map((entries+'\n'+(window.NANTARA_EXTRA_TRANSLATIONS||'')).split('\n').map(l=>{const i=l.indexOf('|');return [l.slice(0,i),l.slice(i+1)]}));
 window.NANTARA_TRANSLATIONS=dictionary;
 let lang;try{lang=localStorage.getItem('nantara-language')}catch{}lang=lang==='id'?'id':'en';
-const originals=new WeakMap(),attrs=new WeakMap();let busy=false;
+const originals=new WeakMap(),attrs=new WeakMap();const originalTitle=document.title;const descriptionMeta=document.querySelector('meta[name="description"]');const originalDescription=descriptionMeta?.content||'';let busy=false;
 function translateText(text){const key=text.trim().replace(/\s+/g,' ');let value=dictionary.get(key);if(!value&&/^Section \d+$/.test(key))value=key.replace('Section','Bagian');return value?text.replace(text.trim(),value):text}
-function apply(){if(busy)return;busy=true;observer?.disconnect();document.documentElement.lang=lang;bar.dataset.active=lang;const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);while(walker.nextNode()){const node=walker.currentNode;if(node.parentElement.closest('script,style,svg,.language-bar'))continue;if(!originals.has(node))originals.set(node,node.textContent);const original=originals.get(node);node.textContent=lang==='id'?translateText(original):original;}for(const el of document.querySelectorAll('[placeholder],[aria-label],[title]')){if(el.closest('.language-bar,.theme-toggle'))continue;let values=attrs.get(el);if(!values){values={};for(const a of ['placeholder','aria-label','title'])if(el.hasAttribute(a))values[a]=el.getAttribute(a);attrs.set(el,values)}for(const [a,v]of Object.entries(values))el.setAttribute(a,lang==='id'?translateText(v):v)}document.querySelectorAll('.language-bar button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.language===lang)));observer?.observe(document.body,{subtree:true,childList:true,characterData:true});busy=false;}
+function apply(){if(busy)return;busy=true;observer?.disconnect();document.documentElement.lang=lang;document.title=lang==='id'?translateText(originalTitle):originalTitle;if(descriptionMeta)descriptionMeta.content=lang==='id'?translateText(originalDescription):originalDescription;bar.dataset.active=lang;const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);while(walker.nextNode()){const node=walker.currentNode;if(node.parentElement.closest('script,style,svg,.language-bar'))continue;if(!originals.has(node))originals.set(node,node.textContent);const original=originals.get(node);node.textContent=lang==='id'?translateText(original):original;}for(const el of document.querySelectorAll('[placeholder],[aria-label],[title]')){if(el.closest('.language-bar,.theme-toggle'))continue;let values=attrs.get(el);if(!values){values={};for(const a of ['placeholder','aria-label','title'])if(el.hasAttribute(a))values[a]=el.getAttribute(a);attrs.set(el,values)}for(const [a,v]of Object.entries(values))el.setAttribute(a,lang==='id'?translateText(v):v)}document.querySelectorAll('.language-bar button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.language===lang)));observer?.observe(document.body,{subtree:true,childList:true,characterData:true});busy=false;}
 const bar=document.createElement('div');bar.className='language-bar';bar.setAttribute('aria-label','Website language');bar.dataset.active=lang;let animationTimer;for(const [code,label]of [['en','EN'],['id','ID']]){const button=document.createElement('button');button.type='button';button.dataset.language=code;button.textContent=label;button.setAttribute('aria-label',code==='en'?'English':'Indonesia');button.onclick=()=>{if(lang===code)return;lang=code;try{localStorage.setItem('nantara-language',lang)}catch{}document.documentElement.classList.remove('language-switching');void document.documentElement.offsetWidth;document.documentElement.classList.add('language-switching');clearTimeout(animationTimer);apply();animationTimer=setTimeout(()=>document.documentElement.classList.remove('language-switching'),350)};bar.append(button)}const languageNav=document.querySelector('.nav-inner');if(languageNav){const menu=languageNav.querySelector('.nav-toggle');const theme=languageNav.querySelector('.theme-toggle');if(theme)theme.before(bar);else if(menu)menu.before(bar);else{const back=languageNav.querySelector('.nav-back');if(back)back.before(bar);else languageNav.append(bar)}}else{bar.classList.add('language-floating');document.body.prepend(bar)}
 let queued=false;const observer=new MutationObserver(records=>{for(const record of records)if(record.type==='characterData')originals.delete(record.target);if(!queued){queued=true;requestAnimationFrame(()=>{queued=false;apply()})}});window.nantaraTranslate=apply;apply();
 })();
