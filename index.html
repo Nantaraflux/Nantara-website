@@ -124,21 +124,27 @@
       padding: 12px 0;
     }
     .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
     }
     .nav-logo {
       font-family: 'Gentium Plus', Georgia, serif; font-weight: 700; letter-spacing: -.02em; font-weight: 700; font-size: 20px;
       color: var(--white); display: flex; align-items: center; gap: 0;
       letter-spacing: 0.01em;
+      flex: 0 0 auto;
+      min-width: 0;
     }
     .nav-logo img { height: 70px; width: 70px; object-fit: contain; margin-right: -16px; }
     .nav-logo span { font-size: 22px; letter-spacing: -0.012em; }
     .nav-links {
-      display: flex; align-items: center; gap: 32px;
+      display: flex; align-items: center; justify-content: flex-end; gap: clamp(16px, 2.1vw, 32px);
+      margin-left: auto;
+      min-width: 0;
+      flex: 1 1 auto;
     }
     .nav-links a {
       font-size: 13px; font-weight: 500; color: var(--text-muted);
       transition: color 0.2s; letter-spacing: 0.01em;
+      white-space: nowrap;
     }
     .nav-links a:hover { color: var(--white); }
     a.nav-cta {
@@ -1656,12 +1662,13 @@
     .sr-delay-5 { transition-delay: 0.40s; }
 
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 900px) {
+    @media (max-width: 1180px) {
       .nav-links { display: none; }
       .nav-toggle { display: flex; }
       .nav-links.open {
         display: flex; flex-direction: column;
         position: absolute; top: 64px; left: 0; right: 0;
+        align-items: flex-end; text-align: right;
         background: rgba(1,2,8,0.97); backdrop-filter: blur(24px);
         border-bottom: 1px solid var(--border);
         padding: 20px var(--px) 24px; gap: 16px;
@@ -1826,7 +1833,7 @@
       opacity: 0; transition: opacity 0.3s;
     }
     .nav-backdrop.show { display: block; opacity: 1; }
-    @media (max-width: 900px) {
+    @media (max-width: 1180px) {
       .nav-links {
         transform: translateY(-6px); opacity: 0;
         transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.25s;
@@ -1873,7 +1880,7 @@
     .wa-send:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; pointer-events: none; }
 
     /* Mobile touch targets */
-    @media (max-width: 900px) {
+    @media (max-width: 1180px) {
       .wa-send { min-width: 44px; min-height: 44px; }
       .wa-ask { min-height: 44px; padding: 10px 14px; }
       .faq-q { min-height: 56px; }
