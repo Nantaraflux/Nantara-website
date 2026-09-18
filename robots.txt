@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://nantaraflux.github.io/Nantara-website/sitemap.xml
+Sitemap: https://nantaraai.com/sitemap.xml
