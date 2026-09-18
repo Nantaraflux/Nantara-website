@@ -1005,7 +1005,7 @@
       border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
     }
     .metrics-row {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
       position: relative;
     }
     .metric-item {
@@ -1705,7 +1705,7 @@
       }
       .bento-grid { grid-template-columns: 1fr; }
       .bento-card.span-2 { grid-column: span 1; }
-      .metrics-row { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .metrics-row { gap: 16px; }
       .metric-item:not(:last-child)::after { display: none; }
       .wf-pipeline { flex-direction: column; }
       .wf-connector { width: auto; height: 24px; }
@@ -2196,9 +2196,8 @@
   <div class="container">
     <div class="metrics-row">
       <div class="metric-item sr"><div class="metric-value" data-count="70" data-suffix="%+">0%+</div><div class="metric-label">Faster order fulfillment</div></div>
-      <div class="metric-item sr sr-delay-1"><div class="metric-value" data-count="72" data-suffix="h">0h</div><div class="metric-label">Hours to live deployment</div></div>
-      <div class="metric-item sr sr-delay-2"><div class="metric-value" data-count="5" data-suffix="min">0min</div><div class="metric-label">Average order response time</div></div>
-      <div class="metric-item sr sr-delay-3"><div class="metric-value" data-count="100" data-suffix="%">0%</div><div class="metric-label">Order accuracy rate</div></div>
+      <div class="metric-item sr sr-delay-1"><div class="metric-value" data-count="5" data-suffix="min">0min</div><div class="metric-label">Average order response time</div></div>
+      <div class="metric-item sr sr-delay-2"><div class="metric-value" data-count="100" data-suffix="%">0%</div><div class="metric-label">Order accuracy rate</div></div>
     </div>
   </div>
 </div>
