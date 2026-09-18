@@ -21,7 +21,7 @@ Just|Sekadar
 Answers.|Jawaban.
 Nantara handles your daily operations, from capturing orders and managing customers to invoicing, fulfilment, and reporting.|Nantara menangani operasional harian Anda, mulai dari pencatatan pesanan dan pengelolaan pelanggan hingga faktur, pengiriman, dan laporan.
 See Nantara in Action|Lihat Nantara Bekerja
-5–7 day|5–7 hari
+5–7 days|5–7 hari
 setup|persiapan
 No rip-and-replace|Tanpa mengganti sistem Anda
 on your channels|di kanal bisnis Anda
