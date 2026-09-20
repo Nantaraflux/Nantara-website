@@ -1,582 +1,269 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Builder | Nantara</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <meta property="og:title" content="Web Builder | Nantara">
-  <meta property="og:description" content="Landing pages and interactive websites built around your business. Start with a consultation.">
-  <meta property="og:image" content="https://nantaraflux.github.io/Nantara-website/social-card.png">
-  <meta property="og:type" content="website">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Gentium+Plus:wght@400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --blue: #38B6FF;
-      --blue-dark: #1A6BFF;
-      --purple: #8B3DFF;
-      --purple-mid: #7C3AED;
-      --violet: #A78BFA;
-      --bg: #060609;
-      --bg-card: #0C0B18;
-      --bg-card2: #100F20;
-      --white: #FFFFFF;
-      --text: rgba(255,255,255,0.88);
-      --text-muted: rgba(255,255,255,0.65);
-      --text-dim: rgba(255,255,255,0.4);
-      --border: rgba(255,255,255,0.07);
-      --border-bright: rgba(255,255,255,0.14);
-      --border-blue: rgba(56,182,255,0.28);
-    }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 16px; line-height: 1.75;
-      color: var(--text); background: var(--bg);
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-    a { color: var(--blue); text-decoration: none; transition: color 0.15s; }
-    a:hover { color: var(--violet); }
-
-    /* NAV */
-    .nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(6,6,9,0.88);
-      backdrop-filter: blur(20px) saturate(1.4);
-      border-bottom: 1px dashed var(--border);
-    }
-    .nav-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 90px; padding: 0 clamp(20px, 5vw, 48px);
-    }
-    .nav-logo {
-      font-family: 'Gentium Plus', serif; font-weight: 700; font-size: 22px;
-      color: var(--white); display: flex; align-items: center; gap: 2px;
-      text-decoration: none;
-    }
-    .nav-logo img { height: 80px; width: 80px; object-fit: contain; margin-right: -18px; }
-    .nav-back {
-      font-size: 14px; font-weight: 500; color: var(--text-muted);
-      display: flex; align-items: center; gap: 6px; transition: color 0.15s;
-    }
-    .nav-back:hover { color: var(--white); }
-    .nav-back svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
-
-    /* HERO */
-    .about-hero {
-      padding: clamp(60px, 8vw, 100px) clamp(20px, 5vw, 48px) clamp(40px, 5vw, 64px);
-      position: relative; overflow: hidden; text-align: center;
-    }
-    .about-hero-glow {
-      position: absolute; z-index: 0;
-      width: 800px; height: 600px;
-      top: -250px; left: 50%; transform: translateX(-50%);
-      background: radial-gradient(ellipse at center,
-        rgba(30, 80, 255, 0.35) 0%,
-        rgba(100, 40, 230, 0.18) 40%,
-        transparent 70%
-      );
-      filter: blur(40px); pointer-events: none;
-    }
-    .about-hero h1 {
-      font-size: clamp(40px, 6vw, 64px);
-      font-weight: 800; color: var(--white);
-      line-height: 1.06; letter-spacing: -0.04em;
-      position: relative; margin-bottom: 20px;
-    }
-    .about-hero p {
-      font-size: clamp(16px, 1.6vw, 19px); color: var(--text-muted);
-      position: relative; max-width: 560px; margin: 0 auto; line-height: 1.7;
-    }
-
-    /* CONTAINER */
-    .container {
-      max-width: 1200px; margin: 0 auto;
-      padding: 0 clamp(20px, 5vw, 48px);
-    }
-
-    /* MISSION */
-    .mission {
-      padding: clamp(60px, 7vw, 100px) 0;
-      border-top: 1px solid var(--border);
-    }
-    .mission-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(32px, 5vw, 64px); align-items: start;
-    }
-    .mission-tag {
-      font-family: 'DM Mono', monospace; font-size: 12px;
-      color: var(--blue); letter-spacing: 0.1em;
-      text-transform: uppercase; margin-bottom: 16px; display: block;
-    }
-    .mission-left h2 {
-      font-size: clamp(28px, 3.5vw, 42px);
-      font-weight: 800; color: var(--white);
-      line-height: 1.1; letter-spacing: -0.03em;
-      margin-bottom: 20px;
-    }
-    .mission-right p {
-      font-size: 16px; color: var(--text-muted); line-height: 1.8;
-      margin-bottom: 16px;
-    }
-
-    /* VALUES */
-    .values {
-      padding: clamp(60px, 7vw, 100px) 0;
-    }
-    .values-header {
-      margin-bottom: 48px;
-    }
-    .values-header h2 {
-      font-size: clamp(28px, 3.5vw, 42px);
-      font-weight: 800; color: var(--white);
-      line-height: 1.1; letter-spacing: -0.03em;
-    }
-    .values-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-    .value-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 10px; padding: 32px 28px;
-      transition: border-color 0.2s;
-    }
-    .value-card:hover { border-color: var(--border-blue); }
-    .value-num {
-      font-family: 'DM Mono', monospace; font-size: 11px;
-      color: var(--blue); letter-spacing: 0.1em;
-      text-transform: uppercase; margin-bottom: 16px;
-    }
-    .value-card h3 {
-      font-size: 20px; font-weight: 700; color: var(--white);
-      margin-bottom: 10px; letter-spacing: -0.02em;
-    }
-    .value-card p {
-      font-size: 14px; color: var(--text-muted); line-height: 1.7;
-    }
-
-    /* STORY */
-    .story {
-      padding: clamp(60px, 7vw, 100px) 0;
-      border-top: 1px solid var(--border);
-    }
-    .story-layout {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(32px, 5vw, 64px); align-items: start;
-    }
-    .story-left h2 {
-      font-size: clamp(28px, 3.5vw, 42px);
-      font-weight: 800; color: var(--white);
-      line-height: 1.1; letter-spacing: -0.03em;
-      margin-bottom: 20px;
-    }
-    .story-right p {
-      font-size: 16px; color: var(--text-muted); line-height: 1.8;
-      margin-bottom: 16px;
-    }
-    .story-right .quote {
-      border-left: 3px solid var(--purple-mid);
-      padding: 16px 20px; margin: 24px 0;
-      background: rgba(139,61,255,0.06); border-radius: 0 8px 8px 0;
-      font-size: 17px; color: var(--white); font-weight: 500;
-      line-height: 1.6; font-style: italic;
-    }
-
-    /* NUMBERS */
-    .numbers {
-      padding: clamp(60px, 7vw, 100px) 0;
-    }
-    .numbers-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 1px; background: var(--border); border-radius: 10px;
-      overflow: hidden;
-    }
-    .number-block {
-      background: var(--bg-card); padding: 40px 24px; text-align: center;
-    }
-    .number-val {
-      font-size: clamp(36px, 5vw, 56px); font-weight: 800;
-      line-height: 1; letter-spacing: -0.03em; margin-bottom: 8px;
-      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .number-lbl {
-      font-size: 14px; color: var(--text-muted); line-height: 1.4;
-    }
-
-    /* APPROACH */
-    .approach {
-      padding: clamp(60px, 7vw, 100px) 0;
-      border-top: 1px solid var(--border);
-    }
-    .approach-header { margin-bottom: 48px; }
-    .approach-header h2 {
-      font-size: clamp(28px, 3.5vw, 42px);
-      font-weight: 800; color: var(--white);
-      line-height: 1.1; letter-spacing: -0.03em;
-    }
-    .approach-steps {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-    .approach-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 10px; padding: 32px 28px;
-      transition: border-color 0.2s;
-    }
-    .approach-card:hover { border-color: var(--border-blue); }
-    .approach-card .step-tag {
-      font-family: 'DM Mono', monospace; font-size: 11px;
-      color: var(--blue); letter-spacing: 0.1em;
-      text-transform: uppercase; margin-bottom: 14px;
-    }
-    .approach-card h3 {
-      font-size: 20px; font-weight: 700; color: var(--white);
-      margin-bottom: 8px; letter-spacing: -0.02em;
-    }
-    .approach-card p {
-      font-size: 14px; color: var(--text-muted); line-height: 1.7;
-    }
-
-    /* CTA */
-    .about-cta {
-      padding: clamp(60px, 7vw, 100px) 0;
-      text-align: center; position: relative; overflow: hidden;
-    }
-    .about-cta-glow {
-      position: absolute; top: -50%; left: 50%; transform: translateX(-50%);
-      width: 800px; height: 600px; border-radius: 50%; pointer-events: none;
-      background: radial-gradient(ellipse,
-        rgba(30,60,255,0.2) 0%,
-        rgba(139,61,255,0.1) 40%,
-        transparent 70%
-      );
-      filter: blur(50px);
-    }
-    .about-cta h2 {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 800; color: var(--white);
-      line-height: 1.1; letter-spacing: -0.03em;
-      margin-bottom: 16px; position: relative;
-    }
-    .about-cta p {
-      font-size: 17px; color: var(--text-muted); max-width: 460px;
-      margin: 0 auto 32px; line-height: 1.6; position: relative;
-    }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 16px;
-      padding: 14px 32px; border-radius: 8px; border: 1.5px solid transparent;
-      cursor: pointer; transition: all 0.22s ease; min-height: 48px;
-      text-decoration: none; position: relative;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--purple) 100%);
-      color: var(--white);
-    }
-    .btn-primary:hover {
-      filter: brightness(1.15);
-      box-shadow: 0 0 28px rgba(120,60,255,0.4); transform: translateY(-1px);
-    }
-    .btn-outline {
-      background: rgba(255,255,255,0.05); color: var(--white);
-      border-color: var(--border-bright);
-    }
-    .btn-outline:hover {
-      background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3);
-      transform: translateY(-1px);
-    }
-    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; }
-
-    /* FOOTER */
-    .about-footer {
-      border-top: 1px solid var(--border);
-      padding: 48px clamp(20px, 5vw, 48px);
-      max-width: 1200px; margin: 0 auto;
-    }
-    .footer-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 24px;
-    }
-    .footer-left { display: flex; align-items: center; gap: 16px; }
-    .footer-logo {
-      font-family: 'Gentium Plus', serif; font-weight: 700; font-size: 18px;
-      color: var(--white); display: flex; align-items: center; gap: 2px;
-      text-decoration: none;
-    }
-    .footer-logo img { height: 40px; width: 40px; object-fit: contain; margin-right: -10px; }
-    .footer-copy { font-size: 13px; color: var(--text-dim); }
-    .footer-socials { display: flex; gap: 10px; }
-    .footer-socials a {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: var(--bg-card); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s;
-    }
-    .footer-socials a:hover {
-      border-color: var(--purple-mid); background: rgba(139,61,255,0.08);
-      transform: translateY(-2px);
-    }
-    .footer-socials svg { width: 18px; height: 18px; fill: var(--text-muted); }
-    .footer-socials a:hover svg { fill: var(--white); }
-
-    /* STARS */
-    canvas#starfield {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none; z-index: 0;
-    }
-    .nav, .about-hero, .container, .about-cta, .about-footer { position: relative; z-index: 1; }
-
-    @media (max-width: 900px) {
-      .mission-grid, .story-layout { grid-template-columns: 1fr; }
-      .values-grid { grid-template-columns: 1fr; }
-      .numbers-grid { grid-template-columns: repeat(2, 1fr); }
-      .approach-steps { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 600px) {
-      .numbers-grid { grid-template-columns: 1fr; }
-      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
-      .footer-left { flex-direction: column; }
-    }
-  </style>
-<meta name="description" content="Custom landing pages, interactive websites, and business websites by Nantara. Discuss your idea with us on WhatsApp.">
-<link rel="canonical" href="https://nantaraflux.github.io/Nantara-website/Web%20Builder.html">
-<link rel="stylesheet" href="enhancements.css">
-<script src="site-config.js" defer></script>
-<script src="enhancements.js" defer></script>
-<link rel="stylesheet" href="language-toggle.css?v=20260915-9">
-<script src="i18n-extra.js" defer></script>
-<script src="i18n-guide.js" defer></script>
-<script src="i18n-demo.js" defer></script>
-<script src="i18n-web.js" defer></script>
-<script src="i18n.js?v=20260916-10" defer></script>
-<link rel="stylesheet" href="web-showcase.css?v=20260915-8">
-<script src="web-showcase.js?v=20260915-8" defer></script>
-<link rel="stylesheet" href="theme.css?v=20260915-8">
-<script src="theme.js?v=20260915-8"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Web Builder by Nantara | Websites built around your business</title>
+<meta name="description" content="Thoughtful landing pages and interactive websites for your business. Start with a conversation about what you need.">
+<link rel="canonical" href="https://nantaraai.com/Web%20Builder.html">
+<link rel="icon" href="favicon.png" type="image/png">
+<meta name="theme-color" content="#f8f9f5">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nantara">
+<meta property="og:title" content="Web Builder by Nantara | Websites built around your business">
+<meta property="og:description" content="Thoughtful landing pages and interactive websites for your business. Start with a conversation about what you need.">
+<meta property="og:url" content="https://nantaraai.com/Web%20Builder.html">
+<meta property="og:image" content="https://nantaraai.com/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('nantara-theme')==='dark'?'dark':'light'}catch(e){}</script>
+<link rel="preload" href="assets/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="nantara.css?v=20260920">
+<script src="nantara.js?v=20260920" defer>
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Nantara","url":"https://nantaraai.com/","logo":"https://nantaraai.com/logo.png","contactPoint":{"@type":"ContactPoint","contactType":"sales","url":"https://wa.me/message/7DRPFHKTWGPDE1","availableLanguage":["English","Indonesian"]}}</script>
 </head>
 <body>
-
-<canvas id="starfield"></canvas>
-
-<!-- NAV -->
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <img src="logo.png" alt="Nantara AI" decoding="async">
-      <span>Nantara AI</span>
-    </a>
-    <a href="index.html" class="nav-back">
-      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
-      Back to Home
-    </a>
-  </div>
+<a class="skip-link" href="#main">
+<span data-en="Skip to content" data-id="Langsung ke konten" >Skip to content</span>
+</a>
+<header class="site-header" id="siteHeader">
+<div class="nav-wrap">
+<a class="brand" href="index.html" aria-label="Nantara home">
+<img src="logo.png" alt="" width="36" height="36">
+<span>Nantara</span>
+</a>
+<nav class="desktop-nav" id="mainNav" aria-label="Main navigation">
+<a href="index.html#product">
+<span data-en="Order Agent" data-id="Order Agent" >Order Agent</span>
+</a>
+<a href="index.html#how">
+<span data-en="How it works" data-id="Cara kerja" >How it works</span>
+</a>
+<a href="index.html#integrations">
+<span data-en="Integrations" data-id="Integrasi" >Integrations</span>
+</a>
+<a href="About.html">
+<span data-en="Company" data-id="Tentang kami" >Company</span>
+</a>
+<a class="mobile-consult" href="https://wa.me/message/7DRPFHKTWGPDE1" target="_blank" rel="noopener">
+<span data-en="Talk to us" data-id="Konsultasi" >Talk to us</span>
+</a>
 </nav>
-
-<!-- HERO -->
-<div class="about-hero">
-  <div class="about-hero-glow"></div>
-  <h1>Websites built<br>around your business.</h1>
-  <p>Landing pages, interactive websites, and custom web experiences. Tell us what you have in mind. We will help shape it into a website that works for your business.</p>
-  <a href="https://wa.me/message/7DRPFHKTWGPDE1" class="btn btn-primary">Discuss Your Website</a>
+<div class="nav-actions">
+<div class="locale" role="group" aria-label="Language" data-language="en">
+<button data-lang="en" aria-pressed="true" type="button">EN</button>
+<button data-lang="id" aria-pressed="false" type="button">ID</button>
 </div>
-
-<!-- MISSION -->
-<div class="container">
-  <section class="mission">
-    <div class="mission-grid">
-      <div class="mission-left">
-        <span class="mission-tag">Your Website</span>
-        <h2>Your idea. A website built to match.</h2>
-      </div>
-      <div class="mission-right">
-        <p>A website should make it easy for people to understand your offer and take the next step. We build around your audience, your brand, and the action you want visitors to take.</p>
-        <p>Bring a reference, a rough sketch, or just an idea. We can help with the structure, content, design, and interactive features. Start with a consultation so we can agree on the right scope.</p>
-      </div>
-    </div>
-  </section>
+<button class="theme-button" id="themeToggle" type="button" aria-label="Switch to dark theme">
+<svg class="sun" viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="4"/>
+<path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/>
+</svg>
+<svg class="moon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/>
+</svg>
+</button>
+<a class="button nav-cta" href="https://wa.me/message/7DRPFHKTWGPDE1" target="_blank" rel="noopener">
+<span data-en="Let’s talk" data-id="Konsultasi" >Let’s talk</span>
+<span aria-hidden="true">↗</span>
+</a>
+<button class="menu-button" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Open navigation">
+<span>
+</span>
+<span>
+</span>
+</button>
 </div>
-
-<div class="container">
-  <section class="web-showcase" aria-labelledby="showcase-title">
-    <div class="values-header">
-      <span class="mission-tag">A Look at the Possibilities</span>
-      <h2 id="showcase-title">See what your website could become.</h2>
-      <p class="showcase-caption">Illustrative concepts. Each project is designed around your brand and requirements.</p>
-    </div>
-    <div class="showcase-tabs" role="tablist" aria-label="Website examples">
-      <button type="button" role="tab" id="tab-landing" aria-controls="mock-landing" aria-selected="true" tabindex="0">Landing Page</button>
-      <button type="button" role="tab" id="tab-interactive" aria-controls="mock-interactive" aria-selected="false" tabindex="-1">Interactive Experience</button>
-      <button type="button" role="tab" id="tab-dashboard" aria-controls="mock-dashboard" aria-selected="false" tabindex="-1">Business Dashboard</button>
-    </div>
-    <div class="mock-browser">
-      <div class="mock-toolbar"><span class="mock-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mock-url">Preview · Website concept</span><span class="mock-preview-label">DESIGN PREVIEW</span></div>
-      <div class="mock-landing mock-panel" role="tabpanel" id="mock-landing" aria-labelledby="tab-landing">
-        <div class="sample-nav"><b>FORMA<span>®</span></b><span>Objects &nbsp; Studio &nbsp; Journal</span><span class="sample-nav-end">Collection 2026 ↗</span></div>
-        <div class="sample-hero">
-          <div class="sample-copy"><span class="sample-eyebrow">CONSIDERED DESIGN. EVERYDAY LIVING.</span><h3>Less, but<br><em>better.</em></h3><p>Thoughtful objects for spaces that feel like you.</p><span class="sample-button">Explore the collection ↗</span><div class="sample-footnote"><span>01 / 03</span><span>Made to be kept.</span></div></div>
-          <div class="sample-art" role="img" aria-label="Sculptural blue chair in a sunlit architectural room"><div class="sample-window"></div><div class="sample-plinth"></div><div class="chair-back"></div><div class="chair-seat"></div><div class="chair-leg leg-one"></div><div class="chair-leg leg-two"></div><div class="sample-art-label">The Arc Chair<br><small>Form meets function.</small></div><div class="sample-art-index">F / 01</div></div>
-        </div>
-        <div class="sample-bottom"><span>Independent design studio</span><span>Built with intention</span><span>Objects that last</span></div>
-      </div>
-      <div class="mock-interactive mock-panel" role="tabpanel" id="mock-interactive" aria-labelledby="tab-interactive" hidden>
-        <div class="sample-nav"><b>ATELIER<span> / </span></b><span>Your workspace, reimagined.</span><span class="sample-nav-end">Design your space ↗</span></div>
-        <div class="config-layout"><div class="config-scene" role="img" aria-label="Workspace preview with a desk, screen and selectable ambient lighting"><span class="config-scene-label">YOUR SPACE / LIVE PREVIEW</span><div class="config-light"></div><div class="config-screen"><span>Make room<br>for good work.</span></div><div class="config-desk"></div><div class="config-desk-leg"></div><div class="config-plant"><i></i><i></i><i></i></div><span class="config-caption">A workspace that feels like yours.</span></div><div class="config-controls"><span class="sample-eyebrow">DESIGNED BY YOU</span><h3>Make it<br>your own.</h3><p>Try the controls. Watch your space change.</p><fieldset><legend>Choose your atmosphere</legend><div class="config-swatches"><button type="button" data-atmosphere="warm" aria-pressed="true"><i style="background:#deac80"></i>Warm</button><button type="button" data-atmosphere="cool" aria-pressed="false"><i style="background:#8daed1"></i>Cool</button><button type="button" data-atmosphere="sage" aria-pressed="false"><i style="background:#9cbaa3"></i>Sage</button></div></fieldset><label class="config-range-label" for="mock-brightness">Ambient light</label><input id="mock-brightness" type="range" min="20" max="100" value="70"><div class="config-summary"><span>One idea. Your configuration.</span><b>Built around you.</b></div></div></div>
-      </div>
-      <div class="mock-dashboard mock-panel" role="tabpanel" id="mock-dashboard" aria-labelledby="tab-dashboard" hidden>
-        <aside class="dash-sidebar"><b>PULSE<span> / </span></b><span class="dash-nav-active">Overview</span><span>Orders</span><span>Customers</span><span>Reports</span><div class="dash-sidebar-foot">Northline Studio<br><small>Workspace</small></div></aside><div class="dash-content"><div class="dash-heading"><div><span class="sample-eyebrow">WORKSPACE / OVERVIEW</span><h3>Your business, in focus.</h3></div><span class="dash-date">This month</span></div><div class="dash-kpis"><div><span>Revenue</span><b>Rp128.4M</b><small>+18.6% this month</small></div><div><span>Orders</span><b>842</b><small>+12.4% this month</small></div><div><span>Conversion</span><b>4.8%</b><small>+0.7 points</small></div></div><div class="dash-chart-card"><div><b>Revenue overview</b><span>Illustrative data</span></div><svg class="dash-chart" viewBox="0 0 640 150" role="img" aria-label="Illustrative revenue chart trending upward"><defs><linearGradient id="mock-chart-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#7965ef" stop-opacity=".35"/><stop offset="1" stop-color="#7965ef" stop-opacity="0"/></linearGradient></defs><path d="M0 35H640M0 75H640M0 115H640" stroke="#e8e9f0" fill="none"/><path d="M0 130C35 130 36 90 70 98S105 125 140 80S185 105 220 66S265 85 300 52S350 82 390 46S440 64 480 30S520 45 560 20S610 30 640 8V150H0Z" fill="url(#mock-chart-fill)"/><path d="M0 130C35 130 36 90 70 98S105 125 140 80S185 105 220 66S265 85 300 52S350 82 390 46S440 64 480 30S520 45 560 20S610 30 640 8" stroke="#7965ef" stroke-width="3" fill="none"/></svg><div class="dash-chart-labels"><span>Week 1</span><span>Week 2</span><span>Week 3</span><span>Week 4</span></div></div><div class="dash-orders"><b>Recent orders</b><div><span>#ORD-0842</span><span>Studio Arc</span><span class="order-paid">Paid</span><b>Rp2.4M</b></div><div><span>#ORD-0841</span><span>Field & Form</span><span class="order-pending">Pending</span><b>Rp1.8M</b></div></div></div>
-      </div>
-    </div>
-    <div class="showcase-bottom"><span>Different ideas. The same attention to detail.</span><a href="https://wa.me/message/7DRPFHKTWGPDE1">Let’s discuss your website ↗</a></div>
-  </section>
 </div>
-
-<!-- VALUES -->
-<div class="container">
-  <section class="values">
-    <div class="values-header">
-      <span class="mission-tag">What We Build</span>
-      <h2>Choose the experience your business needs.</h2>
-    </div>
-    <div class="values-grid">
-      <div class="value-card"><div class="value-num">Service 01</div><h3>Landing Pages</h3><p>A focused page for your product, service, campaign, or launch. Clear messaging, a strong offer, and a direct route to enquiries.</p></div>
-      <div class="value-card"><div class="value-num">Service 02</div><h3>Interactive Websites</h3><p>Calculators, product selectors, guided demos, and other useful interactions that help visitors explore your offer.</p></div>
-      <div class="value-card"><div class="value-num">Service 03</div><h3>Company Websites</h3><p>Introduce your business with service pages, an about section, project highlights, and contact information that is easy to find.</p></div>
-      <div class="value-card"><div class="value-num">Service 04</div><h3>Custom Web Experiences</h3><p>Have something different in mind? Share the idea and references. We will explore the design and features needed to bring it to life.</p></div>
-      <div class="value-card"><div class="value-num">Service 05</div><h3>Connected Workflows</h3><p>Connect the website to WhatsApp, forms, booking tools, or business systems where it makes sense. Integration scope is agreed before development.</p></div>
-      <div class="value-card"><div class="value-num">Service 06</div><h3>Mobile-Ready Design</h3><p>A responsive experience with readable content, practical navigation, and clear actions on phones, tablets, and desktops.</p></div>
-    </div>
-  </section>
+</header>
+<main id="main">
+<section class="inner-hero container">
+<p data-en="Web Builder by Nantara" data-id="Web Builder oleh Nantara" class="eyebrow">Web Builder by Nantara</p>
+<h1 data-en="A clearer home
+for your business online." data-id="Rumah digital yang lebih jelas
+untuk bisnis Anda." >A clearer home
+for your business online.</h1>
+<p data-en="Landing pages, company websites and interactive experiences. Designed around what your visitors need to understand and do next." data-id="Landing page, website perusahaan, dan pengalaman interaktif. Dirancang agar pengunjung memahami bisnis Anda dan tahu langkah berikutnya." class="hero-lead">Landing pages, company websites and interactive experiences. Designed around what your visitors need to understand and do next.</p>
+<div class="hero-actions">
+<a class="button" href="https://wa.me/message/7DRPFHKTWGPDE1" target="_blank" rel="noopener">
+<span data-en="Tell us what you have in mind" data-id="Ceritakan website yang Anda inginkan" >Tell us what you have in mind</span>
+<span aria-hidden="true">↗</span>
+</a>
 </div>
-
-<!-- NUMBERS -->
-<div class="container">
-  <section class="numbers">
-    <div class="numbers-grid">
-      <div class="number-block"><div class="number-val">01</div><div class="number-lbl">Consultation first</div></div>
-      <div class="number-block"><div class="number-val">02</div><div class="number-lbl">Scope agreed together</div></div>
-      <div class="number-block"><div class="number-val">03</div><div class="number-lbl">Designed for your brand</div></div>
-      <div class="number-block"><div class="number-val">04</div><div class="number-lbl">Reviewed before launch</div></div>
-    </div>
-  </section>
-</div>
-
-<!-- STORY -->
-<div class="container">
-  <section class="story">
-    <div class="story-layout">
-      <div class="story-left">
-        <span class="mission-tag">Built Around You</span>
-        <h2>A clear purpose behind every page.</h2>
-      </div>
-      <div class="story-right">
-        <p>Whether you are launching a new offer, introducing your company, or building a tool for your customers, we start with the outcome you need.</p>
-        <p>A landing page may need one focused story and a strong consultation button. An interactive website may need a calculator, a guided product selection, or a booking flow. We help you choose features that serve a real purpose.</p>
-        <div class="quote">
-          “Tell us what your visitors should be able to do. We will design the website around that.”
-        </div>
-        <p>You review the direction before we build. We agree on the pages, features, content responsibilities, revisions, and delivery plan during consultation.</p>
-        <p>Pricing and timelines depend on the scope. Hosting, domain setup, integrations, and ongoing maintenance can be discussed as part of your project.</p>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- APPROACH -->
-<div class="container">
-  <section class="approach">
-    <div class="approach-header">
-      <span class="mission-tag">How We Work</span>
-      <h2>From your first idea to launch.</h2>
-    </div>
-    <div class="approach-steps">
-      <div class="approach-card"><div class="step-tag">Step 01</div><h3>Consult.</h3><p>Tell us about your audience, goals, references, and required features. We recommend a scope and share a project estimate.</p></div>
-      <div class="approach-card"><div class="step-tag">Step 02</div><h3>Design.</h3><p>We plan the page structure and visual direction around your brand. You review the content and design before development.</p></div>
-      <div class="approach-card"><div class="step-tag">Step 03</div><h3>Build.</h3><p>We develop the agreed pages and interactions, then check the experience on desktop and mobile.</p></div>
-      <div class="approach-card"><div class="step-tag">Step 04</div><h3>Launch.</h3><p>After your approval, we help prepare the website for publishing and discuss any ongoing support you need.</p></div>
-    </div>
-  </section>
-</div>
-
-<!-- CTA -->
-<section class="about-cta">
-  <div class="about-cta-glow"></div>
-  <div class="container">
-    <h2>Have a website<br>in mind?</h2>
-    <p>Tell us about your business, share a reference, or describe the experience you want to create. Let’s discuss the possibilities first.</p>
-    <div class="cta-btns">
-      <a href="https://wa.me/message/7DRPFHKTWGPDE1" class="btn btn-primary">Discuss Your Website</a>
-      <a href="index.html" class="btn btn-outline">Back to Home</a>
-    </div>
-  </div>
 </section>
-
-<!-- FOOTER -->
-<div class="about-footer">
-  <div class="footer-inner">
-    <div class="footer-left">
-      <a href="index.html" class="footer-logo">
-        <img src="logo.png" alt="Nantara AI" decoding="async">
-        <span>Nantara AI</span>
-      </a>
-      <span class="footer-copy">&copy; 2026 Nantara AI. All rights reserved.</span>
-    </div>
-    <div class="footer-socials">
-      <a href="https://instagram.com/nantaraai" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
-        </svg>
-      </a>
-      <a href="https://tiktok.com/@nantaraai" aria-label="TikTok">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16.6 5.82A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/>
-        </svg>
-      </a>
-    </div>
-  </div>
+<section class="container web-examples">
+<div class="web-mockup">
+<div class="browser-chrome">
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+<span>
+<span data-en="Landing page concept" data-id="Konsep landing page" >Landing page concept</span>
+</span>
 </div>
-
-<script>
-const canvas = document.getElementById('starfield');
-const ctx = canvas.getContext('2d');
-let W, H;
-function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-resize(); window.addEventListener('resize', resize);
-
-const stars = Array.from({length: 150}, () => ({
-  x: Math.random(), y: Math.random(),
-  r: Math.random() * 1.1 + 0.3,
-  a: Math.random() * 0.5 + 0.2,
-  speed: Math.random() * 0.00006 + 0.00002,
-  twinkle: Math.random() * 0.003 + 0.001,
-  offset: Math.random() * Math.PI * 2,
-  color: Math.random() > 0.7 ? '160,180,255' : Math.random() > 0.5 ? '200,180,255' : '255,255,255'
-}));
-
-let t = 0;
-(function draw() {
-  ctx.clearRect(0, 0, W, H);
-  t++;
-  stars.forEach(s => {
-    s.y -= s.speed;
-    if (s.y < -0.02) { s.y = 1.02; s.x = Math.random(); }
-    const tw = Math.sin(t * s.twinkle + s.offset) * 0.3 + 0.7;
-    ctx.beginPath();
-    ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(${s.color},${s.a * tw})`;
-    ctx.fill();
-  });
-  requestAnimationFrame(draw);
-})();
-</script>
-
+<div class="mock-page mock-editorial">
+<span class="mock-logo">ATELIER / 01</span>
+<div>
+<h2 data-en="Space to
+think differently." data-id="Ruang untuk
+berpikir berbeda." >Space to
+think differently.</h2>
+<div class="mock-sculpture">
+<span>
+</span>
+<span>
+</span>
+<span>
+</span>
+</div>
+</div>
+<p>
+<span data-en="A considered first impression." data-id="Kesan pertama yang dirancang dengan baik." >A considered first impression.</span>
+</p>
+</div>
+</div>
+<div class="web-mockup">
+<div class="browser-chrome">
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+<span>
+<span data-en="Interactive website concept" data-id="Konsep website interaktif" >Interactive website concept</span>
+</span>
+</div>
+<div class="mock-page mock-app">
+<span class="mock-logo">STUDIO / PROJECTS</span>
+<h2 data-en="An overview.
+Without the noise." data-id="Gambaran lengkap.
+Tanpa kerumitan." >An overview.
+Without the noise.</h2>
+<div class="mock-app-grid">
+<div>
+<small>
+<span data-en="Current projects" data-id="Proyek aktif" >Current projects</span>
+</small>
+<strong>12</strong>
+<div class="mini-chart">
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+</div>
+</div>
+<div>
+<small>
+<span data-en="This week" data-id="Minggu ini" >This week</span>
+</small>
+<div class="mock-task">● <span data-en="Research" data-id="Riset" >Research</span>
+</div>
+<div class="mock-task">● <span data-en="Design review" data-id="Tinjauan desain" >Design review</span>
+</div>
+<div class="mock-task">● <span data-en="Website launch" data-id="Peluncuran web" >Website launch</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<p class="container fine-print mock-disclaimer">
+<span data-en="Original design concepts to show possible directions. Not client projects or live applications." data-id="Konsep desain asli untuk menunjukkan pilihan arah. Bukan proyek klien atau aplikasi aktif." >Original design concepts to show possible directions. Not client projects or live applications.</span>
+</p>
+<section class="section container">
+<div class="section-intro">
+<p data-en="Built for your next step" data-id="Dibangun untuk langkah berikutnya" class="eyebrow">Built for your next step</p>
+<h2 data-en="The right website starts
+with the right conversation." data-id="Website yang tepat dimulai
+dengan diskusi yang tepat." >The right website starts
+with the right conversation.</h2>
+</div>
+<div class="benefits">
+<article>
+<span class="feature-number">01</span>
+<h3 data-en="Landing pages" data-id="Landing page" >Landing pages</h3>
+<p data-en="One clear story, a focused offer and a direct path to an inquiry." data-id="Cerita yang jelas, penawaran terarah, dan jalan langsung untuk menghubungi bisnis." >One clear story, a focused offer and a direct path to an inquiry.</p>
+</article>
+<article>
+<span class="feature-number">02</span>
+<h3 data-en="Business websites" data-id="Website bisnis" >Business websites</h3>
+<p data-en="A professional place for your company, services and work to come together." data-id="Tempat profesional yang menyatukan perusahaan, layanan, dan karya Anda." >A professional place for your company, services and work to come together.</p>
+</article>
+<article>
+<span class="feature-number">03</span>
+<h3 data-en="Interactive experiences" data-id="Pengalaman interaktif" >Interactive experiences</h3>
+<p data-en="Forms, calculators and custom interfaces scoped around your actual needs." data-id="Formulir, kalkulator, dan antarmuka khusus sesuai kebutuhan nyata Anda." >Forms, calculators and custom interfaces scoped around your actual needs.</p>
+</article>
+</div>
+</section>
+<section class="simple-cta container">
+<h2 data-en="Have a direction in mind?
+Let’s make it tangible." data-id="Sudah punya bayangan?
+Mari wujudkan." >Have a direction in mind?
+Let’s make it tangible.</h2>
+<p data-en="We’ll discuss the design, content, features and scope before proposing the build." data-id="Kita bahas desain, konten, fitur, dan cakupan sebelum menyusun proposal." >We’ll discuss the design, content, features and scope before proposing the build.</p>
+<a class="button" href="https://wa.me/message/7DRPFHKTWGPDE1" target="_blank" rel="noopener">
+<span data-en="Discuss your website" data-id="Konsultasikan website Anda" >Discuss your website</span>
+<span aria-hidden="true">↗</span>
+</a>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-top">
+<div>
+<a class="brand" href="index.html">
+<img src="logo.png" alt="" width="36" height="36">
+<span>Nantara</span>
+</a>
+<p data-en="Make room for the work that matters." data-id="Beri ruang untuk pekerjaan yang berarti." >Make room for the work that matters.</p>
+<a class="email-link" href="mailto:nantaraai@gmail.com">nantaraai@gmail.com <span aria-hidden="true">↗</span>
+</a>
+</div>
+<div class="footer-links">
+<div>
+<h3 data-en="Explore" data-id="Jelajahi" >Explore</h3>
+<a href="index.html#product">Order Agent</a>
+<a href="index.html#how">
+<span data-en="How it works" data-id="Cara kerja" >How it works</span>
+</a>
+<a href="index.html#faq">FAQ</a>
+</div>
+<div>
+<h3 data-en="Nantara" data-id="Nantara" >Nantara</h3>
+<a href="About.html">
+<span data-en="About us" data-id="Tentang kami" >About us</span>
+</a>
+<a href="Web Builder.html">Web Builder</a>
+<a href="https://wa.me/message/7DRPFHKTWGPDE1" target="_blank" rel="noopener">
+<span data-en="Contact" data-id="Hubungi kami" >Contact</span> <span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+</div>
+<div class="container footer-bottom">
+<span>© 2026 Nantara</span>
+<div>
+<a href="Privacy Policy.html">
+<span data-en="Privacy" data-id="Privasi" >Privacy</span>
+</a>
+<a href="Terms of Service.html">
+<span data-en="Terms" data-id="Ketentuan" >Terms</span>
+</a>
+</div>
+<span>
+<span data-en="Built with purpose. From Indonesia." data-id="Dibangun dengan tujuan. Dari Indonesia." >Built with purpose. From Indonesia.</span>
+</span>
+</div>
+</footer>
 </body>
 </html>

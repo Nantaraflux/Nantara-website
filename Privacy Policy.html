@@ -1,402 +1,461 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy, Nantara AI</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <meta property="og:title" content="Privacy Policy, Nantara AI">
-  <meta property="og:description" content="How Nantara AI collects, uses, and protects your information. Zero data stored on our servers.">
-  <meta property="og:image" content="https://nantaraflux.github.io/Nantara-website/social-card.png">
-  <meta property="og:type" content="website">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Gentium+Plus:wght@400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --blue: #38B6FF; --blue-dark: #1A6BFF;
-      --purple: #8B3DFF; --purple-mid: #7C3AED; --violet: #A78BFA;
-      --bg: #060609; --bg-card: #0C0B18;
-      --white: #FFFFFF; --text: rgba(255,255,255,0.88);
-      --text-muted: rgba(255,255,255,0.65); --text-dim: rgba(255,255,255,0.4);
-      --border: rgba(255,255,255,0.07); --border-bright: rgba(255,255,255,0.14);
-    }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 16px; line-height: 1.75;
-      color: var(--text); background: var(--bg);
-      -webkit-font-smoothing: antialiased; overflow-x: hidden;
-    }
-    a { color: var(--blue); text-decoration: none; transition: color 0.15s; }
-    a:hover { color: var(--violet); }
-
-    .nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(6,6,9,0.88); backdrop-filter: blur(20px) saturate(1.4);
-      border-bottom: 1px dashed var(--border);
-    }
-    .nav-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 90px; padding: 0 clamp(20px, 5vw, 48px);
-    }
-    .nav-logo {
-      font-family: 'Gentium Plus', serif; font-weight: 700; font-size: 22px;
-      color: var(--white); display: flex; align-items: center; gap: 2px; text-decoration: none;
-    }
-    .nav-logo img { height: 80px; width: 80px; object-fit: contain; margin-right: -18px; }
-    .nav-back {
-      font-size: 14px; font-weight: 500; color: var(--text-muted);
-      display: flex; align-items: center; gap: 6px; transition: color 0.15s;
-    }
-    .nav-back:hover { color: var(--white); }
-    .nav-back svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
-
-    .pp-hero {
-      padding: clamp(60px, 8vw, 100px) clamp(20px, 5vw, 48px) clamp(40px, 5vw, 64px);
-      position: relative; overflow: hidden; text-align: center;
-    }
-    .pp-hero-glow {
-      position: absolute; z-index: 0; width: 700px; height: 500px;
-      top: -200px; left: 50%; transform: translateX(-50%);
-      background: radial-gradient(ellipse at center, rgba(30,80,255,0.3) 0%, rgba(100,40,230,0.15) 40%, transparent 70%);
-      filter: blur(40px); pointer-events: none;
-    }
-    .pp-hero h1 {
-      font-size: clamp(36px, 5vw, 56px); font-weight: 800; color: var(--white);
-      line-height: 1.1; letter-spacing: -0.03em; position: relative; margin-bottom: 16px;
-    }
-    .pp-hero p { font-size: 16px; color: var(--text-muted); position: relative; max-width: 480px; margin: 0 auto; }
-    .pp-hero .effective {
-      font-family: 'DM Mono', monospace; font-size: 13px; color: var(--blue);
-      letter-spacing: 0.04em; margin-top: 16px; display: block; position: relative;
-    }
-
-    .pp-content {
-      max-width: 780px; margin: 0 auto;
-      padding: 0 clamp(20px, 5vw, 48px) clamp(80px, 8vw, 120px);
-    }
-    .pp-section { margin-bottom: 48px; }
-    .pp-section h2 {
-      font-size: clamp(22px, 2.5vw, 28px); font-weight: 700; color: var(--white);
-      letter-spacing: -0.02em; margin-bottom: 16px;
-      padding-bottom: 12px; border-bottom: 1px solid var(--border);
-    }
-    .pp-section h3 {
-      font-size: 18px; font-weight: 600; color: var(--white); margin: 24px 0 10px;
-    }
-    .pp-section p { font-size: 15px; line-height: 1.8; color: var(--text-muted); margin-bottom: 14px; }
-    .pp-section ul { list-style: none; padding: 0; margin: 0 0 16px 0; }
-    .pp-section li {
-      font-size: 15px; line-height: 1.75; color: var(--text-muted);
-      padding: 4px 0 4px 24px; position: relative;
-    }
-    .pp-section li::before {
-      content: ''; position: absolute; left: 0; top: 12px;
-      width: 6px; height: 6px; border-radius: 50%; background: var(--purple-mid);
-    }
-    .section-num {
-      font-family: 'DM Mono', monospace; font-size: 12px; color: var(--blue);
-      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; display: block;
-    }
-    .highlight-box {
-      background: var(--bg-card); border: 1px solid var(--border-bright);
-      border-radius: 10px; padding: 20px 24px; margin: 20px 0;
-      font-size: 14px; color: var(--text-muted); line-height: 1.75;
-    }
-    .highlight-box strong { color: var(--white); }
-
-    .pp-footer {
-      border-top: 1px solid var(--border);
-      padding: 48px clamp(20px, 5vw, 48px);
-      max-width: 1200px; margin: 0 auto;
-    }
-    .footer-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 24px;
-    }
-    .footer-left { display: flex; align-items: center; gap: 16px; }
-    .footer-logo {
-      font-family: 'Gentium Plus', serif; font-weight: 700; font-size: 18px;
-      color: var(--white); display: flex; align-items: center; gap: 2px; text-decoration: none;
-    }
-    .footer-logo img { height: 40px; width: 40px; object-fit: contain; margin-right: -10px; }
-    .footer-copy { font-size: 13px; color: var(--text-dim); }
-    .footer-socials { display: flex; gap: 10px; }
-    .footer-socials a {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: var(--bg-card); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center; transition: all 0.2s;
-    }
-    .footer-socials a:hover {
-      border-color: var(--purple-mid); background: rgba(139,61,255,0.08); transform: translateY(-2px);
-    }
-    .footer-socials svg { width: 18px; height: 18px; fill: var(--text-muted); }
-    .footer-socials a:hover svg { fill: var(--white); }
-
-    canvas#starfield {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none; z-index: 0;
-    }
-    .nav, .pp-hero, .pp-content, .pp-footer { position: relative; z-index: 1; }
-
-    @media (max-width: 600px) {
-      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
-      .footer-left { flex-direction: column; }
-    }
-  </style>
-<meta name="description" content="Read how Nantara AI handles personal information and how to contact us about your privacy.">
-<link rel="canonical" href="https://nantaraflux.github.io/Nantara-website/Privacy%20Policy.html">
-<link rel="stylesheet" href="enhancements.css">
-<script src="site-config.js" defer></script>
-<script src="enhancements.js" defer></script>
-<link rel="stylesheet" href="language-toggle.css?v=20260915-9">
-<script src="i18n-extra.js" defer></script>
-<script src="i18n-guide.js" defer></script>
-<script src="i18n-demo.js" defer></script>
-<script src="i18n.js?v=20260916-10" defer></script>
-<link rel="stylesheet" href="theme.css?v=20260915-8">
-<script src="theme.js?v=20260915-8"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy | Nantara</title>
+<meta name="description" content="How Nantara AI collects, uses, and protects your information.">
+<link rel="canonical" href="https://nantaraai.com/Privacy%20Policy.html">
+<link rel="icon" href="favicon.png" type="image/png">
+<meta name="theme-color" content="#f8f9f5">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nantara">
+<meta property="og:title" content="Privacy Policy | Nantara">
+<meta property="og:description" content="How Nantara AI collects, uses, and protects your information.">
+<meta property="og:url" content="https://nantaraai.com/Privacy%20Policy.html">
+<meta property="og:image" content="https://nantaraai.com/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('nantara-theme')==='dark'?'dark':'light'}catch(e){}</script>
+<link rel="stylesheet" href="nantara.css?v=20260920">
+<script src="nantara.js?v=20260920" defer>
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Nantara","url":"https://nantaraai.com/","logo":"https://nantaraai.com/logo.png","contactPoint":{"@type":"ContactPoint","contactType":"sales","url":"https://wa.me/message/7DRPFHKTWGPDE1","availableLanguage":["English","Indonesian"]}}</script>
 </head>
 <body>
-
-<canvas id="starfield"></canvas>
-
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <img src="logo.png" alt="Nantara AI" decoding="async">
-      <span>Nantara AI</span>
-    </a>
-    <a href="index.html" class="nav-back">
-      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
-      Back to Home
-    </a>
-  </div>
+<a class="skip-link" href="#main">
+<span data-en="Skip to content" data-id="Langsung ke konten" >Skip to content</span>
+</a>
+<header class="site-header" id="siteHeader">
+<div class="nav-wrap">
+<a class="brand" href="index.html" aria-label="Nantara home">
+<img src="logo.png" alt="" width="36" height="36">
+<span>Nantara</span>
+</a>
+<nav class="desktop-nav" id="mainNav" aria-label="Main navigation">
+<a href="index.html#product">
+<span data-en="Order Agent" data-id="Order Agent" >Order Agent</span>
+</a>
+<a href="index.html#how">
+<span data-en="How it works" data-id="Cara kerja" >How it works</span>
+</a>
+<a href="index.html#integrations">
+<span data-en="Integrations" data-id="Integrasi" >Integrations</span>
+</a>
+<a href="About.html">
+<span data-en="Company" data-id="Tentang kami" >Company</span>
+</a>
+<a class="mobile-consult" href="https://wa.me/message/7DRPFHKTWGPDE1" target="_blank" rel="noopener">
+<span data-en="Talk to us" data-id="Konsultasi" >Talk to us</span>
+</a>
 </nav>
-
-<div class="pp-hero">
-  <div class="pp-hero-glow"></div>
-  <h1>Privacy Policy</h1>
-  <p>How Nantara AI collects, uses, and protects your information.</p>
-  <span class="effective">Last Updated: June 7, 2026</span>
+<div class="nav-actions">
+<div class="locale" role="group" aria-label="Language" data-language="en">
+<button data-lang="en" aria-pressed="true" type="button">EN</button>
+<button data-lang="id" aria-pressed="false" type="button">ID</button>
 </div>
-
-<div class="pp-content">
+<button class="theme-button" id="themeToggle" type="button" aria-label="Switch to dark theme">
+<svg class="sun" viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="4"/>
+<path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/>
+</svg>
+<svg class="moon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/>
+</svg>
+</button>
+<a class="button nav-cta" href="https://wa.me/message/7DRPFHKTWGPDE1" target="_blank" rel="noopener">
+<span data-en="Let’s talk" data-id="Konsultasi" >Let’s talk</span>
+<span aria-hidden="true">↗</span>
+</a>
+<button class="menu-button" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Open navigation">
+<span>
+</span>
+<span>
+</span>
+</button>
+</div>
+</div>
+</header>
+<main id="main">
+<section class="inner-hero container">
+<h1 data-en="Privacy Policy" data-id="Kebijakan Privasi" >Privacy Policy</h1>
+<p data-en="How Nantara AI collects, uses, and protects your information." data-id="Cara Nantara AI mengumpulkan, menggunakan, dan melindungi informasi Anda." class="hero-lead">How Nantara AI collects, uses, and protects your information.</p>
+<p data-en="Last Updated: June 7, 2026" data-id="Terakhir diperbarui: 7 Juni 2026" class="legal-updated">Last Updated: June 7, 2026</p>
+</section>
+<div class="container legal-content">
 
   <div class="pp-section">
-    <span class="section-num">Section 01</span>
-    <h2>Introduction</h2>
-    <p>Nantara AI ("we", "us", "our") is committed to protecting your privacy. This Privacy Policy explains how we handle information when you use our Order Intelligence System and related services.</p>
+
+    <h2>
+<span data-en="Introduction" data-id="Pendahuluan">Introduction</span>
+</h2>
+    <p>
+<span data-en="Nantara AI (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is committed to protecting your privacy. This Privacy Policy explains how we handle information when you use our Order Intelligence System and related services." data-id="Nantara AI (“kami”) berkomitmen melindungi privasi Anda. Kebijakan ini menjelaskan penanganan informasi saat Anda menggunakan Sistem Pesanan Cerdas dan layanan terkait.">Nantara AI ("we", "us", "our") is committed to protecting your privacy. This Privacy Policy explains how we handle information when you use our Order Intelligence System and related services.</span>
+</p>
     <div class="highlight-box">
-      <strong>Our core principle:</strong> We do not store your business data on our servers. All order data, buyer information, and business records live in your own accounts. Period.
-    </div>
+      <strong>
+<span data-en="Our core principle:" data-id="Prinsip utama kami:">Our core principle:</span>
+</strong>
+<span data-en=" We do not store your business data on our servers. All order data, buyer information, and business records live in your own accounts. Period.
+    " data-id=" Kami tidak menyimpan data bisnis Anda di server kami. Data pesanan, informasi pelanggan, dan catatan bisnis tetap berada di akun Anda.
+    "> We do not store your business data on our servers. All order data, buyer information, and business records live in your own accounts. Period.
+    </span>
+</div>
   </div>
 
   <div class="pp-section">
-    <span class="section-num">Section 02</span>
-    <h2>Information We Collect</h2>
-    <h3>Account Information</h3>
-    <p>When you sign up for Nantara AI, we collect:</p>
+
+    <h2>
+<span data-en="Information We Collect" data-id="Informasi yang Kami Kumpulkan">Information We Collect</span>
+</h2>
+    <h3>
+<span data-en="Account Information" data-id="Informasi Akun">Account Information</span>
+</h3>
+    <p>
+<span data-en="When you sign up for Nantara AI, we collect:" data-id="Saat Anda mendaftar Nantara AI, kami mengumpulkan:">When you sign up for Nantara AI, we collect:</span>
+</p>
     <ul>
-      <li>Your name, email address, and phone number</li>
-      <li>Company name and business details</li>
-      <li>Billing information for subscription payments</li>
+      <li>
+<span data-en="Your name, email address, and phone number" data-id="Nama, alamat email, dan nomor telepon Anda">Your name, email address, and phone number</span>
+</li>
+      <li>
+<span data-en="Company name and business details" data-id="Nama perusahaan dan detail bisnis">Company name and business details</span>
+</li>
+      <li>
+<span data-en="Billing information for subscription payments" data-id="Informasi penagihan untuk pembayaran langganan">Billing information for subscription payments</span>
+</li>
     </ul>
-    <h3>Service Configuration Data</h3>
-    <p>To set up and maintain your order intelligence system, we temporarily access:</p>
+    <h3>
+<span data-en="Service Configuration Data" data-id="Data Konfigurasi Layanan">Service Configuration Data</span>
+</h3>
+    <p>
+<span data-en="To set up and maintain your order intelligence system, we temporarily access:" data-id="Untuk menyiapkan dan merawat sistem pesanan Anda, kami mengakses sementara:">To set up and maintain your order intelligence system, we temporarily access:</span>
+</p>
     <ul>
-      <li>Product catalogs, pricing tiers, and business policies you provide during onboarding</li>
-      <li>WhatsApp Business API credentials (used solely for system integration)</li>
-      <li>Database and CRM connection details (used solely for workflow automation)</li>
+      <li>
+<span data-en="Product catalogs, pricing tiers, and business policies you provide during onboarding" data-id="Katalog produk, tingkatan harga, dan kebijakan bisnis yang diberikan saat persiapan">Product catalogs, pricing tiers, and business policies you provide during onboarding</span>
+</li>
+      <li>
+<span data-en="WhatsApp Business API credentials (used solely for system integration)" data-id="Kredensial WhatsApp Business API, hanya untuk integrasi sistem">WhatsApp Business API credentials (used solely for system integration)</span>
+</li>
+      <li>
+<span data-en="Database and CRM connection details (used solely for workflow automation)" data-id="Detail koneksi basis data dan CRM, hanya untuk otomasi alur kerja">Database and CRM connection details (used solely for workflow automation)</span>
+</li>
     </ul>
-    <h3>Usage Analytics</h3>
-    <p>We collect anonymized usage metrics to improve our service:</p>
+    <h3>
+<span data-en="Usage Analytics" data-id="Analitik Penggunaan">Usage Analytics</span>
+</h3>
+    <p>
+<span data-en="We collect anonymized usage metrics to improve our service:" data-id="Kami mengumpulkan metrik penggunaan yang dianonimkan untuk meningkatkan layanan:">We collect anonymized usage metrics to improve our service:</span>
+</p>
     <ul>
-      <li>System performance data (response times, resolution rates, uptime)</li>
-      <li>Feature usage patterns (which automations are most active)</li>
-      <li>Error logs for debugging and optimization</li>
+      <li>
+<span data-en="System performance data (response times, resolution rates, uptime)" data-id="Data kinerja sistem: waktu respons, tingkat penyelesaian, dan waktu aktif">System performance data (response times, resolution rates, uptime)</span>
+</li>
+      <li>
+<span data-en="Feature usage patterns (which automations are most active)" data-id="Pola penggunaan fitur, termasuk otomasi yang paling aktif">Feature usage patterns (which automations are most active)</span>
+</li>
+      <li>
+<span data-en="Error logs for debugging and optimization" data-id="Catatan kesalahan untuk perbaikan dan optimasi">Error logs for debugging and optimization</span>
+</li>
     </ul>
   </div>
 
   <div class="pp-section">
-    <span class="section-num">Section 03</span>
-    <h2>How We Use Your Information</h2>
-    <p>We use the information we collect exclusively for:</p>
+
+    <h2>
+<span data-en="How We Use Your Information" data-id="Cara Kami Menggunakan Informasi Anda">How We Use Your Information</span>
+</h2>
+    <p>
+<span data-en="We use the information we collect exclusively for:" data-id="Informasi yang dikumpulkan hanya digunakan untuk:">We use the information we collect exclusively for:</span>
+</p>
     <ul>
-      <li>Setting up, configuring, and maintaining your order intelligence system</li>
-      <li>Processing subscription payments and managing your account</li>
-      <li>Providing customer support and technical assistance</li>
-      <li>Improving system performance and developing new features</li>
-      <li>Sending service-related communications (system updates, maintenance notices)</li>
-      <li>Generating monthly performance reports for your review</li>
+      <li>
+<span data-en="Setting up, configuring, and maintaining your order intelligence system" data-id="Menyiapkan, mengonfigurasi, dan merawat sistem pesanan Anda">Setting up, configuring, and maintaining your order intelligence system</span>
+</li>
+      <li>
+<span data-en="Processing subscription payments and managing your account" data-id="Memproses pembayaran langganan dan mengelola akun">Processing subscription payments and managing your account</span>
+</li>
+      <li>
+<span data-en="Providing customer support and technical assistance" data-id="Memberikan dukungan pelanggan dan bantuan teknis">Providing customer support and technical assistance</span>
+</li>
+      <li>
+<span data-en="Improving system performance and developing new features" data-id="Meningkatkan kinerja sistem dan mengembangkan fitur baru">Improving system performance and developing new features</span>
+</li>
+      <li>
+<span data-en="Sending service-related communications (system updates, maintenance notices)" data-id="Mengirim informasi layanan, pembaruan sistem, dan pemberitahuan perawatan">Sending service-related communications (system updates, maintenance notices)</span>
+</li>
+      <li>
+<span data-en="Generating monthly performance reports for your review" data-id="Membuat laporan kinerja bulanan untuk Anda tinjau">Generating monthly performance reports for your review</span>
+</li>
     </ul>
-    <p>We will never use your information for advertising, sell it to third parties, or share it with anyone outside of Nantara AI without your explicit consent.</p>
+    <p>
+<span data-en="We will never use your information for advertising, sell it to third parties, or share it with anyone outside of Nantara AI without your explicit consent." data-id="Kami tidak akan menggunakan informasi Anda untuk iklan, menjualnya ke pihak ketiga, atau membagikannya di luar Nantara AI tanpa persetujuan tegas Anda.">We will never use your information for advertising, sell it to third parties, or share it with anyone outside of Nantara AI without your explicit consent.</span>
+</p>
   </div>
 
   <div class="pp-section">
-    <span class="section-num">Section 04</span>
-    <h2>Data Storage &amp; Ownership</h2>
+
+    <h2>
+<span data-en="Data Storage &amp; Ownership" data-id="Penyimpanan dan Kepemilikan Data">Data Storage &amp; Ownership</span>
+</h2>
     <div class="highlight-box">
-      <strong>Zero data on our servers.</strong> This is not a marketing claim, it's our architecture. All order data, buyer records, and business information are stored exclusively in your own accounts (your database workspace, your CRM, your WhatsApp).
-    </div>
-    <p>Specifically:</p>
+      <strong>
+<span data-en="Zero data on our servers." data-id="Tanpa data bisnis di server kami.">Zero data on our servers.</span>
+</strong>
+<span data-en=" This is not a marketing claim, it's our architecture. All order data, buyer records, and business information are stored exclusively in your own accounts (your database workspace, your CRM, your WhatsApp).
+    " data-id=" Arsitektur kami menyimpan seluruh data pesanan, catatan pelanggan, dan informasi bisnis hanya di akun Anda sendiri: ruang kerja basis data, CRM, dan WhatsApp Anda.
+    "> This is not a marketing claim, it's our architecture. All order data, buyer records, and business information are stored exclusively in your own accounts (your database workspace, your CRM, your WhatsApp).
+    </span>
+</div>
+    <p>
+<span data-en="Specifically:" data-id="Secara khusus:">Specifically:</span>
+</p>
     <ul>
-      <li>Order data, buyer information, and transaction records are stored in your own database account</li>
-      <li>CRM data remains in your CRM platform</li>
-      <li>WhatsApp conversation data is processed in real-time and routed to your systems, we do not retain copies</li>
-      <li>Nantara AI only stores your account credentials, billing info, and system configuration settings on our infrastructure</li>
-      <li>Upon service termination, we delete all configuration data and revoke all access credentials within 30 days</li>
+      <li>
+<span data-en="Order data, buyer information, and transaction records are stored in your own database account" data-id="Data pesanan, informasi pelanggan, dan catatan transaksi disimpan di akun basis data Anda">Order data, buyer information, and transaction records are stored in your own database account</span>
+</li>
+      <li>
+<span data-en="CRM data remains in your CRM platform" data-id="Data CRM tetap berada di platform CRM Anda">CRM data remains in your CRM platform</span>
+</li>
+      <li>
+<span data-en="WhatsApp conversation data is processed in real-time and routed to your systems, we do not retain copies" data-id="Data percakapan WhatsApp diproses langsung dan diteruskan ke sistem Anda; kami tidak menyimpan salinannya">WhatsApp conversation data is processed in real-time and routed to your systems, we do not retain copies</span>
+</li>
+      <li>
+<span data-en="Nantara AI only stores your account credentials, billing info, and system configuration settings on our infrastructure" data-id="Nantara AI hanya menyimpan kredensial akun, informasi penagihan, dan pengaturan konfigurasi di infrastruktur kami">Nantara AI only stores your account credentials, billing info, and system configuration settings on our infrastructure</span>
+</li>
+      <li>
+<span data-en="Upon service termination, we delete all configuration data and revoke all access credentials within 30 days" data-id="Saat layanan berakhir, kami menghapus data konfigurasi dan mencabut kredensial akses dalam 30 hari">Upon service termination, we delete all configuration data and revoke all access credentials within 30 days</span>
+</li>
     </ul>
   </div>
 
   <div class="pp-section">
-    <span class="section-num">Section 05</span>
-    <h2>Data Security</h2>
-    <p>We implement industry-standard security measures to protect the information we handle:</p>
+
+    <h2>
+<span data-en="Data Security" data-id="Keamanan Data">Data Security</span>
+</h2>
+    <p>
+<span data-en="We implement industry-standard security measures to protect the information we handle:" data-id="Kami menerapkan langkah keamanan standar industri untuk melindungi informasi:">We implement industry-standard security measures to protect the information we handle:</span>
+</p>
     <ul>
-      <li>All data transmissions are encrypted using TLS 1.3</li>
-      <li>API credentials and access tokens are encrypted at rest</li>
-      <li>Access to client configurations is restricted to authorized team members on a need-to-know basis</li>
-      <li>We conduct regular security reviews of our integration workflows</li>
-      <li>Third-party service connections use OAuth 2.0 or equivalent secure authentication protocols</li>
+      <li>
+<span data-en="All data transmissions are encrypted using TLS 1.3" data-id="Seluruh transmisi data dienkripsi menggunakan TLS 1.3">All data transmissions are encrypted using TLS 1.3</span>
+</li>
+      <li>
+<span data-en="API credentials and access tokens are encrypted at rest" data-id="Kredensial API dan token akses dienkripsi saat disimpan">API credentials and access tokens are encrypted at rest</span>
+</li>
+      <li>
+<span data-en="Access to client configurations is restricted to authorized team members on a need-to-know basis" data-id="Akses konfigurasi klien dibatasi bagi anggota tim berwenang sesuai kebutuhan">Access to client configurations is restricted to authorized team members on a need-to-know basis</span>
+</li>
+      <li>
+<span data-en="We conduct regular security reviews of our integration workflows" data-id="Kami meninjau keamanan alur integrasi secara berkala">We conduct regular security reviews of our integration workflows</span>
+</li>
+      <li>
+<span data-en="Third-party service connections use OAuth 2.0 or equivalent secure authentication protocols" data-id="Koneksi pihak ketiga menggunakan OAuth 2.0 atau protokol autentikasi aman yang setara">Third-party service connections use OAuth 2.0 or equivalent secure authentication protocols</span>
+</li>
     </ul>
   </div>
 
   <div class="pp-section">
-    <span class="section-num">Section 06</span>
-    <h2>Third-Party Services</h2>
-    <p>Nantara AI integrates with the following categories of third-party services to deliver our product:</p>
+
+    <h2>
+<span data-en="Third-Party Services" data-id="Layanan Pihak Ketiga">Third-Party Services</span>
+</h2>
+    <p>
+<span data-en="Nantara AI integrates with the following categories of third-party services to deliver our product:" data-id="Nantara AI terhubung dengan kategori layanan pihak ketiga berikut:">Nantara AI integrates with the following categories of third-party services to deliver our product:</span>
+</p>
     <ul>
-      <li>Messaging platforms (WhatsApp Business API), for order capture and buyer communication</li>
-      <li>Database platforms, for order logging and data management</li>
-      <li>CRM platforms, for fulfillment routing and buyer relationship management</li>
-      <li>AI language models, for order interpretation, enrichment, and intelligent routing</li>
-      <li>Payment processors, for secure subscription billing</li>
+      <li>
+<span data-en="Messaging platforms (WhatsApp Business API), for order capture and buyer communication" data-id="Platform pesan seperti WhatsApp Business API untuk pencatatan pesanan dan komunikasi pelanggan">Messaging platforms (WhatsApp Business API), for order capture and buyer communication</span>
+</li>
+      <li>
+<span data-en="Database platforms, for order logging and data management" data-id="Platform basis data untuk pencatatan pesanan dan pengelolaan data">Database platforms, for order logging and data management</span>
+</li>
+      <li>
+<span data-en="CRM platforms, for fulfillment routing and buyer relationship management" data-id="Platform CRM untuk penerusan pengiriman dan pengelolaan hubungan pelanggan">CRM platforms, for fulfillment routing and buyer relationship management</span>
+</li>
+      <li>
+<span data-en="AI language models, for order interpretation, enrichment, and intelligent routing" data-id="Model bahasa AI untuk memahami, melengkapi, dan meneruskan pesanan">AI language models, for order interpretation, enrichment, and intelligent routing</span>
+</li>
+      <li>
+<span data-en="Payment processors, for secure subscription billing" data-id="Pemroses pembayaran untuk penagihan langganan yang aman">Payment processors, for secure subscription billing</span>
+</li>
     </ul>
-    <p>Each third-party service is governed by its own privacy policy. We select partners that meet our security and privacy standards, but we recommend reviewing their policies independently.</p>
+    <p>
+<span data-en="Each third-party service is governed by its own privacy policy. We select partners that meet our security and privacy standards, but we recommend reviewing their policies independently." data-id="Setiap layanan pihak ketiga memiliki kebijakan privasinya sendiri. Kami memilih mitra sesuai standar keamanan dan privasi kami, tetapi menyarankan Anda meninjau kebijakan mereka secara mandiri.">Each third-party service is governed by its own privacy policy. We select partners that meet our security and privacy standards, but we recommend reviewing their policies independently.</span>
+</p>
   </div>
 
   <div class="pp-section">
-    <span class="section-num">Section 07</span>
-    <h2>Cookies &amp; Tracking</h2>
-    <p>Our website uses minimal cookies:</p>
+
+    <h2>
+<span data-en="Cookies &amp; Tracking" data-id="Cookie dan Pelacakan">Cookies &amp; Tracking</span>
+</h2>
+    <p>
+<span data-en="Our website uses minimal cookies:" data-id="Website kami menggunakan cookie terbatas:">Our website uses minimal cookies:</span>
+</p>
     <ul>
-      <li>Essential cookies for website functionality and session management</li>
-      <li>Analytics cookies to understand how visitors interact with our website (anonymized, no personal identification)</li>
+      <li>
+<span data-en="Essential cookies for website functionality and session management" data-id="Cookie esensial untuk fungsi website dan pengelolaan sesi">Essential cookies for website functionality and session management</span>
+</li>
+      <li>
+<span data-en="Analytics cookies to understand how visitors interact with our website (anonymized, no personal identification)" data-id="Cookie analitik untuk memahami interaksi pengunjung, dianonimkan tanpa identifikasi pribadi">Analytics cookies to understand how visitors interact with our website (anonymized, no personal identification)</span>
+</li>
     </ul>
-    <p>We do not use advertising cookies or tracking pixels. We do not build advertising profiles from your browsing behavior.</p>
+    <p>
+<span data-en="We do not use advertising cookies or tracking pixels. We do not build advertising profiles from your browsing behavior." data-id="Kami tidak menggunakan cookie iklan atau piksel pelacakan, serta tidak membuat profil iklan dari aktivitas penelusuran Anda.">We do not use advertising cookies or tracking pixels. We do not build advertising profiles from your browsing behavior.</span>
+</p>
   </div>
 
   <div class="pp-section">
-    <span class="section-num">Section 08</span>
-    <h2>Your Rights</h2>
-    <p>You have the right to:</p>
+
+    <h2>
+<span data-en="Your Rights" data-id="Hak Anda">Your Rights</span>
+</h2>
+    <p>
+<span data-en="You have the right to:" data-id="Anda berhak untuk:">You have the right to:</span>
+</p>
     <ul>
-      <li>Access the personal information we hold about you</li>
-      <li>Request correction of inaccurate information</li>
-      <li>Request deletion of your account and associated data</li>
-      <li>Withdraw consent for data processing at any time</li>
-      <li>Export your account information in a portable format</li>
-      <li>Object to specific uses of your information</li>
+      <li>
+<span data-en="Access the personal information we hold about you" data-id="Mengakses informasi pribadi Anda yang kami simpan">Access the personal information we hold about you</span>
+</li>
+      <li>
+<span data-en="Request correction of inaccurate information" data-id="Meminta perbaikan informasi yang tidak akurat">Request correction of inaccurate information</span>
+</li>
+      <li>
+<span data-en="Request deletion of your account and associated data" data-id="Meminta penghapusan akun dan data terkait">Request deletion of your account and associated data</span>
+</li>
+      <li>
+<span data-en="Withdraw consent for data processing at any time" data-id="Menarik persetujuan pemrosesan data kapan saja">Withdraw consent for data processing at any time</span>
+</li>
+      <li>
+<span data-en="Export your account information in a portable format" data-id="Mengekspor informasi akun dalam format yang dapat dipindahkan">Export your account information in a portable format</span>
+</li>
+      <li>
+<span data-en="Object to specific uses of your information" data-id="Menolak penggunaan tertentu atas informasi Anda">Object to specific uses of your information</span>
+</li>
     </ul>
-    <p>To exercise any of these rights, contact us at <a href="mailto:nantaraai@gmail.com">nantaraai@gmail.com</a>. We will respond within 14 business days.</p>
+    <p>
+<span data-en="To exercise any of these rights, contact us at " data-id="Untuk menggunakan hak tersebut, hubungi kami melalui ">To exercise any of these rights, contact us at </span>
+<a href="mailto:nantaraai@gmail.com">nantaraai@gmail.com</a>
+<span data-en=". We will respond within 14 business days." data-id=". Kami akan merespons dalam 14 hari kerja.">. We will respond within 14 business days.</span>
+</p>
   </div>
 
   <div class="pp-section">
-    <span class="section-num">Section 09</span>
-    <h2>Data Retention</h2>
+
+    <h2>
+<span data-en="Data Retention" data-id="Retensi Data">Data Retention</span>
+</h2>
     <ul>
-      <li>Account information is retained for the duration of your active subscription plus 90 days after termination</li>
-      <li>Billing records are retained for 5 years as required by tax and financial regulations</li>
-      <li>System configuration data is deleted within 30 days of service termination</li>
-      <li>Anonymized usage analytics may be retained indefinitely for service improvement</li>
+      <li>
+<span data-en="Account information is retained for the duration of your active subscription plus 90 days after termination" data-id="Informasi akun disimpan selama langganan aktif dan 90 hari setelah berakhir">Account information is retained for the duration of your active subscription plus 90 days after termination</span>
+</li>
+      <li>
+<span data-en="Billing records are retained for 5 years as required by tax and financial regulations" data-id="Catatan penagihan disimpan selama 5 tahun sesuai peraturan perpajakan dan keuangan">Billing records are retained for 5 years as required by tax and financial regulations</span>
+</li>
+      <li>
+<span data-en="System configuration data is deleted within 30 days of service termination" data-id="Data konfigurasi dihapus dalam 30 hari setelah layanan berakhir">System configuration data is deleted within 30 days of service termination</span>
+</li>
+      <li>
+<span data-en="Anonymized usage analytics may be retained indefinitely for service improvement" data-id="Analitik penggunaan yang dianonimkan dapat disimpan tanpa batas waktu untuk peningkatan layanan">Anonymized usage analytics may be retained indefinitely for service improvement</span>
+</li>
     </ul>
   </div>
 
   <div class="pp-section">
-    <span class="section-num">Section 10</span>
-    <h2>Children's Privacy</h2>
-    <p>Nantara AI is a B2B service designed for business use. We do not knowingly collect information from individuals under the age of 18. If you believe we have inadvertently collected such information, please contact us immediately.</p>
+
+    <h2>
+<span data-en="Children's Privacy" data-id="Privasi Anak">Children's Privacy</span>
+</h2>
+    <p>
+<span data-en="Nantara AI is a B2B service designed for business use. We do not knowingly collect information from individuals under the age of 18. If you believe we have inadvertently collected such information, please contact us immediately." data-id="Nantara AI merupakan layanan B2B untuk bisnis. Kami tidak dengan sengaja mengumpulkan informasi dari individu di bawah 18 tahun. Jika Anda menduga hal ini terjadi, segera hubungi kami.">Nantara AI is a B2B service designed for business use. We do not knowingly collect information from individuals under the age of 18. If you believe we have inadvertently collected such information, please contact us immediately.</span>
+</p>
   </div>
 
   <div class="pp-section">
-    <span class="section-num">Section 11</span>
-    <h2>Changes to This Policy</h2>
-    <p>We may update this Privacy Policy from time to time to reflect changes in our practices or applicable laws. We will notify active subscribers of material changes via email at least 14 days before they take effect. The "Last Updated" date at the top of this page indicates the most recent revision.</p>
+
+    <h2>
+<span data-en="Changes to This Policy" data-id="Perubahan Kebijakan">Changes to This Policy</span>
+</h2>
+    <p>
+<span data-en="We may update this Privacy Policy from time to time to reflect changes in our practices or applicable laws. We will notify active subscribers of material changes via email at least 14 days before they take effect. The &quot;Last Updated&quot; date at the top of this page indicates the most recent revision." data-id="Kami dapat memperbarui Kebijakan Privasi sesuai perubahan praktik atau hukum. Pelanggan aktif diberi pemberitahuan perubahan penting melalui email minimal 14 hari sebelum berlaku. Tanggal pembaruan di atas menunjukkan revisi terbaru.">We may update this Privacy Policy from time to time to reflect changes in our practices or applicable laws. We will notify active subscribers of material changes via email at least 14 days before they take effect. The "Last Updated" date at the top of this page indicates the most recent revision.</span>
+</p>
   </div>
 
   <div class="pp-section">
-    <span class="section-num">Section 12</span>
-    <h2>Contact Us</h2>
-    <p>If you have questions about this Privacy Policy or how we handle your data:</p>
+
+    <h2>
+<span data-en="Contact Us" data-id="Hubungi Kami">Contact Us</span>
+</h2>
+    <p>
+<span data-en="If you have questions about this Privacy Policy or how we handle your data:" data-id="Jika Anda memiliki pertanyaan tentang kebijakan ini atau penanganan data:">If you have questions about this Privacy Policy or how we handle your data:</span>
+</p>
     <div class="highlight-box">
-      <strong>Nantara AI</strong><br>
-      Email: <a href="mailto:nantaraai@gmail.com">nantaraai@gmail.com</a><br>
-      Website: <a href="https://nantarai.com">nantarai.com</a>
+      <strong>Nantara AI</strong>
+<br>
+<span data-en="
+      Email: " data-id="
+      Email: ">
+      Email: </span>
+<a href="mailto:nantaraai@gmail.com">nantaraai@gmail.com</a>
+<br>
+<span data-en="
+      Website: " data-id="
+      Website: ">
+      Website: </span>
+<a href="https://nantarai.com">nantarai.com</a>
     </div>
   </div>
 
 </div>
-
-<div class="pp-footer">
-  <div class="footer-inner">
-    <div class="footer-left">
-      <a href="index.html" class="footer-logo">
-        <img src="logo.png" alt="Nantara AI" decoding="async">
-        <span>Nantara AI</span>
-      </a>
-      <span class="footer-copy">&copy; 2026 Nantara AI. All rights reserved.</span>
-    </div>
-    <div class="footer-socials">
-      <a href="https://instagram.com/nantaraai" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
-        </svg>
-      </a>
-      <a href="https://tiktok.com/@nantaraai" aria-label="TikTok">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16.6 5.82A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/>
-        </svg>
-      </a>
-    </div>
-  </div>
+</main>
+<footer class="site-footer">
+<div class="container footer-top">
+<div>
+<a class="brand" href="index.html">
+<img src="logo.png" alt="" width="36" height="36">
+<span>Nantara</span>
+</a>
+<p data-en="Make room for the work that matters." data-id="Beri ruang untuk pekerjaan yang berarti." >Make room for the work that matters.</p>
+<a class="email-link" href="mailto:nantaraai@gmail.com">nantaraai@gmail.com <span aria-hidden="true">↗</span>
+</a>
 </div>
-
-<script>
-const canvas = document.getElementById('starfield');
-const ctx = canvas.getContext('2d');
-let W, H;
-function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-resize(); window.addEventListener('resize', resize);
-const stars = Array.from({length: 150}, () => ({
-  x: Math.random(), y: Math.random(),
-  r: Math.random() * 1.1 + 0.3, a: Math.random() * 0.5 + 0.2,
-  speed: Math.random() * 0.00006 + 0.00002,
-  twinkle: Math.random() * 0.003 + 0.001,
-  offset: Math.random() * Math.PI * 2,
-  color: Math.random() > 0.7 ? '160,180,255' : Math.random() > 0.5 ? '200,180,255' : '255,255,255'
-}));
-let t = 0;
-(function draw() {
-  ctx.clearRect(0, 0, W, H);
-  t++;
-  stars.forEach(s => {
-    s.y -= s.speed;
-    if (s.y < -0.02) { s.y = 1.02; s.x = Math.random(); }
-    const tw = Math.sin(t * s.twinkle + s.offset) * 0.3 + 0.7;
-    ctx.beginPath();
-    ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(${s.color},${s.a * tw})`;
-    ctx.fill();
-  });
-  requestAnimationFrame(draw);
-})();
-</script>
-
+<div class="footer-links">
+<div>
+<h3 data-en="Explore" data-id="Jelajahi" >Explore</h3>
+<a href="index.html#product">Order Agent</a>
+<a href="index.html#how">
+<span data-en="How it works" data-id="Cara kerja" >How it works</span>
+</a>
+<a href="index.html#faq">FAQ</a>
+</div>
+<div>
+<h3 data-en="Nantara" data-id="Nantara" >Nantara</h3>
+<a href="About.html">
+<span data-en="About us" data-id="Tentang kami" >About us</span>
+</a>
+<a href="Web Builder.html">Web Builder</a>
+<a href="https://wa.me/message/7DRPFHKTWGPDE1" target="_blank" rel="noopener">
+<span data-en="Contact" data-id="Hubungi kami" >Contact</span> <span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+</div>
+<div class="container footer-bottom">
+<span>© 2026 Nantara</span>
+<div>
+<a href="Privacy Policy.html">
+<span data-en="Privacy" data-id="Privasi" >Privacy</span>
+</a>
+<a href="Terms of Service.html">
+<span data-en="Terms" data-id="Ketentuan" >Terms</span>
+</a>
+</div>
+<span>
+<span data-en="Built with purpose. From Indonesia." data-id="Dibangun dengan tujuan. Dari Indonesia." >Built with purpose. From Indonesia.</span>
+</span>
+</div>
+</footer>
 </body>
 </html>
