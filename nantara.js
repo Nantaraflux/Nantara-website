@@ -26,6 +26,7 @@
   }
   function setLanguage(lang){
     language=lang;root.lang=lang;
+    document.querySelectorAll('[data-wa-id][data-wa-en]').forEach(link=>{link.href='https://wa.me/6285110516135?text='+encodeURIComponent(link.getAttribute('data-wa-'+lang))});
     localized.forEach(el=>el.textContent=el.dataset[lang]);
     document.querySelector('.locale').dataset.language=lang;
     document.querySelectorAll('[data-lang]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.lang===lang)));
