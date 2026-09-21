@@ -111,3 +111,12 @@
 .use-case-card strong{grid-column:2/4;display:inline-flex;align-items:center;width:max-content;max-width:100%;padding:.48rem .75rem;border-radius:999px;background:var(--soft);color:var(--accent);font-size:.72rem;font-weight:600}
 @media(max-width:850px){.business-explorer{grid-template-columns:1fr;gap:2.5rem}.business-selector{position:static}.business-selector [role=tablist]{display:grid;grid-template-columns:1fr 1fr}.business-selector button:nth-child(odd){border-right:1px solid var(--line)}.business-selector button:nth-last-child(-n+2){border-bottom:0}.business-detail>h3{font-size:clamp(2.5rem,8vw,4rem)}}
 @media(max-width:600px){.business-selector [role=tablist]{display:flex;flex-direction:column}.business-selector button,.business-selector button:nth-child(odd),.business-selector button:nth-last-child(-n+2){border-right:0;border-bottom:1px solid var(--line)}.business-selector button:last-child{border-bottom:0}.use-case-card{grid-template-columns:2rem 1fr;gap:.75rem 1rem;padding:1.5rem 0}.use-case-number{grid-row:1/4}.use-case-card p,.use-case-card h4{grid-column:2}.use-case-card strong{grid-column:2;width:fit-content}.business-detail>h3{font-size:clamp(2.25rem,11vw,3.2rem)}}
+/* Terms: make the one-time commercial model scannable before the legal detail. */
+.terms-model-summary{display:grid;grid-template-columns:1fr 1fr;margin:0 0 4rem;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+.terms-model-summary article{padding:1.6rem;border-bottom:1px solid var(--line)}
+.terms-model-summary article:nth-child(odd){border-right:1px solid var(--line)}
+.terms-model-summary article:nth-last-child(-n+2){border-bottom:0}
+.terms-model-summary article>span{color:var(--accent);font-size:.7rem;letter-spacing:.08em}
+.terms-model-summary h2{margin:.8rem 0 .55rem;font-size:1.25rem;letter-spacing:-.025em}
+.terms-model-summary p{font-size:.86rem;line-height:1.65}
+@media(max-width:600px){.terms-model-summary{grid-template-columns:1fr}.terms-model-summary article,.terms-model-summary article:nth-child(odd),.terms-model-summary article:nth-last-child(-n+2){border-right:0;border-bottom:1px solid var(--line)}.terms-model-summary article:last-child{border-bottom:0}}
