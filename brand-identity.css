@@ -1,0 +1,5 @@
+/* Transparent monochrome marks follow the page theme, without backing plates. */
+img[src*="logo.png"],img[src*="logo-white-bg.png"]{background:transparent!important;border-radius:0!important;box-shadow:none!important;filter:brightness(0)}
+.brand{color:#000;background:transparent!important;box-shadow:none!important;border-radius:0!important}
+html[data-theme="dark"] img[src*="logo.png"],html[data-theme="dark"] img[src*="logo-white-bg.png"]{filter:brightness(0) invert(1)}
+html[data-theme="dark"] .brand{color:#fff}
