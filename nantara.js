@@ -1,7 +1,8 @@
 (()=>{
   const root=document.documentElement;
   const storage={get(key){try{return localStorage.getItem(key)}catch{return null}},set(key,value){try{localStorage.setItem(key,value)}catch{}}};
-  let language=storage.get('nantara-language')==='id'?'id':'en';
+  const savedLanguage=storage.get('nantara-language');
+  let language=['id','en'].includes(savedLanguage)?savedLanguage:(root.dataset.defaultLanguage||'en');
   let stage=0;
   const localized=[...document.querySelectorAll('[data-en][data-id]')];
   const stageData=document.getElementById('stageCopy');
@@ -30,7 +31,7 @@
     localized.forEach(el=>el.textContent=el.dataset[lang]);
     document.querySelector('.locale').dataset.language=lang;
     document.querySelectorAll('[data-lang]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.lang===lang)));
-    storage.set('nantara-language',lang);labels();renderStage();
+    storage.set('nantara-language',lang);labels();renderStage();document.dispatchEvent(new CustomEvent('nantara:language',{detail:lang}));
   }
   document.querySelectorAll('[data-lang]').forEach(button=>button.addEventListener('click',()=>setLanguage(button.dataset.lang)));
   setLanguage(language);
