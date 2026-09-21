@@ -84,3 +84,30 @@
 .vertical-workflow p{margin:0 0:.35rem;color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}
 .vertical-workflow h4{margin:0;font-size:1rem;font-weight:500;line-height:1.5}
 @media(max-width:760px){.vertical-explorer{margin-top:1.75rem}.vertical-toolbar{padding:.8rem 0}.vertical-rail>[data-vertical]{flex-basis:78vw;min-height:4.25rem}.vertical-detail{grid-template-columns:1fr;gap:2.5rem;padding:2.75rem 0}.vertical-summary h3{font-size:clamp(2.1rem,11vw,3.2rem)}.vertical-summary>p:not(.eyebrow){font-size:.95rem}.vertical-toolbar button{width:2.35rem;height:2.35rem}}
+/* Focused business-model explorer: four models, eight controls. */
+.vertical-explorer[hidden]{display:none!important}
+.business-explorer{display:grid;grid-template-columns:minmax(250px,.72fr) minmax(0,1.65fr);gap:clamp(2.5rem,7vw,7rem);padding-top:2rem;border-top:1px solid var(--line)}
+.business-selector{align-self:start;border:1px solid var(--line);background:var(--surface);border-radius:14px;overflow:hidden;position:sticky;top:110px}
+.business-selector>p{padding:1rem 1.25rem;border-bottom:1px solid var(--line);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+.business-selector [role=tablist]{display:flex;flex-direction:column}
+.business-selector button{display:grid;grid-template-columns:2rem 1fr auto;align-items:center;gap:.75rem;width:100%;padding:1.15rem 1.25rem;border-bottom:1px solid var(--line);background:transparent;color:var(--muted);text-align:left;transition:background .2s,color .2s,padding .2s}
+.business-selector button:last-child{border-bottom:0}
+.business-selector button span{font-size:.7rem;opacity:.65}
+.business-selector button strong{font-size:1.05rem;font-weight:500}
+.business-selector button:after{content:'→';opacity:0;transform:translateX(-8px);transition:opacity .2s,transform .2s}
+.business-selector button:hover{color:var(--ink);padding-left:1.45rem}
+.business-selector button[aria-selected=true]{background:var(--ink);color:var(--bg)}
+.business-selector button[aria-selected=true]:after{opacity:1;transform:none}
+.business-detail{min-width:0;padding-bottom:1rem}
+.business-detail>.eyebrow{margin-bottom:1rem}
+.business-detail>h3{max-width:16ch;font-size:clamp(2.25rem,4.2vw,4.5rem);font-weight:450;line-height:1;letter-spacing:-.05em}
+.business-summary{max-width:650px;margin-top:1.35rem;font-size:1rem;line-height:1.7}
+.use-case-list{margin-top:2.5rem;border-top:1px solid var(--line)}
+.use-case-card{display:grid;grid-template-columns:2.5rem minmax(150px,.72fr) minmax(200px,1fr);gap:1.25rem 1.75rem;padding:1.75rem 0;border-bottom:1px solid var(--line);animation:panel-in .3s ease}
+.use-case-number{grid-row:1/3;color:var(--accent);font-size:.72rem;letter-spacing:.08em}
+.use-case-card h4{font-size:1.12rem;font-weight:550;line-height:1.35}
+.use-case-card p{font-size:.88rem;line-height:1.65}
+.use-case-action{color:var(--ink)}
+.use-case-card strong{grid-column:2/4;display:inline-flex;align-items:center;width:max-content;max-width:100%;padding:.48rem .75rem;border-radius:999px;background:var(--soft);color:var(--accent);font-size:.72rem;font-weight:600}
+@media(max-width:850px){.business-explorer{grid-template-columns:1fr;gap:2.5rem}.business-selector{position:static}.business-selector [role=tablist]{display:grid;grid-template-columns:1fr 1fr}.business-selector button:nth-child(odd){border-right:1px solid var(--line)}.business-selector button:nth-last-child(-n+2){border-bottom:0}.business-detail>h3{font-size:clamp(2.5rem,8vw,4rem)}}
+@media(max-width:600px){.business-selector [role=tablist]{display:flex;flex-direction:column}.business-selector button,.business-selector button:nth-child(odd),.business-selector button:nth-last-child(-n+2){border-right:0;border-bottom:1px solid var(--line)}.business-selector button:last-child{border-bottom:0}.use-case-card{grid-template-columns:2rem 1fr;gap:.75rem 1rem;padding:1.5rem 0}.use-case-number{grid-row:1/4}.use-case-card p,.use-case-card h4{grid-column:2}.use-case-card strong{grid-column:2;width:fit-content}.business-detail>h3{font-size:clamp(2.25rem,11vw,3.2rem)}}
