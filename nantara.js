@@ -52,4 +52,14 @@
     button.addEventListener('keydown',event=>{let next=stage;if(event.key==='ArrowRight'||event.key==='ArrowDown')next=(stage+1)%4;else if(event.key==='ArrowLeft'||event.key==='ArrowUp')next=(stage+3)%4;else if(event.key==='Home')next=0;else if(event.key==='End')next=3;else return;event.preventDefault();stage=next;renderStage();document.getElementById(`step-${stage}`).focus()});
   });
   document.getElementById('nextStep')?.addEventListener('click',()=>{stage=(stage+1)%4;renderStage()});
+  const carousel=document.querySelector('.scenario-carousel');
+  if(carousel){
+    const slides=[...carousel.querySelectorAll('[data-scenario]')];let current=0;
+    const show=next=>{current=(next+slides.length)%slides.length;slides.forEach((slide,i)=>slide.hidden=i!==current);document.getElementById('scenarioCount').textContent=String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0')};
+    document.getElementById('scenarioPrev').addEventListener('click',()=>show(current-1));
+    document.getElementById('scenarioNext').addEventListener('click',()=>show(current+1));
+    carousel.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();show(current+(event.key==='ArrowRight'?1:-1))}});
+    let start=null;carousel.addEventListener('touchstart',event=>{start={x:event.changedTouches[0].clientX,y:event.changedTouches[0].clientY}},{passive:true});
+    carousel.addEventListener('touchend',event=>{if(!start)return;const dx=event.changedTouches[0].clientX-start.x,dy=event.changedTouches[0].clientY-start.y;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)show(current+(dx<0?1:-1));start=null},{passive:true});
+  }
 })();

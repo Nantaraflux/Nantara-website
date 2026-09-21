@@ -20,3 +20,25 @@
 .brand{color:#000}
 [data-theme=dark] .brand{background:#fafbf8;box-shadow:0 0 0 5px #fafbf8;border-radius:4px}
 [data-theme=dark] .demo-brand img,[data-theme=dark] .flow-agent img{background:#fafbf8;border-radius:4px}
+.scenario-section{border-top:1px solid var(--line)}
+.scenario-carousel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:40px;outline-offset:5px}
+.scenario-carousel:focus-visible{outline:3px solid #868bc4}
+.scenario-slide{animation:panel-in .35s ease;min-height:330px}
+.scenario-slide[hidden]{display:none}
+.scenario-profile{display:flex;align-items:center;gap:17px;padding-bottom:30px;border-bottom:1px solid var(--line)}
+.scenario-index{font-size:30px;letter-spacing:-.05em;color:var(--accent);font-weight:450;padding-right:10px}
+.scenario-role{font-size:12px;margin-bottom:4px}
+.scenario-profile h3{font-size:19px}
+.scenario-disclosure{margin-left:auto;flex-shrink:0;font-size:11px;border:1px solid var(--line);padding:5px 10px;border-radius:20px;color:var(--muted)}
+.scenario-story{display:grid;grid-template-columns:1fr 1fr;gap:65px;padding-top:30px}
+.scenario-story h3{font-size:32px;font-weight:450;line-height:1.15;letter-spacing:-.04em;max-width:410px;margin-bottom:18px}
+.scenario-story p{font-size:15px;line-height:1.75}
+.scenario-approach{padding-left:30px;border-left:1px solid var(--line)}
+.scenario-approach h4{font-size:13px;font-weight:550;margin-bottom:8px}
+.scenario-approach h4:not(:first-child){margin-top:20px}
+.scenario-controls{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid var(--line);padding-top:24px;margin-top:30px}
+.scenario-controls>span{font-size:12px;letter-spacing:.05em;color:var(--muted);white-space:nowrap}
+.scenario-controls>div{display:flex;gap:10px}
+.scenario-controls button{display:flex;align-items:center;gap:12px;padding:10px 17px;min-height:44px;border:1px solid var(--line);border-radius:25px;background:var(--card);font-size:12px}
+.scenario-controls button:hover{background:var(--soft)}
+@media(max-width:700px){.scenario-carousel{padding:23px}.scenario-profile{flex-wrap:wrap;gap:12px;padding-bottom:22px}.scenario-profile>div{flex:1}.scenario-profile h3{font-size:18px}.scenario-disclosure{margin-left:0}.scenario-story{grid-template-columns:1fr;gap:25px;padding-top:25px}.scenario-story h3{font-size:28px}.scenario-approach{padding-left:0;padding-top:24px;border-left:0;border-top:1px solid var(--line)}.scenario-slide{min-height:640px}.scenario-controls{gap:8px}.scenario-controls button{padding:9px 12px;gap:8px;font-size:11px}.scenario-controls>div{gap:6px}}
