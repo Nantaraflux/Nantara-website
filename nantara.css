@@ -84,7 +84,9 @@
 .vertical-workflow p{margin:0 0:.35rem;color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}
 .vertical-workflow h4{margin:0;font-size:1rem;font-weight:500;line-height:1.5}
 @media(max-width:760px){.vertical-explorer{margin-top:1.75rem}.vertical-toolbar{padding:.8rem 0}.vertical-rail>[data-vertical]{flex-basis:78vw;min-height:4.25rem}.vertical-detail{grid-template-columns:1fr;gap:2.5rem;padding:2.75rem 0}.vertical-summary h3{font-size:clamp(2.1rem,11vw,3.2rem)}.vertical-summary>p:not(.eyebrow){font-size:.95rem}.vertical-toolbar button{width:2.35rem;height:2.35rem}}
-/* Focused business-model explorer: four models, eight controls. */
+.tc-other-business{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(2rem,6vw,6rem);margin-top:2rem;padding:clamp(1.5rem,3vw,2.5rem);border:1px solid var(--line);border-radius:1rem;background:var(--surface)}
+.tc-other-business>div{max-width:48rem}.tc-other-business .eyebrow{margin:0 0:.75rem}.tc-other-business h3{margin:0;font-size:clamp(1.45rem,2.8vw,2.3rem);font-weight:500;line-height:1.08;letter-spacing:-.03em}.tc-other-business h3+p{max-width:42rem;margin:1rem 0 0;color:var(--muted);line-height:1.65}.tc-other-business .button{flex:0 0 auto}
+@media(max-width:760px){.tc-other-business{align-items:stretch;flex-direction:column}.tc-other-business .button{justify-content:space-between;width:100%}}/* Focused business-model explorer: four models, eight controls. */
 .vertical-explorer[hidden]{display:none!important}
 .business-explorer{display:grid;grid-template-columns:minmax(250px,.72fr) minmax(0,1.65fr);gap:clamp(2.5rem,7vw,7rem);padding-top:2rem;border-top:1px solid var(--line)}
 .business-selector{align-self:start;border:1px solid var(--line);background:var(--surface);border-radius:14px;overflow:hidden;position:sticky;top:110px}
